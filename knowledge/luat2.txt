@@ -1,0 +1,34 @@
+X + HOH = X_OH + H2
+1
+KLK(X)
+0
+X_O + HOH = X_OH
+1
+KT(X)
+0
+X_O + HOH = H_Y
+2
+TU(Y)
+PK(X)
+0
+X_O + H_Y = X_Y + HOH 
+2
+KL(X)
+Y # OH
+0
+X_O + Y_OH = Y_Z + HOH
+3
+TU(Z)
+PK(X)
+Y # H
+0
+X + O2 = X_O 
+1
+X ( KL(X); S(X)
+0
+X + Y_Z 
+2
+KL(X)
+DH(X>Y)
+1
+ALPHA
