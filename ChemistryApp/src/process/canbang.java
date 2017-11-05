@@ -77,24 +77,12 @@ public class canbang {
     public static Pair<List, List> setChat(String s){
         List <String> res1 = new Vector <String>();
         List <Integer> res2 = new Vector <Integer>();
-        int t = 0;
-        for(String w:pu.donChat.keySet()){
-            if(s.equals(pu.donChat.get(w).getCTHH())){
-                t = 1;
-                res1.add(pu.donChat.get(w).getDaiDien().getSymbol());
-                res2.add(pu.donChat.get(w).getCnt());
-                break;
-            }
+        if(DieuChe.Kiemtra(s) == true){
+           res1.add(DieuChe.LayDC(s).getDaiDien().getSymbol());
+           res2.add(DieuChe.LayDC(s).getCnt());
         }
-        if(t == 0){
-            for(String w:pu.cation.keySet()){
-                for(String q:pu.anion.keySet()){
-                    HopChat a = new HopChat(pu.cation.get(w),pu.anion.get(q));
-                    if(s.equals(a.getCTHH())){
-                        return a.getComponents();
-                    }
-                }
-            }
+        else{
+            return DieuChe.LayHC(s).getComponents();
         }
         Pair <List, List> e = new Pair <List, List>(res1, res2);
         return e;
@@ -114,10 +102,8 @@ public class canbang {
             if(w.equals("+")) c++;
             if(w.equalsIgnoreCase("=")) break;
         }
-       
         String []tt = new String[c+1];
         String []sp = new String[(words.length - k)/2 + 1];
-         
         for(int i=0; i<words.length; i++){
             if(i < k - 1)
                 if(!words[i].equalsIgnoreCase("+")){
