@@ -322,8 +322,8 @@ public class pu {
             FileReader fileReader = new FileReader(KhiPath);
             
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-               
-            while((line = bufferedReader.readLine()) != null) {                                                                
+            
+            while((line = bufferedReader.readLine()) != null) {                                                                               
                 String []v = line.split("\\s");                               
                 HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]));
                 khi.put(temp.getCTHH(), true);
@@ -853,7 +853,7 @@ public class pu {
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                                           
                     String rule = luat.get(i).getRule();                                            
                     result = create(rule, listOfVariables, listOfReferences, listOfType, useage);                    
-                    System.out.println(" --- use rule: " + rule);
+                    //System.out.println(" --- use rule: " + rule);
                     return result;
                 }                                                    
             }
@@ -901,9 +901,14 @@ public class pu {
         return result;
         //System.out.println("Can not make a reaction!");        
     }
-    public static List<String> pu(HopChat X, HopChat Y){
+    public static List<String> pu(HopChat X, HopChat Y){                
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = ");  
         List <String> result = new Vector<String>();
+        boolean ok = (!khongTan.containsKey(X.getCTHH()) || !khongTan.containsKey(Y.getCTHH()));
+        if (!ok){
+            return result;
+        }
+        
         for (int i=0; i<luat.size(); i++){            
             String[] v = luat.get(i).getRule().split("\\s");                         
             if (v.length == 1) continue;
@@ -972,7 +977,7 @@ public class pu {
                     if (useage.equals("after")){                                                   
                         temp = checkAfter(temp);
                         if (temp.size() > 0){                            
-                            System.out.println(" --- use rule: " + rule);
+                            //System.out.println(" --- use rule: " + rule);
                             return temp;
                         }
                     }                    
