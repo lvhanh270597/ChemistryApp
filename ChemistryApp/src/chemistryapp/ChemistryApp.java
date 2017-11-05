@@ -35,46 +35,6 @@ public class ChemistryApp {
     }
     public static void main(String[] args) {          
         pu.readData();                               
-        String St = "";
-        HopChat X = new HopChat(pu.cation.get("Na_1"), pu.anion.get("OH_1"));
-        //HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("O_2"));
-        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"));
-        //HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("O_2"));
-        //DonChat X = pu.donChat.get("H_2");        
-        List <String> result = pu.pu(X, Y);
-        if (result.size() == 0){
-            System.out.println("Can not make a reaction");            
-        }
-        else{                        
-            St = X.getCTHH() + " + " + Y.getCTHH() + " = ";
-            for (int i=0; i<result.size() - 1; i++){             
-                St += result.get(i) + " + ";
-            }                      
-            St += result.get(result.size() - 1);            
-            System.out.println(St);            
-            List <Integer> vl = canbang.canbang(St);
-            result.add(0, " = ");
-            result.add(0, Y.getCTHH());
-            result.add(0, X.getCTHH());        
-            printReaction(result, vl);            
-        }
-        /*HopChat X = new HopChat(pu.cation.get("Fe_2"), pu.anion.get("OH_1"));
-        List <String> result = pu.pu(X);
-        if (result.size() == 0){
-            System.out.println("Can not make a reaction");            
-        }
-        else{                        
-            St = X.getCTHH() + " = ";
-            for (int i=0; i<result.size() - 1; i++){             
-                St += result.get(i) + " + ";
-            }                      
-            St += result.get(result.size() - 1);            
-            System.out.println(St);            
-            List <Integer> vl = canbang.canbang(St);
-            result.add(0, " = ");
-            //result.add(0, Y.getCTHH());
-            result.add(0, X.getCTHH());        
-            printReaction(result, vl);            
-        }*/
+        
     } 
 }

@@ -19,6 +19,7 @@ public class pu {
     private static final String KienThucPath = "D:\\src\\knowledge\\class.txt";
     private static final String NotExistPath = "D:\\src\\knowledge\\khongtontai.txt";
     private static final String KhongTanPath = "D:\\src\\knowledge\\khongtan.txt";
+    private static final String KhiPath = "D:\\src\\knowledge\\khi.txt";
     public static Map <String, NguyenTo> nguyenTo;
     public static Map <String, Anion> anion;
     public static Map <String, Cation> cation;
@@ -28,6 +29,7 @@ public class pu {
     public static Map <String, List<NguyenTo>> kienThuc;
     public static Map <String, HopChat> notExist;
     public static Map <String, HopChat> khongTan;
+    public static Map <String, Boolean> khi;
     
     public static void readData(){
         
@@ -308,6 +310,35 @@ public class pu {
             System.out.println(
                 "Error reading file '" 
                 + KhongTanPath + "'");                              
+        }
+        
+        //--------------------------------------------------------------------//
+        
+        //--------------------------------read khi ------------------------------------//
+        khi = new HashMap<String, Boolean>();
+        
+        line = null;
+        try{
+            FileReader fileReader = new FileReader(KhiPath);
+            
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+               
+            while((line = bufferedReader.readLine()) != null) {                                                                
+                String []v = line.split("\\s");                               
+                HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]));
+                khi.put(temp.getCTHH(), true);
+            }                               
+            bufferedReader.close();         
+        }        
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                KhiPath + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + KhiPath + "'");                              
         }
         
         //--------------------------------------------------------------------//
