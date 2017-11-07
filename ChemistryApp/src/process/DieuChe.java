@@ -22,7 +22,6 @@ public class DieuChe {
         for(String x: pu.donChat.keySet())// chay het ds 
         {
             DonChat b = pu.donChat.get(x);
-            //System.out.println(b.getCTHH());
             if(a.equals(b.getCTHH()))return true ;
         }
         return false ;
@@ -38,7 +37,6 @@ public class DieuChe {
                 HopChat y = new HopChat(pu.cation.get(w),pu.anion.get(z));
                 if(a.equals(y.getCTHH())) {
                     u =y;
-                   //System.out.println(y.getCTHH());
                 }
             }
         }
@@ -86,7 +84,7 @@ public class DieuChe {
                 return k;
             }
         }
-        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {// Don chat =>  Hop chat
+        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {
             DonChat x = LayDC(a);
             HopChat z = LayHC(b);
             String k="NULL";
@@ -155,11 +153,9 @@ public class DieuChe {
                 List <String> result = pu.pu(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                         //System.out.println(result);
                         k=c.getCTHH();
                         st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                         for(int j = 0;j<result.size()-1;j++){
-                            //System.out.println(result.get(j));
                             st += result.get(j)+ " + ";
                         }
                         st += result.get(result.size() - 1);
@@ -170,7 +166,7 @@ public class DieuChe {
             System.out.println(st);
             return k;
         }
-        else if (Kiemtra(a) == false && Kiemtra(b)== false ){ // hop chat vs hop chat
+        else if (Kiemtra(a) == false && Kiemtra(b)== false ){
             HopChat x = LayHC(a);
             HopChat y = LayHC(b);
             if(x.getAnion().getSymbol()=="OH"&& y.getCation().getSymbol()=="H"){
@@ -199,7 +195,6 @@ public class DieuChe {
                         break;
                         }
                     }
-                  //System.out.println(st);
                 }
                 if(p==true) break;
             }
@@ -221,18 +216,15 @@ public class DieuChe {
                     List <String> result = pu.pu(x, k);
                     st=  " ";
                     for(int i =0;i< result.size();i++){
-                        //System.out.println(result.get(i));
                         if(result.get(i).equals(y.getCTHH())){
-                        z=k.getCTHH();
-                        st= "TH1 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
-                        for(int j = 0 ;j<result.size()-1;j++){
-                            st += result.get(j)+ " + ";
-                        }
+                            z=k.getCTHH();
+                            st= "TH1 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                            for(int j = 0 ;j<result.size()-1;j++){
+                                st += result.get(j)+ " + ";
+                            }
                         st += result.get(result.size()-1);
-                        //break;
                         }
                     }
-                        //System.out.println(st);
                     }
                 }
                 System.out.println(st);
@@ -240,7 +232,6 @@ public class DieuChe {
             }
             // TH tìm Cation cho hop chat 
             else {
-                //String st= " ";
                 for(String w: pu.cation.keySet()){
                     HopChat k = new HopChat(pu.cation.get(w),y.getAnion());
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
@@ -253,7 +244,6 @@ public class DieuChe {
                         st=  "";
                         int n = result.size();
                         for(int i =0;i<n;i++){
-                            //System.out.println(result.get(i));
                             if(result.get(i).equals(y.getCTHH())){
                             z=k.getCTHH();
                             st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
@@ -261,7 +251,6 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size()-1);
-                            //break;
                             }
                         }
                     }   

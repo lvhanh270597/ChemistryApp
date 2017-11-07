@@ -1,51 +1,59 @@
-Ag_1 Br_1
-Ag_1 Cl_1
-Ag_1 O_2
-Ag_1 PO4_3
-Ag_1 Cr2O7_2
-Ca_2 CO3_2
-Ca_2 PO4_3
-Ca_2 SO3_2
-Ca_2 SiO3_2
-Cu_2 OH_1
-Cu_2 O_2
-Cu_2 PO4_3
-Cu_2 SO3_2
-Cu_2 SO3_2
-Cu_2 CO3_2
-Cu_2 Cr2O7_2
-Zn_2 CO3_2
-Zn_2 OH_1
-Zn_2 O_2
-Zn_2 PO4_3
-Zn_2 Cr2O7_2
-Mg_2 CO3_2
-Mg_2 OH_1
-Mg_2 O_2
-Mg_2 PO4_3
-Mg_2 Cr2O7_2
-Al_3 OH_1
-Al_3 O_2
-Al_3 PO4_3
-Al_3 SiO3_2
-Fe_2 OH_1
-Fe_2 CO3_2
-Fe_2 O_2
-Fe_2 PO4_3
-Fe_2 Cr2O7_2
-Fe_3 OH_1
-Fe_3 S_2
-Fe_3 SiO3_2
-Fe_3 PO4_3
-Ba_2 SO3_2
-Ba_2 SO4_2
-Ba_2 CO3_2
-Ba_2 SiO3_2
-Ba_2 PO4_3
-Pb_2 OH_1
-Pb_2 S_2
-Pb_2 SO3_2
-Pb_2 SO4_2
-Pb_2 CO3_2
-Pb_2 PO3_3
-Pb_2 PO4_3
+Ag_1 Br_1 vang_nhat
+Ag_1 Cl_1 ket_tua_trang
+Ag_1 I_1 vang_cam
+Ag_1 O_2 nau_den
+Ag_1 PO4_3 ket_tua_trang_vang
+Ag_1 SO4_2 trang
+Ag_1 Cr2O7_2 none
+Ag_1 S_2 den
+Ca_2 CO3_2 ket_tua_trang
+Ca_2 PO4_3 none
+Ca_2 SO3_2 none
+Ca_2 SiO3_2 none
+Cu_2 OH_1 xanh_lam
+Cu_1 O_2 do gach
+Cu_2 O_2 den
+Cu_2 O_4 do gach 
+Cu_2 PO4_3 none
+Cu_2 SO3_2 none
+Cu_2 CO3_2 luc
+Cu_2 Cr2O7_2 none
+Cu_2 S_2 mau_den
+Zn_2 CO3_2 none
+Zn_2 OH_1 trang
+Zn_2 O_2 trang
+Zn_2 PO4_3 none
+Zn_2 Cr2O7_2 none
+Mg_2 CO3_2 trang
+Mg_2 OH_1 trang_keo
+Mg_2 O_2 none
+Mg_2 PO4_3 none
+Mg_2 Cr2O7_2 none
+Al_3 OH_1 keo_trang
+Al_3 O_2 trang
+Al_3 PO4_3 none
+Al_3 SiO3_2 none
+Fe_2 OH_1 trang_xanh
+Fe_2 CO3_2 none
+Fe_2 O_2 den
+Fe_2 PO4_3 none
+Fe_2 Cr2O7_2 none
+Fe_3 OH_1 nau_do
+Fe_3 S_2 den
+Fe_3 SiO3_2 none
+Fe_3 PO4_3 none
+Ba_2 SO3_2 trang
+Ba_2 SO4_2 ket_tua_trang
+Ba_2 CO3_2 trang
+Ba_2 SiO3_2 none
+Ba_2 PO4_3 none
+Pb_2 OH_1 none
+Pb_2 S_2 den
+Pb_2 SO3_2 none
+Pb_2 SO4_2 trang
+Pb_2 CO3_2 none
+Pb_2 PO3_3 none
+Pb_2 PO4_3 none
+Cr_2 OH_1 vang_hung
+Cr_3 OH_1 xam_xanh
+Cd_2 S_2 vang_cam
