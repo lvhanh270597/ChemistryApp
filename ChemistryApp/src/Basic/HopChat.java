@@ -2,6 +2,7 @@
 package Basic;
 
 import Math.*;
+import process.*;
 import java.util.*;
 import javafx.util.*;
 /*
@@ -35,9 +36,9 @@ public class HopChat{
     
     private Cation C;
     private Anion A;    
-    private PhanSo tile;
+    private PhanSo tile;       
     
-    /*private String shorted(String X){        
+    private String shorted(String X){        
         String result = X;
         int i = 0;
         int cnt = 0;
@@ -53,9 +54,9 @@ public class HopChat{
             result = "H" + String.valueOf(cnt) + X.substring(i, X.length());
         }
         return result;
-    }*/
+    }
     
-    public String getCTHH(){
+    private String simpleCTHH(){
         String s = C.getSymbol();
         if (this.tile.getB() > 1) s += Integer.toString(this.tile.getB());
         String t = A.getSymbol();
@@ -65,7 +66,22 @@ public class HopChat{
         }                   
         String X = s + t;
         return X;
-        //return this.shorted(X);
+    }
+    
+    public String getCTHH(){
+        String X = simpleCTHH();
+        String Y = shorted(X);
+        if (X.equals(Y)) return X;        
+        Cation C = this.C;
+        for (String key: pu.anion.keySet()){
+            Anion A = pu.anion.get(key);
+            HopChat hc = new HopChat(C, A);
+            if (hc.simpleCTHH().equals(Y)){
+                this.A = A;
+                return Y;
+            }
+        } 
+        return X;
     }
     
     public float getM(){

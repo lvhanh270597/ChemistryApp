@@ -10,16 +10,16 @@ import java.util.*;
 import javafx.util.*;
 
 public class pu {
-    private static final String NguyenToPath = "D:\\src\\knowledge\\nguyento.txt";
-    private static final String AnionPath = "D:\\src\\knowledge\\anion.txt";
-    private static final String CationPath = "D:\\src\\knowledge\\cation.txt";
-    private static final String DonChatPath = "D:\\src\\knowledge\\donchat.txt";
-    private static final String DienHoaPath = "D:\\src\\knowledge\\dienhoa.txt";
-    private static final String LuatPath = "D:\\src\\knowledge\\luat.txt";
-    private static final String KienThucPath = "D:\\src\\knowledge\\class.txt";
-    private static final String NotExistPath = "D:\\src\\knowledge\\khongtontai.txt";
-    private static final String KhongTanPath = "D:\\src\\knowledge\\khongtan.txt";
-    private static final String KhiPath = "D:\\src\\knowledge\\khi.txt";
+    private static final String NguyenToPath = "knowledge\\nguyento.txt";
+    private static final String AnionPath = "knowledge\\anion.txt";
+    private static final String CationPath = "knowledge\\cation.txt";
+    private static final String DonChatPath = "knowledge\\donchat.txt";
+    private static final String DienHoaPath = "knowledge\\dienhoa.txt";
+    private static final String LuatPath = "knowledge\\luat.txt";
+    private static final String KienThucPath = "knowledge\\class.txt";
+    private static final String NotExistPath = "knowledge\\khongtontai.txt";
+    private static final String KhongTanPath = "knowledge\\khongtan.txt";
+    private static final String KhiPath = "knowledge\\khi.txt";
     public static Map <String, NguyenTo> nguyenTo;
     public static Map <String, Anion> anion;
     public static Map <String, Cation> cation;
@@ -44,7 +44,7 @@ public class pu {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {                
-                String v[] = line.split("\\s+");                                        
+                String v[] = line.split("\\s+");                            
                 boolean kl = (Integer.valueOf(v[2]) == 1);                
                 NguyenTo temp = new NguyenTo(v[0], Float.valueOf(v[1]), kl);
                 nguyenTo.put(v[0], temp);
@@ -324,7 +324,7 @@ public class pu {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             
             while((line = bufferedReader.readLine()) != null) {                                                                               
-                String []v = line.split("\\s");                               
+                String []v = line.split("\\s");                    
                 HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]));
                 khi.put(temp.getCTHH(), true);
             }                               
@@ -638,7 +638,7 @@ public class pu {
             String c = anion.get(a).differ() + "_" + anion.get(a).getOxiHoa();
             Cation C = cation.get(c);
             HopChat hc = new HopChat(C, anion.get("O_2"));
-            HopChat H2O = new HopChat(cation.get("H_1"), anion.get("OH_1"));
+            HopChat H2O = new HopChat(cation.get("H_1"), anion.get("O_2"));
             result.add(hc.getCTHH());
             result.add(H2O.getCTHH());
             return result;

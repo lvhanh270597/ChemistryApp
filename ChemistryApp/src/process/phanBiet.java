@@ -139,6 +139,11 @@ public class phanBiet {
             System.out.println("Đã phân biệt được " + G.get(0).getCTHH());
             return ;
         }
+        
+        System.out.print("Cần phân biệt các chất: ");
+        for (int i=0; i<G.size(); i++) System.out.print(G.get(i).getCTHH() + " ");
+        System.out.println();
+        
         // Luật quỳ tím
         List <HopChat> X = new Vector<HopChat>();
         List <HopChat> Y = new Vector<HopChat>();   

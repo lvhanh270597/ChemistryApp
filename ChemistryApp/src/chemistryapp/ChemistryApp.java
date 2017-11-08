@@ -38,9 +38,9 @@ public class ChemistryApp {
         List <HopChat> G = new Vector<HopChat>();;
         HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"));
         HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"));
-        /*HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"));
-        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"));*/
-        G.add(X);   G.add(Y); //  G.add(Z);   G.add(T);
+        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"));
+        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"));
+        G.add(X);   G.add(Y);   G.add(Z);   G.add(T);        
         phanBiet.phanBiet(G);        
     } 
 }

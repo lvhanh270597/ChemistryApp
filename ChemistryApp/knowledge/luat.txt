@@ -39,7 +39,9 @@ X # OH
 KL Y
 0
 X_Y Z_T = X_T Z_Y
-0
+2
+KL X
+KL Z
 1
 after
 X_OH = X_O H_O
