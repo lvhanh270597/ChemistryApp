@@ -36,11 +36,11 @@ public class ChemistryApp {
     public static void main(String[] args) {          
         pu.readData();                               
         List <HopChat> G = new Vector<HopChat>();;
-        HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"));
-        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"));
-        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"));
-        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"));
+        HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"), "none");
+        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"), "none");
+        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"), "none");
+        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"), "none");
         G.add(X);   G.add(Y);   G.add(Z);   G.add(T);        
-        phanBiet.phanBiet(G);        
+        phanBiet.phanBiet(G);  
     } 
 }
