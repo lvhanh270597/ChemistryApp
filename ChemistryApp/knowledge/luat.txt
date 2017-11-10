@@ -60,3 +60,13 @@ oxihoa
 H2 X_O = X H_O
 0
 0
+M_X H_Z = M_Z H_X
+2
+KL M
+PK Z
+0
+Y H_X = X H_Y
+2
+PK X
+S Y
+0

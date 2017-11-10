@@ -34,13 +34,31 @@ public class ChemistryApp {
         System.out.println();
     }
     public static void main(String[] args) {          
-        pu.readData();                               
+        pu.readData();/*                               
         List <HopChat> G = new Vector<HopChat>();;
         HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"));
         HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"));
         HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"));
         HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"));
         G.add(X);   G.add(Y);   G.add(Z);   G.add(T);        
-        phanBiet.phanBiet(G);        
+        phanBiet.phanBiet(G);    */  
+       List<String> a = new LinkedList<String>();
+        //String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";
+        //String x ="FeS -> H2S -> NO2 -> HNO3 -> Al(NO3)3 -> O2";
+        String x = "FeS -> H2S -> S -> SO2 -> H2SO4 -> ZnSO4 -> Zn(NO3)2 -> O2";
+        String[] word = DieuChe.TachChuoi(x);
+        int i =0;
+        while (i<=word.length-2){
+            System.out.println("từ "+word[i]+ " -> "+ word[i+2]);
+                    String d = DieuChe.ChatDC(word[i], word[i+2]);
+                    System.out.println("Chất dieu che "+ d);
+            i = i+2;
+        }
+        //HopChat X = new HopChat(pu.cation.get("H_ 1"),pu.anion.get("S_2"));
+       // HopChat Y = new HopChat(pu.cation.get("H_1"),pu.anion.get("Cl_1"));
+       DonChat Y = new DonChat(pu.nguyenTo.get("Fe"),1);
+       DonChat X = new DonChat(pu.nguyenTo.get("S"),1);
+        List <String> result= pu.pu(Y,X);
+        System.out.println(result);
     } 
 }

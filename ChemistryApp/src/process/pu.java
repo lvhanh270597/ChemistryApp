@@ -324,7 +324,7 @@ public class pu {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             
             while((line = bufferedReader.readLine()) != null) {    
-                System.out.println(line);
+               // System.out.println(line);
                 String []v = line.split("\\s");                    
                 HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]));
                 khi.put(temp.getCTHH(), true);

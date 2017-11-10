@@ -1,4 +1,4 @@
-Các phần t thấy còn thiếu tại thời điểm này. 
+﻿Các phần t thấy còn thiếu tại thời điểm này. 
 
 Luat Muoi Phan huy. 
 
@@ -23,7 +23,6 @@ SO2 + H2S -> S + H2O
 S + Fe -> FeS 
 H2 + S -> H2S( 350 độ ) 
 { Luật S td hầu hết vs kim loại) 
-
 
 
 
