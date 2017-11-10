@@ -36,11 +36,12 @@ public class ChemistryApp {
     public static void main(String[] args) {          
         pu.readData();/*                               
         List <HopChat> G = new Vector<HopChat>();;
-        HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"));
-        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"));
-        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"));
-        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"));
+        HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"), "none");
+        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"), "none");
+        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"), "none");
+        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"), "none");
         G.add(X);   G.add(Y);   G.add(Z);   G.add(T);        
+<<<<<<< HEAD
         phanBiet.phanBiet(G);    */  
        List<String> a = new LinkedList<String>();
         //String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";
@@ -60,5 +61,8 @@ public class ChemistryApp {
        DonChat X = new DonChat(pu.nguyenTo.get("S"),1);
         List <String> result= pu.pu(Y,X);
         System.out.println(result);
+=======
+        phanBiet.phanBiet(G);  
+>>>>>>> 9e6cc7ce9b1630f0ec8c590b6b4fe98d8594c451
     } 
 }

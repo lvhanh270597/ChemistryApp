@@ -36,7 +36,8 @@ public class HopChat{
     
     private Cation C;
     private Anion A;    
-    private PhanSo tile;       
+    private PhanSo tile;    
+    private String Color;
     
     private String shorted(String X){        
         String result = X;
@@ -88,6 +89,10 @@ public class HopChat{
         return C.getM() * this.tile.getB() + A.getM() * this.tile.getA();
     } 
     
+    public String getColor(){
+        return this.Color;
+    }    
+    
     public Pair<List, List> getComponents(){
         List <String> res1 = new Vector <String>();
         List <Integer> res2 = new Vector <Integer>();   
@@ -114,10 +119,14 @@ public class HopChat{
     }
     
     public HopChat(){}
-    public HopChat(Cation C, Anion A){
+    public HopChat(Cation C, Anion A, String Color){
         this.A = A;
         this.C = C;        
+        this.Color = Color;
         this.tile = new PhanSo(C.getHoaTri(), A.getHoaTri());
+    }
+    public HopChat(Cation C, Anion A){
+        this(C, A, "none");
     }
     
 }
