@@ -60,10 +60,13 @@ public class DieuChe {
                              st += result.get(j) + " + ";
                         }
                         st+= result.get(result.size()-1);
+                        }
+                        System.out.println(st);
+                        return k;
                     }
                 }
             }
-            }else {
+            else {
                 HopChat y = LayHC(b);
                 if(pu.pu(x).size()!=0){
                 List <String> result = pu.pu(x);
@@ -73,18 +76,16 @@ public class DieuChe {
                         st = x.getCTHH()+ " -> ";
                         for(int j =0;j< result.size() ;j++){
                              st += result.get(j) + " + ";
-                        }
+                            }
                         st+= result.get(result.size()-1);
+                        System.out.println(st);
+                        return k;
+                        }
                     }
                 }
             }
-            }
-            if(k!="NULL"){
-                System.out.println(st);
-                return k;
-            }
         }
-        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {
+        if(Kiemtra(a)== true&&Kiemtra(b)==false) {
             DonChat x = LayDC(a);
             HopChat z = LayHC(b);
             String k="NULL";
@@ -92,32 +93,26 @@ public class DieuChe {
             // TH Don chat + DonChat -> Hop chat
             for(String w:pu.donChat.keySet()){
                 DonChat y = pu.donChat.get(w);
-                //System.out.println(w);
                 if(pu.pu(x, y).size()!= 0|| pu.pu(y, x).size()!=0){
-                    //System.out.println(w);
                     List <String> result ;
                     if(pu.pu(x,y).size()==0)
                       result = pu.pu(y,x);
                     else result = pu.pu(x,y);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(z.getCTHH())){
-                         //System.out.println(result);
                         k=y.getCTHH();
                         st=  y.getCTHH() + " + " + x.getCTHH()+ " = ";
                         for(int j = 0;j<result.size()-1;j++){
-                            //System.out.println(result.get(j));
                             st += result.get(j)+ " + ";
                         }
                         st += result.get(result.size() - 1);
+                        System.out.println(st);
+                        return k;   
                         } 
                     }
                 }
             }
-            if(k!="NULL"){
-            System.out.println(st);
-            return k;   
-            }
-            // Don chat + Hop  chat -> Hop chat
+            // Don chat + Hop chat (Tìm Cation) -> Hop chat
             for(String w:pu.cation.keySet()){// Tim = hop chat 
                 //System.out.println(w);
                 HopChat c = new HopChat(pu.cation.get(w),LayHC(b).getAnion());
@@ -126,20 +121,39 @@ public class DieuChe {
                     List <String> result = pu.pu(x, c);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(z.getCTHH())){
-                         //System.out.println(result);
-                        k=c.getCTHH();
-                        st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
-                        for(int j = 0;j<result.size()-1;j++){
-                            //System.out.println(result.get(j));
-                            st += result.get(j)+ " + ";
-                        }
-                        st += result.get(result.size() - 1);
+                            k=c.getCTHH();
+                            st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                            for(int j = 0;j<result.size()-1;j++){
+                                //System.out.println(result.get(j));
+                                st += result.get(j)+ " + ";
+                            }
+                            st += result.get(result.size() - 1);
+                            System.out.println(st);
+                            return k;
                         } 
                     }
                 }
             }
-            System.out.println(st);
-            return k;
+            // Don chat + Hop chat (Tìm Anion) -> Hop chat
+            for(String w:pu.anion.keySet()){
+                HopChat c = new HopChat(LayHC(b).getCation(),pu.anion.get(w));
+                if((pu.pu(x,c).size()!=0)){
+                    List <String> result = pu.pu(x, c);
+                    for(int i =0;i<result.size();i++){
+                        if(result.get(i).equals(z.getCTHH())){
+                            k=c.getCTHH();
+                            st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                            for(int j = 0;j<result.size()-1;j++){
+                                //System.out.println(result.get(j));
+                                st += result.get(j)+ " + ";
+                            }
+                            st += result.get(result.size() - 1);
+                            System.out.println(st);
+                            return k;
+                        } 
+                    }
+                }
+            }
         }
         // TH Hop chat + Đơn chất -> Dơn chất
         else if (Kiemtra(a)== false&&Kiemtra(b)==true){//Hop chat vs don chat 
@@ -153,46 +167,46 @@ public class DieuChe {
                 List <String> result = pu.pu(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                        k=c.getCTHH();
-                        st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
-                        for(int j = 0;j<result.size()-1;j++){
-                            st += result.get(j)+ " + ";
-                        }
-                        st += result.get(result.size() - 1);
+                            k=c.getCTHH();
+                            st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                            for(int j = 0;j<result.size()-1;j++){
+                                st += result.get(j)+ " + ";
+                            }
+                            st += result.get(result.size() - 1);
+                            System.out.println(st);
+                            return k;
                         } 
                     }
                 }
             }
-            System.out.println(st);
-            return k;
         }
         else if (Kiemtra(a) == false && Kiemtra(b)== false ){
             HopChat x = LayHC(a);
             HopChat y = LayHC(b);
+            String z="NULL";
+            String st =" ";
+            boolean p = false; 
             if(x.getAnion().getSymbol()=="OH"&& y.getCation().getSymbol()=="H"){
                 HopChat temp = x;
                 x=y;
                 y = temp;
             }
-            String z="NULL";
-            String st =" ";
             //--------------TH Hop Chat + Don chat -> Hop chat------------------
-            boolean p = false; 
             for(String w: pu.donChat.keySet()){
                 DonChat c = pu.donChat.get(w);
                 if(pu.pu(c, x).size()!=0){
                     List <String> result = pu.pu(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                        z=c.getCTHH();
-                        st= "TH3 " + x.getCTHH() + " + " + c.getCTHH()+ " = ";
-                        for(int j = 0;j<result.size()-1;j++){
-                            //System.out.println(result.get(j));
-                            st += result.get(j)+ " + ";
-                        }
-                        st += result.get(result.size() - 1);
-                        p = true ;
-                        break;
+                            z=c.getCTHH();
+                            st= "TH3 " + x.getCTHH() + " + " + c.getCTHH()+ " = ";
+                            for(int j = 0;j<result.size()-1;j++){
+                                //System.out.println(result.get(j));
+                                st += result.get(j)+ " + ";
+                            }
+                            st += result.get(result.size() - 1);
+                            p = true ;
+                            break;
                         }
                     }
                 }
@@ -223,12 +237,12 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                         st += result.get(result.size()-1);
+                        System.out.println(st);
+                        return z;
                         }
                     }
                     }
                 }
-                System.out.println(st);
-                return z;
             }
             // TH tìm Cation cho hop chat 
             else {
@@ -245,20 +259,69 @@ public class DieuChe {
                         int n = result.size();
                         for(int i =0;i<n;i++){
                             if(result.get(i).equals(y.getCTHH())){
-                            z=k.getCTHH();
-                            st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
-                            for(int j = 0 ;j<n-1;j++){
-                                st += result.get(j)+ " + ";
-                            }
-                            st += result.get(result.size()-1);
+                                z=k.getCTHH();
+                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                for(int j = 0 ;j<n-1;j++){
+                                    st += result.get(j)+ " + ";
+                                }
+                                st += result.get(result.size()-1);
+                                System.out.println(st);
+                                return z;
                             }
                         }
                     }   
                 }
-                System.out.println(st);
             }
-            return z;
+            //--------TH HC + HC -> Chất Mới-----------------
+            for(String i:pu.cation.keySet()){
+                for(String j: pu.anion.keySet()){
+                    HopChat k = new HopChat(pu.cation.get(i),pu.anion.get(j));
+                    if(pu.pu(x, k).size()!=0){
+                        List <String> result= pu.pu(x,k);
+                        for(int m=0;m<result.size();m++){
+                            if(result.get(m).equals(y.getCTHH())){
+                                z=k.getCTHH();
+                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                for(int n = 0 ;n<result.size()-1;n++){
+                                    st += result.get(n)+ " + ";
+                                }
+                                st += result.get(result.size()-1);
+                                System.out.println(st);
+                                return z;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        return "không tìm thấy dc";
+        else if(Kiemtra(a)==true && Kiemtra(b)==true) {
+            //TH DonChat => DonChat(Moi)
+            String st ="";
+            String z="NULL";
+            DonChat x= LayDC(a);
+            DonChat y = LayDC(b);
+            for(String i:pu.cation.keySet()){
+                for(String j: pu.anion.keySet()){
+                    HopChat k = new HopChat(pu.cation.get(i),pu.anion.get(j));
+                    if(pu.pu(x, k).size()!=0){
+                        List <String> result= pu.pu(x,k);
+                        System.out.println(result);
+                        for(int m=0;m<result.size();m++){
+                            if(result.get(m).equals(y.getCTHH())){
+                                z=k.getCTHH();
+                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                for(int n = 0 ;n<result.size()-1;n++){
+                                    st += result.get(n)+ " + ";
+                                }
+                                st += result.get(result.size()-1);
+                                System.out.println(st);return z;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        return "Không tìm thấy";
     }
 }
