@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Ag_1 Br_1 cream
+=======
+﻿Ag_1 Br_1 cream
+>>>>>>> origin/test
 Ag_1 Cl_1 white
 Ag_1 I_1 yellow
 Ag_1 O_2 black

@@ -26,18 +26,12 @@ Loại 1: MxSy + O2 -> Oxit + SO2 ( Hầu Như đều ra v trừ 1 số trườn
 
 4)SO2 + H2O -> H2SO3 ( t tìm hiểu thì SO2 là một oxit axit tan trong nước tạo thành dd axit yếu) 
 5)SO2 + H2S -> S + H2O 
-SO2 + KMnO4 + H20 -> K2So4 + MnSO4 + H2SO4 
-
 SO2 + NaOH -> NaSo3 + H2O ( Th NaOH dư)
 SO2 + NaOH -> NaHSo3 (TH NaOH thiếu) 
 vs (Co2 cũng vậy) 
-
 ( Phần này t ko tìm dc luật của nó do cái đó là tính chất của SO2) 
 
-6) S + Fe -> FeS ( Td vs hầu hết KL trừ Au,Pt) 
-S + H2So4 -> SO2 + H20
-S + HNO3(loang)-> NO + H2So4
-S + HNO3(dac) => NO2 + H2O + H2So4
+6) S + Fe -> FeS  
 
 7) Luật td vs HNo3 đâm đặc.
 
@@ -53,5 +47,4 @@ H2S + Cl2 + H2O -> H2SO4 + HCl
 	Br2
 10) Axit + Axit 
 H2S + H2SO4 -> SO2 + S + H2O 
-H2S + HNo3(l) -> S + NO + H2O 
-H2S + H2No3(d) -> H2So4 + No(NO2) + h20
+H2S + H2So4 => SO2 + No2 + h2o 
