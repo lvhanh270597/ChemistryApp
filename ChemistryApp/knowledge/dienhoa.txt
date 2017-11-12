@@ -38,6 +38,8 @@ Au 3
 Au 0
 F 1
 F2 0
+O 2
+O2 0
 Cl 1
 Cl2 0
 Br 1

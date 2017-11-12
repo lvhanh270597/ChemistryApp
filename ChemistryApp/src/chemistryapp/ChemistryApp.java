@@ -6,6 +6,7 @@ import Math.*;
 import java.io.*;
 import java.util.*;
 import javafx.util.*;
+import knowledge.knowledge;
 import process.*;
 
 public class ChemistryApp {
@@ -33,14 +34,28 @@ public class ChemistryApp {
         System.out.print(result.get(index));
         System.out.println();
     }
+    
+    public static void print(String X){
+        System.out.print(X);
+    }
+    
     public static void main(String[] args) {          
-        pu.readData();                               
-        List <HopChat> G = new Vector<HopChat>();;
-        HopChat X = new HopChat(pu.cation.get("H_1"), pu.anion.get("SO4_2"), "none");
-        HopChat Y = new HopChat(pu.cation.get("H_1"), pu.anion.get("Cl_1"), "none");
-        HopChat Z = new HopChat(pu.cation.get("Ba_2"), pu.anion.get("Cl_1"), "none");
-        HopChat T = new HopChat(pu.cation.get("Na_1"), pu.anion.get("CO3_2"), "none");
-        G.add(X);   G.add(Y);   G.add(Z);   G.add(T);        
-        phanBiet.phanBiet(G);  
+        knowledge.readData();                                       
+        HopChat[] A = {new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1")), 
+                       new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("CO3_2")),
+                       new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("SO4_2"))};      
+        List <HopChat> G = new Vector<HopChat>();
+        for (int i=0; i<A.length; i++) G.add(A[i]);
+        HopChat[] B = {new HopChat(knowledge.cation.get("C_4"), knowledge.anion.get("O_2")),
+                       new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"))};  
+        List <HopChat> E = new Vector<HopChat>();
+        //for (int i=0; i<B.length; i++) E.add(B[i]);
+        phanBiet.phanBiet(G, E);                     
+        /*HopChat A = new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1"));
+        HopChat B = new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"));
+        List<String> result = pu.pu(A, B);
+        for (String vl : result){
+            print(vl + " ");
+        }*/
     } 
-}
+} 

@@ -5,6 +5,7 @@ public class DonChat {
     
     private NguyenTo daiDien;    
     private int soLuong;
+    private String key;
            
     public String getCTHH(){
         String s = this.daiDien.getSymbol();
@@ -25,6 +26,10 @@ public class DonChat {
         return this.daiDien.getM() * this.soLuong;
     }
     
+    public String getKey(){
+        return this.key;
+    }
+    
     public void print(){
         System.out.println(this.getCTHH());
     }
@@ -33,5 +38,6 @@ public class DonChat {
     public DonChat(NguyenTo DD, int cnt){
         this.daiDien = DD;
         this.soLuong = cnt;        
+        this.key = this.daiDien.getSymbol() + "_" + cnt;
     }
 }

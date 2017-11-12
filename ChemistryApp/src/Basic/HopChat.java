@@ -5,6 +5,7 @@ import Math.*;
 import process.*;
 import java.util.*;
 import javafx.util.*;
+import knowledge.knowledge;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,7 +38,7 @@ public class HopChat{
     private Cation C;
     private Anion A;    
     private PhanSo tile;    
-    private String Color;
+    private String Color;    
     
     private String shorted(String X){        
         String result = X;
@@ -74,8 +75,8 @@ public class HopChat{
         String Y = shorted(X);
         if (X.equals(Y)) return X;        
         Cation C = this.C;
-        for (String key: pu.anion.keySet()){
-            Anion A = pu.anion.get(key);
+        for (String key: knowledge.anion.keySet()){
+            Anion A = knowledge.anion.get(key);
             HopChat hc = new HopChat(C, A);
             if (hc.simpleCTHH().equals(Y)){
                 this.A = A;

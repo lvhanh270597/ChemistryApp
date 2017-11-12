@@ -1,62 +1,141 @@
-X Y = X_Y
-2
-F X
-S Y
+dc(H_2) hc(X,O_2) = dc(X) hc(H_1,O_2)
+1
+DH Mg X
 0
-X H_OH = X_OH H2
+hc(C_2,O_2) hc(X,O_2) = dc(X) hc(C_4,O_2)
+1
+DH Mg X
+0
+dc(C_1) hc(X,O_2) = dc(X) hc(C_2,O_2)
+1
+DH Mg X
+0
+dc(X) hc(H_1,O_2) = hc(X,OH_1) dc(H_2)
 1
 KLK X
 0
-X Y_Z
-2
-DH X Y
-Z # OH
+hc(X,O_2) hc(H_1,O_2) = hc(X,OH_1)
 1
-alpha
-X H_Y = H_X Y
+KT X
+0
+hc(H_1,X) hc(Y,OH_1) = hc(Y,X) hc(H_1,O_2)
+0
+0
+hc(H_1,X) hc(Y,O_2) = hc(Y,X) hc(H_1,O_2)
+1
+KL Y
+0
+hc(X,OH_1) hc(Y,O_2) = hc(X,Y) hc(H_1,O_2)
+2
+KL X
+PK Y
+0
+dc(X) hc(H_1,Y) = hc(H_1,X) dc(Y)
 3
 HLG X
 HLG Y
 DH X Y
 0
-X_O H_O = X_OH
-1
-KT X
-0
-X_O H_Y = X_Y H_O
+dc(X) dc(Y) = hc(X,Y)
 2
-KL X
-Y # OH
+F X
+S Y
 0
-X_O H_O
-1
-PK X
-1
-beta
-H_X Y_OH = Y_X H_O
-2
-X # OH
-KL Y
-0
-X_Y Z_T = X_T Z_Y
-2
-KL X
-KL Z
-1
-after
-X_OH = X_O H_O
-1
-KETTUA X_OH
-0
-H_X
-1
-KB H_X
-1
-theta
-O2 X_O
+dc(O_2) hc(X,O_2)
 0
 1
 oxihoa
-H2 X_O = X H_O
+hc(Y,O_2) hc(H_1,O_2)
+1
+PK Y
+1
+beta
+hc(Y,O_2) hc(X,OH_1)
+2
+X # H_1
+PK Y
+1
+beta2
+hc(X,Y) hc(Z,T) = hc(X,T) hc(Z,Y)
+4
+KL X
+KL Z
+Y # O
+T # O
+1
+after
+hc(X,Y) hc(H_1,Z) = hc(X,Z) hc(H_1,Y)
+1
+Z # O
+1
+after
+dc(X) hc(Y,Z)
+4
+DH X Y
+Z # OH
+Z # O
+KLKK X
+1
+alpha
+hc(X,Cl_1) = dc(X) dc(Cl_2)
+1
+IIA X
+0
+hc(X,Cl_1) = dc(X) dc(Cl_2)
+1
+IA X
+0
+hc(X,OH_1) = dc(X) dc(O_2) hc(H_1,O_2)
+1
+IA X
+0
+hc(X,OH_1) = dc(X) dc(O_2) hc(H_1,O_2)
+1
+IIA X
+0
+hc(H_1,X)
+1
+KB hc(H_1,X)
+1
+phanhuy
+hc(X,OH_1) = hc(X,O_2) hc(H_1,O_2)
+1
+KLKK X
+0
+hc(X,OH_1) = hc(X,O_2) hc(H_1,O_2)
+1
+KB hc(X,OH_1)
+0
+hc(X,NO3_1) = hc(X,NO2_1) dc(O_2)
+1
+TH1_NO3 X
+0
+hc(X,NO3_1) = hc(X,O_2) hc(N_4,O_2) dc(O_2)
+1
+TH2_NO3 X
+0
+hc(X,NO3_1) = dc(X) hc(N_4,O_2) dc(O_2)
+1
+TH3_NO3 X
+0
+hc(X,CO3_2) = hc(X,O_2) hc(C_4,O_2)
+1
+KL X
+0
+hc(X,SO4_2) = hc(X,O_2) hc(S_4,O_2) dc(O_2)
+1
+KL X
+0
+dc(O_2) hc(X,S_2) = hc(X,O_2) hc(S_4,O_2)
+1
+KL X
+0
+hc(S_4,O_2) hc(H_1,S_2) = dc(S_1) hc(H_1,O_2)
+0
+0
+dc(Cl_2) hc(H_1,O_2) = hc(H_1,Cl_1) hc(H_1,ClO_1)
+0
+0
+dc(Br_2) hc(H_1,O_2) = hc(H_1,Br_1) hc(H_1,BrO_1)
 0
 0

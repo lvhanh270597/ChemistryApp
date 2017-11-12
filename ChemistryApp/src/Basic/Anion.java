@@ -16,6 +16,7 @@ public class Anion {
     private String symbolChemical;
     private float M;
     private int hoaTri;
+    private String key;
     
     public float getM(){
         return this.M;
@@ -105,11 +106,16 @@ public class Anion {
         System.out.println(this.symbolChemical + " " + this.M + " " + this.hoaTri);
     }
     
+    public String getKey(){
+        return this.key;
+    }
+    
     public Anion(){}
     public Anion(String symbol, float value, int hoaTri){
         //this.name = name;
         this.symbolChemical = symbol;
         this.M = value;
         this.hoaTri = hoaTri;
+        this.key = symbol + "_" + hoaTri;
     }    
 }

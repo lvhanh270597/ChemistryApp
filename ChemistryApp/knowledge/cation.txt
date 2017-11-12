@@ -2,6 +2,8 @@ Ag 1
 Ca 2
 Ba 2
 Cu 2
+Cu 1
+Cd 2
 Zn 2
 K  1
 Na 1
@@ -12,6 +14,8 @@ Fe 3
 H 1
 Li 1
 Cr 3
+Cr 2
+Cr 6
 Mn 2
 Ni 2
 Sn 2
@@ -21,7 +25,6 @@ Au 3
 P 5
 C 2
 C 4
-N 6
 N 2
 N 4
 N 1
