@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 import javafx.util.Pair;
 import java.util.LinkedList;
+import knowledge.knowledge;
 /**
  *
  * @author OS
@@ -19,26 +20,24 @@ public class DieuChe {
         return word;
     }
     public static boolean Kiemtra (String a){
-        for(String x: pu.donChat.keySet())// chay het ds 
+        for(String x: knowledge.donChat.keySet())// chay het ds 
         {
-            DonChat b = pu.donChat.get(x);
-            //System.out.println(b.getCTHH());
+            DonChat b = knowledge.donChat.get(x);
             if(a.equals(b.getCTHH()))return true ;
         }
         return false ;
     }
     
     public static DonChat LayDC(String a){
-        return pu.donChat.get(pu.getKeyDonChatFromName(a));
+        return knowledge.donChat.get(pu.getKeyDonChatFromName(a));
     }
     public static HopChat LayHC(String a){
         HopChat u = new HopChat();
-        for(String w:pu.cation.keySet()){
-            for(String z: pu.anion.keySet()){
-                HopChat y = new HopChat(pu.cation.get(w),pu.anion.get(z));
+        for(String w:knowledge.cation.keySet()){
+            for(String z: knowledge.anion.keySet()){
+                HopChat y = new HopChat(knowledge.cation.get(w),knowledge.anion.get(z));
                 if(a.equals(y.getCTHH())) {
                     u =y;
-                   //System.out.println(y.getCTHH());
                 }
             }
         }
@@ -86,14 +85,14 @@ public class DieuChe {
                 return k;
             }
         }
-        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {// Don chat =>  Hop chat
+        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {
             DonChat x = LayDC(a);
             HopChat z = LayHC(b);
             String k="NULL";
             String st="";
             // TH Don chat + DonChat -> Hop chat
-            for(String w:pu.donChat.keySet()){
-                DonChat y = pu.donChat.get(w);
+            for(String w:knowledge.donChat.keySet()){
+                DonChat y = knowledge.donChat.get(w);
                 //System.out.println(w);
                 if(pu.pu(x, y).size()!= 0|| pu.pu(y, x).size()!=0){
                     //System.out.println(w);
@@ -120,9 +119,9 @@ public class DieuChe {
             return k;   
             }
             // Don chat + Hop  chat -> Hop chat
-            for(String w:pu.cation.keySet()){// Tim = hop chat 
+            for(String w:knowledge.cation.keySet()){// Tim = hop chat 
                 //System.out.println(w);
-                HopChat c = new HopChat(pu.cation.get(w),LayHC(b).getAnion());
+                HopChat c = new HopChat(knowledge.cation.get(w),LayHC(b).getAnion());
                 if((pu.pu(x,c).size()!=0)){
                 //System.out.println(w);
                     List <String> result = pu.pu(x, c);
@@ -149,17 +148,15 @@ public class DieuChe {
             DonChat y = LayDC(b);
             String k="NULL";
             String st=" ";
-            for(String w:pu.donChat.keySet()){
-                 DonChat c = pu.donChat.get(w);
+            for(String w:knowledge.donChat.keySet()){
+                 DonChat c = knowledge.donChat.get(w);
                 if(pu.pu(c, x).size()!=0){
                 List <String> result = pu.pu(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                         //System.out.println(result);
                         k=c.getCTHH();
                         st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                         for(int j = 0;j<result.size()-1;j++){
-                            //System.out.println(result.get(j));
                             st += result.get(j)+ " + ";
                         }
                         st += result.get(result.size() - 1);
@@ -170,7 +167,7 @@ public class DieuChe {
             System.out.println(st);
             return k;
         }
-        else if (Kiemtra(a) == false && Kiemtra(b)== false ){ // hop chat vs hop chat
+        else if (Kiemtra(a) == false && Kiemtra(b)== false ){
             HopChat x = LayHC(a);
             HopChat y = LayHC(b);
             if(x.getAnion().getSymbol()=="OH"&& y.getCation().getSymbol()=="H"){
@@ -182,8 +179,8 @@ public class DieuChe {
             String st =" ";
             //--------------TH Hop Chat + Don chat -> Hop chat------------------
             boolean p = false; 
-            for(String w: pu.donChat.keySet()){
-                DonChat c = pu.donChat.get(w);
+            for(String w: knowledge.donChat.keySet()){
+                DonChat c = knowledge.donChat.get(w);
                 if(pu.pu(c, x).size()!=0){
                     List <String> result = pu.pu(c, x);
                     for(int i =0;i<result.size();i++){
@@ -199,7 +196,6 @@ public class DieuChe {
                         break;
                         }
                     }
-                  //System.out.println(st);
                 }
                 if(p==true) break;
             }
@@ -210,8 +206,8 @@ public class DieuChe {
             //--------------TH Hop chat + Hop chat => Hop chat----------------- 
             // Th tìm Anion cho Hop chat
             if(x.getAnion()==y.getAnion()){
-                for(String w:pu.anion.keySet()){
-                    HopChat k = new HopChat(y.getCation(),pu.anion.get(w));
+                for(String w:knowledge.anion.keySet()){
+                    HopChat k = new HopChat(y.getCation(),knowledge.anion.get(w));
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
                         HopChat temp = x;
                         x=k;
@@ -221,18 +217,15 @@ public class DieuChe {
                     List <String> result = pu.pu(x, k);
                     st=  " ";
                     for(int i =0;i< result.size();i++){
-                        //System.out.println(result.get(i));
                         if(result.get(i).equals(y.getCTHH())){
-                        z=k.getCTHH();
-                        st= "TH1 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
-                        for(int j = 0 ;j<result.size()-1;j++){
-                            st += result.get(j)+ " + ";
-                        }
+                            z=k.getCTHH();
+                            st= "TH1 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                            for(int j = 0 ;j<result.size()-1;j++){
+                                st += result.get(j)+ " + ";
+                            }
                         st += result.get(result.size()-1);
-                        //break;
                         }
                     }
-                        //System.out.println(st);
                     }
                 }
                 System.out.println(st);
@@ -240,9 +233,8 @@ public class DieuChe {
             }
             // TH tìm Cation cho hop chat 
             else {
-                //String st= " ";
-                for(String w: pu.cation.keySet()){
-                    HopChat k = new HopChat(pu.cation.get(w),y.getAnion());
+                for(String w: knowledge.cation.keySet()){
+                    HopChat k = new HopChat(knowledge.cation.get(w),y.getAnion());
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
                         HopChat temp = x;
                         x=k;
@@ -253,7 +245,6 @@ public class DieuChe {
                         st=  "";
                         int n = result.size();
                         for(int i =0;i<n;i++){
-                            //System.out.println(result.get(i));
                             if(result.get(i).equals(y.getCTHH())){
                             z=k.getCTHH();
                             st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
@@ -261,7 +252,6 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size()-1);
-                            //break;
                             }
                         }
                     }   
