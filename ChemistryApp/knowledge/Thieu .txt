@@ -1,57 +1,29 @@
-﻿Các phần t thấy còn thiếu tại thời điểm này. 
+Các phần t thấy còn thiếu tại thời điểm này. 
 
-1)Luat Muoi Phan huy. 
-Điện phân nóng chảy áp dụng cho MCln M(OH)n và al2o3(M là kL nhóm IA IIA) 
-OH- => O2 H2O
-* Nhiệt phân muối
-- bazo 
-M(OH)n -> M2On + nH2O ( voi M khác Li,Na,k,Ca,Ba)
-Lưu ý: nhiệt phân Fe(OH)2 phải có O2 
-- Goc Muối NO3
-Th1: K Ca Na sp là muối Nitrit(nO2-)+ O2
-Th2: Mg Al, Zn Fe Co NI Sn Pb H2 Cu sp Oxit KL + No2 + O2
-Th3: Hg Ag Pt Au sp sẽ là: KL + No2 + O2
-- Góc Muối CO3
-M2(CO3)n -> M2On + Co2
-- Goc Muối SO4
-M2(SO4)n -> 2M2On 2nSO2 + O2
+Luat Muoi Phan huy. 
 
+CO + Fe2O3 -> Fe + CO2
 
-2) CO + Fe2O3 -> Fe + CO2
+Al2O3 -> Al + O2 ( dpnc)
+KCl -> K + Cl2
+=> X_Y -> X + Y
+(Luật: Phương pháp điện phân dùng để điều chế hầu hết đươc các kim loại: Điều chế những KL 
+có tính khử mạnh như Li , Na, Al,K ... bằng cách điện phân những hợp chất ( muối , bazo, muối))
 
-
-3) FeS + O2 -> Fe2O3 + SO2
+FeS + O2 -> Fe2O3 + SO2
 (Luật:liên quan đến muối sunfat: Công thức tổng quát MxSy
 Loại 1: MxSy + O2 -> Oxit + SO2 ( Hầu Như đều ra v trừ 1 số trường hợp đặc biệt) 
+Loại 2:MxSy + H+ -> Muối + H2S ( cái này quan trọng để làm nhận biết) Trừ các chất không tan 
+trong axit ( CuS , Ag2S , SnS , CdS) 
 
-4)SO2 + H2O -> H2SO3 ( t tìm hiểu thì SO2 là một oxit axit tan trong nước tạo thành dd axit yếu) 
-5)SO2 + H2S -> S + H2O 
-SO2 + KMnO4 + H20 -> K2So4 + MnSO4 + H2SO4 
-
-SO2 + NaOH -> NaSo3 + H2O ( Th NaOH dư)
-SO2 + NaOH -> NaHSo3 (TH NaOH thiếu) 
-vs (Co2 cũng vậy) 
-
+SO2 + H2O -> H2SO3 ( t tìm hiểu thì SO2 là một oxit axit tan trong nước tạo thành dd axit yếu) 
+SO2 + H2S -> S + H2O 
 ( Phần này t ko tìm dc luật của nó do cái đó là tính chất của SO2) 
 
-6) S + Fe -> FeS ( Td vs hầu hết KL trừ Au,Pt) 
-S + H2So4 -> SO2 + H20
-S + HNO3(loang)-> NO + H2So4
-S + HNO3(dac) => NO2 + H2O + H2So4
+S + Fe -> FeS 
+H2 + S -> H2S( 350 độ ) 
+{ Luật S td hầu hết vs kim loại) 
 
-7) Luật td vs HNo3 đâm đặc.
 
-8) Halogen tác dụng vs nước: 
-Chỉ có F2 + H2O -> HF O2 do F là chất oxi hóa mạnh 
-Còn lại Cl2 + H2O = HCl HClO
-Br2 + H2o = HBr HbrO
 
-9) Điều chế axit 
-SO2 + O2 + H2O -> H2SO4
-NO2 + O2 + h2O -> HNO3 
-H2S + Cl2 + H2O -> H2SO4 + HCl
-	Br2
-10) Axit + Axit 
-H2S + H2SO4 -> SO2 + S + H2O 
-H2S + HNo3(l) -> S + NO + H2O 
-H2S + H2No3(d) -> H2So4 + No(NO2) + h20
+
