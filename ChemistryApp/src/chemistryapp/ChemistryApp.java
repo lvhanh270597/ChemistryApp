@@ -50,7 +50,12 @@ public class ChemistryApp {
                        new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"))};  
         List <HopChat> E = new Vector<HopChat>();
         //for (int i=0; i<B.length; i++) E.add(B[i]);
-        phanBiet.phanBiet(G, E);                     
+       //phanBiet.phanBiet(G, E);    
+        //String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";
+        //String x ="FeS -> H2S -> NO2 -> HNO3 -> Al(NO3)3 -> O2";
+        //String x = "FeS -> H2S -> SO2 -> H2SO4 -> ZnSO4 -> Zn(NO3)2 -> O2";
+        String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
+        DieuChe.DieuChe(x);
         /*HopChat A = new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1"));
         HopChat B = new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"));
         List<String> result = pu.pu(A, B);
