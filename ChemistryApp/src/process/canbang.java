@@ -151,8 +151,6 @@ public class canbang {
                 }
             }
         }
-        System.out.println(TT1 + " " + TT2);
-        System.out.println(SP1 + " " + SP2);
         sochat = VT.size();
         int [][]matrix = new int [sochat][sobien];
         for(int i=0; i<tt.size(); i++){
@@ -210,12 +208,6 @@ public class canbang {
                     }
                 }
             }
-        }
-        for(int i=0; i<sochat;i++){
-            for(int j=0;j<sobien;j++){
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
         }
         List<Integer> e = giaimatran(matrix,sochat,sobien);
         return e;
