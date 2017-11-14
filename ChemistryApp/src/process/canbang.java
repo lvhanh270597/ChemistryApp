@@ -220,7 +220,4 @@ public class canbang {
         List<Integer> e = giaimatran(matrix,sochat,sobien);
         return e;
     }
-    public static void canbange(String s){
-        
-    }
 }
