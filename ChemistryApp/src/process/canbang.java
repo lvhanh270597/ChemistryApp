@@ -87,6 +87,28 @@ public class canbang {
         Pair <List, List> e = new Pair <List, List>(res1, res2);
         return e;
     }
+    public static Pair<List, List> tachchat(String s){
+        String []words = s.split("\\s");
+        int k =0;
+        for(String w:words){
+            k++;
+            if(w.equalsIgnoreCase("=")) break;
+        }
+        List<String> tt = new LinkedList<String>();
+        List<String> sp = new LinkedList<String>();
+        for(int i=0; i<words.length; i++){
+            if(i < k - 1)
+                if(!words[i].equalsIgnoreCase("+")){
+                    tt.add(words[i]);
+                }
+            if(i >= k)
+                if(!words[i].equalsIgnoreCase("+")){
+                    sp.add(words[i]);
+                }
+        }
+        Pair<List, List> e = new Pair<List,List>(tt,sp);
+        return e;
+    }
     public static List<Integer> canbang(String s){
         int sobien, sochat = 0;
         List <String> TT1 = new LinkedList<String>();
@@ -95,49 +117,29 @@ public class canbang {
         List <Integer> SP2 = new LinkedList<Integer>();
         List <String> VT = new LinkedList<String>(); 
         //tìm các chất tham gia, sản phẩm trong chuỗi
-        String []words = s.split("\\s");
-        int k =0, c=0, p=0;
-        for(String w:words){
-            k++;
-            if(w.equals("+")) c++;
-            if(w.equalsIgnoreCase("=")) break;
-        }
-        String []tt = new String[c+1];
-        String []sp = new String[(words.length - k)/2 + 1];
-        for(int i=0; i<words.length; i++){
-            if(i < k - 1)
-                if(!words[i].equalsIgnoreCase("+")){
-                    tt[p] = words[i];
-                    p++;
-                }
-            if(i == k - 1) p = 0;
-            if(i >= k)
-                if(!words[i].equalsIgnoreCase("+")){
-                    sp[p] = words[i];
-                    p++;
-                }
-        }
+        List<String> tt = tachchat(s).getKey();
+        List<String> sp = tachchat(s).getValue();
         ///Tách các chất tham gia, sản phẩm
         List <String> temp1;
         List <Integer> temp2;
-        for(int i=0; i<tt.length; i++){
-            temp1 = setChat(tt[i]).getKey();
-            temp2 = setChat(tt[i]).getValue();
+        for(int i=0; i<tt.size(); i++){
+            temp1 = setChat(tt.get(i)).getKey();
+            temp2 = setChat(tt.get(i)).getValue();
             for(int j=0; j<temp1.size(); j++){
                 TT1.add(temp1.get(j));
                 TT2.add(temp2.get(j));  
             }
         }
-        for(int i=0; i<sp.length; i++){
-            temp1 = setChat(sp[i]).getKey();
-            temp2 = setChat(sp[i]).getValue();
+        for(int i=0; i<sp.size(); i++){
+            temp1 = setChat(sp.get(i)).getKey();
+            temp2 = setChat(sp.get(i)).getValue();
             for(int j=0; j<temp1.size(); j++){
                 SP1.add(temp1.get(j));
                 SP2.add(temp2.get(j));
             }
         }
         ///Thành lập ma trận
-        sobien = tt.length + sp.length;
+        sobien = tt.size() + sp.size();
         for(int i=0; i<TT1.size(); i++){
             VT.add(TT1.get(i));
             if(i>0){
@@ -149,11 +151,13 @@ public class canbang {
                 }
             }
         }
+        System.out.println(TT1 + " " + TT2);
+        System.out.println(SP1 + " " + SP2);
         sochat = VT.size();
         int [][]matrix = new int [sochat][sobien];
-        for(int i=0; i<tt.length; i++){
+        for(int i=0; i<tt.size(); i++){
             int j=0;
-            temp1 = setChat(tt[i]).getKey();
+            temp1 = setChat(tt.get(i)).getKey();
             for(int e=0; e<temp1.size(); e++){
                 while(j<TT1.size()){
                     int kt=0;
@@ -179,17 +183,17 @@ public class canbang {
                 }
             }
         }
-        for(int i=0; i<sp.length; i++){
+        for(int i=0; i<sp.size(); i++){
             int j=0;
-            temp1 = setChat(sp[i]).getKey();
+            temp1 = setChat(sp.get(i)).getKey();
             for(int e=0; e<temp1.size(); e++){
                 while(j<SP1.size()){
                     int kt=0;
                     if(temp1.get(e).equals(SP1.get(j))){  
                         for(int t=0; t<VT.size(); t++){
                             if(SP1.get(j).equals(VT.get(t))){
-                                if(matrix[t][i+tt.length] == 0){
-                                    matrix[t][i+tt.length] = -SP2.get(j);
+                                if(matrix[t][i+tt.size()] == 0){
+                                    matrix[t][i+tt.size()] = -SP2.get(j);
                                     SP1.remove(j);
                                     SP2.remove(j);
                                     kt=1;
@@ -207,7 +211,16 @@ public class canbang {
                 }
             }
         }
+        for(int i=0; i<sochat;i++){
+            for(int j=0;j<sobien;j++){
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
         List<Integer> e = giaimatran(matrix,sochat,sobien);
         return e;
+    }
+    public static void canbange(String s){
+        
     }
 }
