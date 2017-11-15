@@ -150,7 +150,7 @@ public class canbang {
                     }
                 }
             }
-        }
+        }   
         sochat = VT.size();
         int [][]matrix = new int [sochat][sobien];
         for(int i=0; i<tt.size(); i++){

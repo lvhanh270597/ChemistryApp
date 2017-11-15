@@ -8,7 +8,7 @@ import java.util.*;
 import javafx.util.*;
 import knowledge.knowledge;
 import process.*;
-
+import Interface.*;
 public class ChemistryApp {
                     
     public static void printReaction(List<String> result, List <Integer> vl){
@@ -41,7 +41,7 @@ public class ChemistryApp {
     
     public static void main(String[] args) {          
         knowledge.readData();                                       
-        HopChat[] A = {new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1")), 
+        /*HopChat[] A = {new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1")), 
                        new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("CO3_2")),
                        new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("SO4_2"))};      
         List <HopChat> G = new Vector<HopChat>();
@@ -62,5 +62,7 @@ public class ChemistryApp {
         for (String vl : result){
             print(vl + " ");
         }*/
+        giaodien gd = new giaodien();
+        gd.show();
     } 
 } 
