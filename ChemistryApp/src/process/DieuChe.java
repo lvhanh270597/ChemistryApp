@@ -57,42 +57,44 @@ public class DieuChe {
         //---------------Phan Huy---------------------------
         if(Kiemtra(a)==false){
             String k ="NULL";
-            String st="";
+            String st=" ";
             HopChat x = LayHC(a);
             if(Kiemtra(b)==true){
                 DonChat y = LayDC(b);
                 if(pu.pu(x).size()!=0){
                 List <String> result = pu.pu(x);
-                for(int i=0;i<result.size()-1;i++){
+                for(int i=0;i<result.size();i++){
+                    //System.out.println(result.get(i)+ " = "+ y.getCTHH());
                     if(result.get(i).equals(y.getCTHH())){
-                        k = y.getCTHH();
+                         //System.out.println("Yes");
+                        k = "Nhiet độ";
                         st = x.getCTHH()+ " -> ";
                         for(int j =0;j< result.size()-1 ;j++){
                              st += result.get(j) + " + ";
                         }
                         st+= result.get(result.size()-1);
+                        System.out.println(st);
+                        return k;
                     }
                 }
             }
             }else {
                 HopChat y = LayHC(b);
                 if(pu.pu(x).size()!=0){
-                List <String> result = pu.pu(x);
-                for(int i=0;i<result.size();i++){
-                    if(result.get(i).equals(y.getCTHH())){
-                        k = y.getCTHH();
-                        st = x.getCTHH()+ " -> ";
-                        for(int j =0;j< result.size() ;j++){
-                             st += result.get(j) + " + ";
+                    List <String> result = pu.pu(x);
+                    for(int i=0;i<result.size();i++){
+                        if(result.get(i).equals(y.getCTHH())){
+                            k = y.getCTHH();
+                            st = x.getCTHH()+ " -> ";
+                            for(int j =0;j< result.size();j++){
+                                 st += result.get(j) + " + ";
+                            }
+                            st+= result.get(result.size()-1);
+                            System.out.println(st);
+                            return k;
                         }
-                        st+= result.get(result.size()-1);
                     }
                 }
-            }
-            }
-            if(k!="NULL"){
-                System.out.println(st);
-                return k;
             }
         }
         if(Kiemtra(a)== true&&Kiemtra(b)==false)  {
@@ -164,6 +166,28 @@ public class DieuChe {
                     }
                 }
             }
+            // DonChat + HopChat -> HopChat(Moi)
+            for(String i: knowledge.cation.keySet()){
+                for(String j: knowledge.anion.keySet()){
+                    HopChat c = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
+                    if(pu.pu(x,c).size()!=0){
+                        List <String> result = pu.pu(x,c);
+                        for(int w=0 ;w<result.size();w++){
+                           if(result.get(w).equals(z.getCTHH())){
+                                k=c.getCTHH();
+                                st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                for(int p = 0;p<result.size()-1;p++){
+                                    //System.out.println(result.get(j));
+                                    st += result.get(p)+ " + ";
+                                }
+                                st += result.get(result.size() - 1);
+                                System.out.println(st);
+                                return k;
+                           }
+                        }
+                    }
+                }
+            }
         }
         // TH Hop chat + Đơn chất -> Dơn chất
         else if (Kiemtra(a)== false&&Kiemtra(b)==true){//Hop chat vs don chat 
@@ -208,7 +232,7 @@ public class DieuChe {
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
                             z=c.getCTHH();
-                            st= "TH3 " + x.getCTHH() + " + " + c.getCTHH()+ " = ";
+                            st= x.getCTHH() + " + " + c.getCTHH()+ " = ";
                             for(int j = 0;j<result.size()-1;j++){
                                 //System.out.println(result.get(j));
                                 st += result.get(j)+ " + ";
@@ -236,7 +260,7 @@ public class DieuChe {
                         for(int i =0;i< result.size();i++){
                             if(result.get(i).equals(y.getCTHH())){
                                 z=k.getCTHH();
-                                st= "TH1 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                st=x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int j = 0 ;j<result.size()-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
@@ -264,7 +288,7 @@ public class DieuChe {
                         for(int i =0;i<n;i++){
                             if(result.get(i).equals(y.getCTHH())){
                                 z=k.getCTHH();
-                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int j = 0 ;j<n-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
@@ -284,7 +308,7 @@ public class DieuChe {
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
                                 z=k.getCTHH();
-                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int n = 0 ;n<result.size()-1;n++){
                                     st += result.get(n)+ " + ";
                                 }
@@ -309,11 +333,10 @@ public class DieuChe {
                     HopChat k = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
                     if(pu.pu(x, k).size()!=0){
                         List <String> result= pu.pu(x,k);
-                        System.out.println(result);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
                                 z=k.getCTHH();
-                                st= "TH2 " + x.getCTHH() + " + " + k.getCTHH()+ " = ";
+                                st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int n = 0 ;n<result.size()-1;n++){
                                     st += result.get(n)+ " + ";
                                 }
