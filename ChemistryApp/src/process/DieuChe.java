@@ -67,7 +67,7 @@ public class DieuChe {
                     //System.out.println(result.get(i)+ " = "+ y.getCTHH());
                     if(result.get(i).equals(y.getCTHH())){
                          //System.out.println("Yes");
-                        k = "Nhiet do";
+                        k = "Nhiet độ";
                         st = x.getCTHH()+ " -> ";
                         for(int j =0;j< result.size()-1 ;j++){
                              st += result.get(j) + " + ";
@@ -163,6 +163,28 @@ public class DieuChe {
                             System.out.println(st);
                             return k;
                         } 
+                    }
+                }
+            }
+            // DonChat + HopChat -> HopChat(Moi)
+            for(String i: knowledge.cation.keySet()){
+                for(String j: knowledge.anion.keySet()){
+                    HopChat c = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
+                    if(pu.pu(x,c).size()!=0){
+                        List <String> result = pu.pu(x,c);
+                        for(int w=0 ;w<result.size();w++){
+                           if(result.get(w).equals(z.getCTHH())){
+                                k=c.getCTHH();
+                                st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                for(int p = 0;p<result.size()-1;p++){
+                                    //System.out.println(result.get(j));
+                                    st += result.get(p)+ " + ";
+                                }
+                                st += result.get(result.size() - 1);
+                                System.out.println(st);
+                                return k;
+                           }
+                        }
                     }
                 }
             }
@@ -311,7 +333,6 @@ public class DieuChe {
                     HopChat k = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
                     if(pu.pu(x, k).size()!=0){
                         List <String> result= pu.pu(x,k);
-                        System.out.println(result);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
                                 z=k.getCTHH();

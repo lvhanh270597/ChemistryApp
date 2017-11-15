@@ -17,6 +17,7 @@ Cr 3
 Cr 2
 Cr 6
 Mn 2
+Mn 4
 Ni 2
 Sn 2
 Pb 2

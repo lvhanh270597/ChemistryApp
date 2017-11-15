@@ -143,9 +143,10 @@ Z # O
 KLKK X
 1
 alpha
-hc(X,Cl_1) = dc(X) dc(Cl_2)
-1
-IIA X
+hc(X,Y) = dc(X) dc(Y)
+2
+KT X
+HLG Y
 0
 hc(X,Cl_1) = dc(X) dc(Cl_2)
 1
@@ -226,9 +227,24 @@ dc(X) hc(H_1,S_2) = hc(H_1,X) dc(S_1)
 1
 HLG X
 0
-dc(S_1) dc(O_2) = hc(S_4,O_2)
+dc(S) hc(H_1,NO3_1) = hc(H_1,O_2) hc(H_1,SO4_2) hc(N_4,O_2)
 0
 0
-hc(H_1,SO3_2) hc(H_1,S_2) = dc(S_1) hc(H_1,O_2)
+hc(H_1,NO3_1) dc(S) = hc(H_1,O_2) hc(H_1,SO4_2) hc(N_4,O_2)
 0
+0
+hc(X,ClO3_1) = hc(X,Cl_1) dc(O_2)
+1
+KT X
+0
+hc(Hg_2,O_2) = dc(Hg_1) dc(O_2)
+0
+0
+dc(O_3) hc(K_1,I_1) hc(H_1,O_2) = dc(I_2) dc(O_2) hc(K_1,OH_1)
+0
+0
+dc(X) dc(Y) = hc(X,Y)
+2
+KT X
+HLG Y
 0
