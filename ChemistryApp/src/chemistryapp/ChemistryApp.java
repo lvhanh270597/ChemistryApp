@@ -7,12 +7,13 @@ import java.io.*;
 import java.util.*;
 import javafx.util.*;
 import knowledge.knowledge;
+import java.util.LinkedList;
 import process.*;
 import Interface.*;
 public class ChemistryApp {
                     
     public static void printReaction(List<String> result, List <Integer> vl){
-        int index = result.indexOf(" = ");                
+        int index = result.indexOf("=");                
         int t = 0;
         for (int i=0; i<index - 1; i++){
             if (vl.get(i) > 1)
@@ -34,7 +35,30 @@ public class ChemistryApp {
         System.out.print(result.get(index));
         System.out.println();
     }
-    
+     public static String printReaction1(List<String> result, List <Integer> vl){
+         String s ="";
+        int index = result.indexOf("=");                
+        int t = 0;
+        for (int i=0; i<index - 1; i++){
+            if (vl.get(i) > 1)
+                s+=vl.get(i);
+            s+=result.get(i) + " + ";
+        }            
+        if (vl.get(index - 1) > 1)
+            s+=vl.get(index - 1);
+        s+=result.get(index - 1) + " = ";        
+        for (int i=index+1; i<result.size() - 1; i++){
+            if (vl.get(i - 1) > 1){
+                s+=vl.get(i - 1);
+            }
+            s+=result.get(i) + " + ";
+        }        
+        index = vl.size();
+        if (vl.get(index - 1) > 1)
+            s+=vl.get(index - 1);
+        s+=result.get(index);
+        return s;
+    }
     public static void print(String X){
         System.out.print(X);
     }
@@ -71,6 +95,11 @@ public class ChemistryApp {
         for (String vl : result){
             print(vl + " ");
         }*/
+        /*String s = "Na + H2O = NaOH + H2";
+        List<Integer> sb = canbang.canbang(s);
+        for(int i=0; i<sb.size(); i++)
+            System.out.print(sb.get(i) + " ");
+        System.out.println();*/
         giaodien gd = new giaodien();
         gd.show();
     } 

@@ -1,2 +1,0 @@
-Basic.PhanSo
-Basic.HopChat

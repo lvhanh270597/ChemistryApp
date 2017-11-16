@@ -23,13 +23,16 @@ public class giaodien extends javax.swing.JFrame {
         initComponents();
         createInterface();
     }
+    gdcanbang cb = new gdcanbang();
+    gdphantukhoi ptk = new gdphantukhoi();
+    gdnhanbiet nb = new gdnhanbiet();
+    gddieuche dc = new gddieuche();
+    gddudoan dd = new gddudoan();
+    gdbaitoan bt = new gdbaitoan();
     public void createInterface(){
         this.setSize(810, 569);
         this.setLocation(450,250);
-        banle.setSize(810,36);
-        banle.setLocation(0,0);
-        banle.setBackground(Color.WHITE);
-        banle.setLayout(null);
+        this.setBackground(Color.WHITE);
         nen1.setSize(810,213);
         nen1.setLocation(0,36);
         nen1.setBackground(Color.LIGHT_GRAY);
@@ -38,7 +41,6 @@ public class giaodien extends javax.swing.JFrame {
         nen2.setLocation(0,249);
         nen2.setBackground(new Color(32,47,90));
         nen2.setLayout(null);
-        this.add(banle);
         this.add(nen2);
         this.add(nen1);
         exit.setSize(36,36);
@@ -51,7 +53,7 @@ public class giaodien extends javax.swing.JFrame {
                 System.exit(0);
             }
         });
-        banle.add(exit);
+        this.add(exit);
         mini.setSize(36,36);
         mini.setLocation(724, 0);
         mini.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -62,15 +64,15 @@ public class giaodien extends javax.swing.JFrame {
                 System.exit(0);
             }
         });*/
-        banle.add(mini);
+        this.add(mini);
         icon.setSize(50,36);
         icon.setLocation(0, 0);
         ImageIcon iconIcon = new ImageIcon("hoahoc\\icon.png");
         icon.setIcon(iconIcon);
-        banle.add(icon);
+        this.add(icon);
         name.setSize(60,36);
         name.setLocation(55, 0);
-        banle.add(name);
+        this.add(name);
         picture.setSize(431,213);
         picture.setLocation(422, 0);
         ImageIcon pictureIcon = new ImageIcon("hoahoc\\dc.png");
@@ -154,6 +156,43 @@ public class giaodien extends javax.swing.JFrame {
             }
         });
         nen2.add(left);
+        cn[0].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               ptk.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        cn[1].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               dc.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        cn[2].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               cb.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        cn[3].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               dd.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        cn[4].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               nb.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        cn[5].addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent m){
+               bt.setVisible(true);
+               giaodien.this.setVisible(false);
+            }
+        });
+        
     }
    
     
@@ -217,7 +256,6 @@ public class giaodien extends javax.swing.JFrame {
             }
         });
     }
-    JPanel banle = new JPanel();
     JPanel nen1 = new JPanel();
     JPanel nen2 = new JPanel();
     JLabel exit = new JLabel();
