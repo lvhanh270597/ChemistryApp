@@ -228,7 +228,8 @@ dc(X) hc(H_1,S_2) = hc(H_1,X) dc(S_1)
 HLG X
 0
 dc(S) hc(H_1,NO3_1) = hc(H_1,O_2) hc(H_1,SO4_2) hc(N_4,O_2)
-0
+1
+NT S
 0
 hc(H_1,NO3_1) dc(S) = hc(H_1,O_2) hc(H_1,SO4_2) hc(N_4,O_2)
 0
@@ -247,4 +248,19 @@ dc(X) dc(Y) = hc(X,Y)
 2
 KT X
 HLG Y
+0
+hc(N_4,O_2) hc(S_4,O_2) = hc(S_6,O_2) hc(N_2,O_2)
+0
+0
+dc(S_1) hc(Na_1,OH_1) = hc(Na_1,S_2) hc(Na_1,SO3_2) hc(H_1,O_2)
+0
+0
+hc(Mn_4,O_2) hc(H_1,Cl_1) = hc(Mn_2,Cl_1) hc(H_1,O_2) dc(Cl_2)
+0
+0
+hc(Cu_2,O_2) hc(H_1,S_2) = dc(Cu_1) hc(S_4,O_2) hc(H_1,O_2)
+0
+0
+hc(H_1,S_2) hc(Cu_2,O_2) = dc(Cu_1) hc(S_4,O_2) hc(H_1,O_2)
+0
 0

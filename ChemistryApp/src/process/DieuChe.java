@@ -97,7 +97,7 @@ public class DieuChe {
                 }
             }
         }
-        if(Kiemtra(a)== true&&Kiemtra(b)==false)  {
+        if(Kiemtra(a)== true&&Kiemtra(b)==false) {
             DonChat x = LayDC(a);
             HopChat z = LayHC(b);
             String k="NULL";
@@ -213,6 +213,29 @@ public class DieuChe {
                     }
                 }
             }
+            // Hop chat + Hop chat => Don Chat
+            for(String w: knowledge.cation.keySet()){
+                for(String p: knowledge.anion.keySet()){
+                    HopChat c = new HopChat(knowledge.cation.get(w),knowledge.anion.get(p));{
+                        if(pu.pu(x, c).size()!=0){
+                            List<String> result = pu.pu(x,c);
+                            //System.out.println(result);
+                            for(int i =0;i<result.size();i++){
+                                if(result.get(i).equals(b)){
+                                k=c.getCTHH();
+                                st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                for(int j = 0;j<result.size()-1;j++){
+                                    st += result.get(j)+ " + ";
+                                }
+                                st += result.get(result.size() - 1);
+                                System.out.println(st);
+                                return k;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         else if (Kiemtra(a) == false && Kiemtra(b)== false ){
             HopChat x = LayHC(a);
@@ -273,7 +296,6 @@ public class DieuChe {
                 }
             }
             // TH tìm Cation cho hop chat 
-            else {
                for(String w: knowledge.cation.keySet()){
                     HopChat k = new HopChat(knowledge.cation.get(w),y.getAnion());
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
@@ -304,7 +326,9 @@ public class DieuChe {
                 for(String j: knowledge.anion.keySet()){
                     HopChat k = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
                     if(pu.pu(x, k).size()!=0){
+                       // System.out.println("Yes");
                         List <String> result= pu.pu(x,k);
+                        //System.out.println(result);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
                                 z=k.getCTHH();
@@ -318,7 +342,6 @@ public class DieuChe {
                             }
                         }
                     }
-                }
                 }
             }
         }

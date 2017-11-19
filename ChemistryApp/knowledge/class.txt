@@ -11,3 +11,4 @@ IIA = Be Mg Ca Ba
 TH1_NO3 = K Ca Na Ba
 TH2_NO3 = Mg Al Zn Fe Ni Sn Pb Cu
 TH3_NO3 = Hg Ag
+NT = S
