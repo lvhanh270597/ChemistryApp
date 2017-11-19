@@ -74,21 +74,25 @@ public class ChemistryApp {
         List <HopChat> E = new Vector<HopChat>();*/
         //for (int i=0; i<B.length; i++) E.add(B[i]);
        //phanBiet.phanBiet(G, E);  
-        String x = "FeS -> H2S -> S -> NO2 -> SO3 -> H2SO4 -> SO2 -> H2SO4 -> CO2 -> CO -> S -> Na2SO3 -> Na2S -> H2S -> Cu";// page 14
-       // String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";
-        //String x ="FeS -> H2S -> S -> NO2 -> HNO3 -> Al(NO3)3 -> O2";
+       // String x = "FeS -> H2S -> S -> NO2 -> SO3 -> H2SO4 -> SO2 -> H2SO4 -> CO2 -> CO -> S -> Na2SO3 -> Na2S -> H2S -> Cu";// page 14
+        //String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";// page 13
+       // String x ="FeS -> H2S -> S -> NO2 -> HNO3 -> Al(NO3)3 -> O2";
         //String x = "FeS -> H2S -> SO2 -> H2SO4 -> ZnSO4 -> Zn(NO3)2 -> O2";
        //String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
-        //String x = "MnO2 -> Cl2";
+        //String x = "Br2 -> HBr";
         //String x = "KClO3 -> O2 -> CO2 -> BaCO3 -> BaCl2 -> Ba(NO3)2 -> O2";
-        //String x ="KMnO4 -> O2 -> O3 -> I2 -> KI -> I2 -> S";
+        //String x ="HgO -> O2 -> O3 -> I2 -> KI -> I2 -> S";
+        //String x ="S -> SO2 -> SO3 -> H2SO4 -> CuSO4 -> Cu(NO3)2 -> O2 -> ZnO -> Zn(NO3)2 -> Zn"; // page 12
+        //String x ="ZnS -> SO2 -> H2SO4 -> ZnSO4 -> Zn";//page 17
+        String x = "C -> SO2 -> K2CO3 -> K2SO4 -> CaSO4";
+        //String x = "P -> SO2";
         DieuChe.DieuChe(x);
-        //DonChat a = knowledge.donChat.get("S_1");
+       // DonChat a = knowledge.donChat.get("Br_2");
         //DonChat b = knowledge.donChat.get("O_3");
-        //HopChat a= new HopChat(knowledge.cation.get("Cu_2"),knowledge.anion.get("O_2"));
-        //HopChat b = new HopChat(knowledge.cation.get("H_1"),knowledge.anion.get("S_2"));
-        //List <String> k = pu.pu(a,b);
-        //System.out.println(k);
+        HopChat a= new HopChat(knowledge.cation.get("K_1"),knowledge.anion.get("SO4_2"));
+        HopChat b = new HopChat(knowledge.cation.get("Ca_2"),knowledge.anion.get("Cl_1"));
+        List <String> k = pu.pu(a,b);
+        System.out.println(k);
         /*HopChat A = new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1"));
         HopChat B = new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"));
         List<String> result = pu.pu(A, B)       ;

@@ -688,7 +688,7 @@ public class pu {
                     listOfReferences.add(my_anion1);
                     listOfType.add("an");
                 }                                                 
-                //System.out.println(luat.get(i).getRule());
+               // System.out.println(luat.get(i).getRule());
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                       
                     String rule = knowledge.luat.get(i).getRule();                                          
                     //System.out.println(rule);                    
@@ -696,8 +696,8 @@ public class pu {
                     if (useage.equals("after")){                        
                         temp = checkAfter(temp);
                         if (temp.size() > 0){                            
-                            //System.out.println(" --- use rule: " + rule);
-//                            result = temp;
+ //                           System.out.println(" --- use rule: " + rule);
+ //                           result = temp;
 //                            for (int j=0; j<result.size() - 1; j++){
 //                                print(result.get(j) + " + ");
 //                            }
