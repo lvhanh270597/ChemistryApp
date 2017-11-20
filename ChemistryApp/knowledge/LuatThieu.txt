@@ -4,6 +4,7 @@
 BaSo4 là chất kết tửa 
 
 3) C + O3 -> CO( không có pt này)
+P + O3 -> P2O5
 
 4 )H2S + N(HSO3)2 = NS + SO2 + H2O
 H2SO4 + N(HSO3)2 = NSO4 + SO2 + H2O
@@ -29,6 +30,8 @@ mà trong chường trình ra sp là H2S + SO2 + H2O
 9)
 C + O2 -> Co2 
 C + CO2 => CO
+CO + O2 -> CO2
+(Sách giáo khoa lớp 11) 
 
 10)
 hc(K_1,MnO4_1) = hc(K_1,MnO4_2) hc(Mn_4,O_2) dc(O_2)
@@ -37,12 +40,14 @@ Không đưa vào luật
 11)Thiếu O2 -> O3 (Phóng điện) 
 
 13) KMnO4 -> K + O2 ( PT SAI )
-luật
+Các chất như Ca(HCO3)2 cũng v 
+do luật
 hc(X,Y) = dc(X) dc(Y)
 2
 KT X
 HLG Y
 0
+
 14) Các pt 
 HLG(X) + H2O + SO2 -> H2So4 HX
 15) Phản ứng trao đổi Na2S + HCl -> NaCl + H2S sao k pt dc nhỉ 
@@ -57,5 +62,36 @@ Nhưng:
 còn KOH + SO2 thì ko dc
 
 18) k2SO4 + CaCl2 ( sao chuong trình ko pu dc nhỉ ) 
+
+19)N2 + O2 -> NO ( mà trong chương trình ra H2O) rule dc(X) + hc(Y)
+NO + O2 -> NO2
+
+20)
+Khi Đưa 2 luật này vào 
+hc(X,HCO3_1) hc(X,OH_1) = Hc(X,CO3_2) hc(H_1,O_2)
+1
+KL X
+0
+hc(X,HCO3_1) hc(Y,OH_1) = hc(Y,CO3_2) hc(X,CO3_2) hc(H_1,O_2)
+3
+KL X
+KL Y
+X # Y
+0
+Ta có NaHCO3 + Na(OH)2 = NaCo3 H2O ( đúng)
+mà khi NaHCO3 + Ca(OH)2 = Na2(CO3) + H2O (Sai ) 
+phải ra là Na2(CO3) CaCO3 + h2O mói đúng
+
+21)Thiếu
+XCO3 -> XO + CO2 trừ KL kiềm
+XHCO3 -> X2CO3 + Co2 + H2O
+
+22)đưa luật này và ko dc 
+dc(Si_1) dc(X) = hc(Si_4,X)
+1
+PK X
+0
+
+
 
 
