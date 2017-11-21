@@ -209,16 +209,8 @@ public class gdcanbang extends javax.swing.JFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
        String s = input.getText(); // TODO add your handling code here:
-       List<Integer> cb = canbang.canbang(s);
-       List<String> matter = new LinkedList<String>();
-       String[]words = s.split("\\s");
-       for(String w:words){
-           if(!w.equals("+")){
-               matter.add(w);
-           }
-       }
-       s = ChemistryApp.printReaction1(matter, cb);
-       output.setText(s);
+       pu p = new pu(s);       
+       output.setText(p.getPTHH());
     }//GEN-LAST:event_button1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

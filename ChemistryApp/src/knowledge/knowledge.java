@@ -366,4 +366,93 @@ public class knowledge {
         
         //--------------------------------------------------------------------//
     }
+    public static HopChat getHC(String X){                
+        for (Anion an : anion.values()){
+            for (Cation ca : cation.values()){
+                HopChat tmp = new HopChat(ca, an);
+                if (tmp.getCTHH().equals(X)) return tmp;
+            }
+        }
+        return null;
+    }
+    public static DonChat getDC(String X){
+        for (DonChat dc : donChat.values()){
+            if (dc.getCTHH().equals(X)) return dc;
+        }
+        return null;
+    }
+    
+    public static Cation getCationFromName(String name){
+        int min = 8;
+        Cation ans = knowledge.cation.get("H_1");
+        for (String key: knowledge.cation.keySet()){
+            Cation choose = knowledge.cation.get(key);
+            if (choose.getSymbol().equals(name) &&
+                min > choose.getHoaTri()) {
+                ans = choose;
+                min = choose.getHoaTri();
+            }
+        }
+        return ans;
+    }
+    
+    public static int getHighestCation(String name){        
+        int max = 0;
+        for (String key: knowledge.cation.keySet()){
+            if (knowledge.cation.get(key).getSymbol().equals(name)) 
+                if (max < knowledge.cation.get(key).getHoaTri()){
+                    max = knowledge.cation.get(key).getHoaTri();                    
+                }
+        }
+        return max;
+    }
+    
+    public static Anion getAnionFromName(String name){        
+        Anion result = knowledge.anion.get("OH_1");
+        for (String key: knowledge.anion.keySet()){
+            if (knowledge.anion.get(key).getSymbol().equals(name)) result = knowledge.anion.get(key);            
+        }        
+        return result;
+    }
+    
+    public static String getKeyDonChatFromName(String name){
+        for (String key: knowledge.donChat.keySet()){
+            if (knowledge.donChat.get(key).getCTHH().equals(name)) return key;
+        }
+        return "";
+    }
+    
+    public static DonChat getDonChatFromDaiDien(NguyenTo dd){
+        for (String key: knowledge.donChat.keySet()){
+            if (knowledge.donChat.get(key).getDaiDien().getSymbol().equals(dd.getSymbol())) return knowledge.donChat.get(key);
+        }
+        return knowledge.donChat.get("O_2");
+    }  
+
+    public static DonChat getDonChatFromAnion(Anion an){
+        DonChat result = knowledge.donChat.get("O_2");
+        String name = an.getSymbol();
+        for (int i=1; i<=5; i++){
+            String temp = name + "_" + String.valueOf(i);
+            if (knowledge.donChat.containsKey(temp)) {
+                result = knowledge.donChat.get(temp);
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public static int posOfDienHoa2(String X){
+        for (int i=0; i<knowledge.dienHoa.size(); i++){
+            if (knowledge.dienHoa.get(i).getValue().equals(X)) return i;
+        }
+        return -1;
+    }
+    
+    public static int posOfDienHoa1(String X){
+        for (int i=0; i<knowledge.dienHoa.size(); i++){
+            if (knowledge.dienHoa.get(i).getKey().equals(X)) return i;
+        }
+        return -1;
+    }
 }

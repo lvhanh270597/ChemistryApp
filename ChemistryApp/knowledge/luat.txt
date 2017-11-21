@@ -1,6 +1,7 @@
 dc(H_2) hc(X,O_2) = dc(X) hc(H_1,O_2)
-1
+2
 DH Mg X
+KL X
 0
 hc(X,O_2) dc(H_2) = dc(X) hc(H_1,O_2)
 1
@@ -40,7 +41,8 @@ hc(H_1,O_2) dc(X) = hc(X,OH_1) dc(H_2)
 KLK X
 0
 hc(H_1,X) hc(Y,OH_1) = hc(Y,X) hc(H_1,O_2)
-0
+1
+X # O
 0
 hc(Y,OH_1) hc(H_1,X) = hc(Y,X) hc(H_1,O_2)
 0

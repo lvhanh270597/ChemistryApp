@@ -17,7 +17,7 @@ import javafx.util.Pair;
  *
  * @author Thien Trang
  */
-public class canbang {
+public class canBang {
     public static List<Integer> giaimatran(int [][]a, int n, int m){
         ///biến về ma trận tam giác trên
         int t = 0;
@@ -77,12 +77,12 @@ public class canbang {
     public static Pair<List, List> setChat(String s){
         List <String> res1 = new Vector <String>();
         List <Integer> res2 = new Vector <Integer>();
-        if(DieuChe.Kiemtra(s) == true){
-           res1.add(DieuChe.LayDC(s).getDaiDien().getSymbol());
-           res2.add(DieuChe.LayDC(s).getCnt());
+        if(dieuChe.Kiemtra(s) == true){
+           res1.add(dieuChe.LayDC(s).getDaiDien().getSymbol());
+           res2.add(dieuChe.LayDC(s).getCnt());
         }
         else{
-            return DieuChe.LayHC(s).getComponents();
+            return dieuChe.LayHC(s).getComponents();
         }
         Pair <List, List> e = new Pair <List, List>(res1, res2);
         return e;

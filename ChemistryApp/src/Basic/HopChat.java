@@ -80,6 +80,7 @@ public class HopChat{
             HopChat hc = new HopChat(C, A);
             if (hc.simpleCTHH().equals(Y)){
                 this.A = A;
+                this.tile = new PhanSo(C.getHoaTri(), A.getHoaTri());
                 return Y;
             }
         } 

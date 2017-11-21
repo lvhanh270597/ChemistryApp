@@ -43,9 +43,9 @@ public class phanBiet {
     public static void Show(List<HopChat> G, HopChat A){
         for (int i=0; i<G.size(); i++){
             HopChat v = G.get(i);
-            List <String> phanUng = pu.pu(v, A);
+            List <String> phanUng = pu.execute(v, A);
             if (phanUng.size() == 0){
-                phanUng = pu.pu(A, v);
+                phanUng = pu.execute(A, v);
             }
             // Không có hiện tượng
             HopChat Color = coKetTua(phanUng);
@@ -102,9 +102,9 @@ public class phanBiet {
              
         for (int i=0; i<G.size(); i++){
             HopChat v = G.get(i);
-            List <String> phanUng = pu.pu(v, A);
+            List <String> phanUng = pu.execute(v, A);
             if (phanUng.size() == 0){
-                phanUng = pu.pu(A, v);
+                phanUng = pu.execute(A, v);
             }
             // Không có hiện tượng
             HopChat Color = coKetTua(phanUng);

@@ -2,6 +2,7 @@
 package process;
 
 import Basic.*;
+import Math.SoHoc;
 import knowledge.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,7 +11,304 @@ import java.io.IOException;
 import java.util.*;
 import javafx.util.*;
 
-public class pu {
+public class pu {   
+    
+    private String PTHH;
+    private List<DonChat> X;
+    private List<HopChat> Y;
+    
+    public pu(){}
+    public pu(String X){
+        if (X.indexOf("=") > -1){
+            String[] result = X.split("\\s");
+            List <Integer> heso = canbang(X);
+            this.PTHH = printReaction(result, heso);
+        }
+        else{       
+            this.X = new Vector<DonChat> ();
+            this.Y = new Vector<HopChat> ();
+            String[] thamGia = X.split("\\s");            
+            String tmp;
+            this.PTHH = "";
+            for (int i=0; i<thamGia.length; i++){
+                DonChat dc = knowledge.getDC(thamGia[i]);
+                if (dc == null){
+                    HopChat hc = knowledge.getHC(thamGia[i]);
+                    this.Y.add(hc);
+                    tmp = hc.getCTHH();
+                }
+                else{
+                    this.X.add(dc);
+                    tmp = dc.getCTHH();
+                }
+                if (i < thamGia.length - 1){
+                    this.PTHH += tmp + " + ";
+                }
+                else{
+                    this.PTHH += tmp + " = ";
+                }
+            }
+        }
+    }
+    
+    public String getPTHH(){
+        return this.PTHH;
+    }
+    
+    public List<String> predict(){
+        List <String> result;
+        int n = this.X.size();
+        int m = this.Y.size();
+        if (n == 2){
+            result = execute(this.X.get(0), this.X.get(1));
+        }
+        else
+            if (n == 1){
+                result = execute(this.X.get(0), this.Y.get(0));
+            }
+            else{
+                if (m == 2){
+                    result = execute(this.Y.get(0), this.Y.get(1)); 
+                    if (result == null) 
+                        result = execute(this.Y.get(1), this.Y.get(0));                     
+                }
+                else{
+                    result = execute(this.Y.get(0));
+                }
+            }
+        
+        String tmp = this.PTHH;        
+        n = result.size();
+        //System.out.println(result);
+        if (n == 0){
+            this.PTHH += " không phản ứng!";
+            return null;
+        }
+        
+        for (int i=0; i<n - 1; i++){
+            tmp += result.get(i) + " + ";
+        }
+        tmp += result.get(n - 1);
+        
+        pu p = new pu(tmp);
+        this.PTHH = p.getPTHH();        
+        return result;
+    }
+    
+// Trang
+    private List<Integer> giaimatran(int [][]a, int n, int m){
+        ///biến về ma trận tam giác trên
+        int t = 0;
+        while(t < n - 1){
+            for(int j=0; j<m; j++){
+                if(a[t][j] == 0){
+                    int temp;
+                    for(int k=t+1; k<n; k++){
+                        if(a[k][j] != 0){
+                            for(int z=0; z<m; z++){
+                                temp = a[k][z];
+                                a[k][z] = a[t][z];
+                                a[t][z] = temp;
+                            }
+                            break;
+                        }
+                    }
+                }
+                int v = a[t][j];
+                for(int k=t+1; k<n; k++){
+                    if(a[k][j] != 0){
+                        int u = a[k][j];
+                        for(int z=j; z<m; z++)
+                            a[k][z] = a[k][z]*v - a[t][z]*u;
+                    }
+                }
+                t++;
+                if(t >= n - 1)break;
+            }
+        }
+        int []x = new int [100];
+        ///tìm nghiệm
+        x[m-1] = Math.abs(a[m-2][m-2]);
+        for (int i=m-2; i>=0; i--){
+            x[i] = 0;
+            for (int j=0; j<m; j++)
+                if (i != j) x[i] = x[i] - a[i][j] * x[j];
+            if(((x[i]%2==0 && a[i][i]%2==1) ||(x[i]%2==1 && a[i][i]%2==0))&& a[i][i]!=1 && i<n-1){
+                for(int j=0; j<m; j++)
+                    x[j] = x[j]*a[i][i];
+            }
+            x[i] = x[i] / a[i][i];
+        }
+        ///tối giản        
+        int uc = x[0];
+        for(int i=1; i<m; i++){            
+            uc = SoHoc.gcd(uc, x[i]);
+        }      
+        for(int i=0; i<m; i++){
+            x[i] /= uc;
+        }
+        List<Integer> e = new LinkedList();
+        for(int i=0; i<m; i++)
+            e.add(x[i]);
+        return e;
+    }
+    private Pair<List, List> setChat(String s){
+        List <String> res1 = new Vector <String>();
+        List <Integer> res2 = new Vector <Integer>();
+        if(dieuChe.Kiemtra(s) == true){
+           res1.add(dieuChe.LayDC(s).getDaiDien().getSymbol());
+           res2.add(dieuChe.LayDC(s).getCnt());
+        }
+        else{
+            return dieuChe.LayHC(s).getComponents();
+        }
+        Pair <List, List> e = new Pair <List, List>(res1, res2);
+        return e;
+    }
+    private Pair<List, List> tachchat(String s){
+        String []words = s.split("\\s");
+        int k =0;
+        for(String w:words){
+            k++;
+            if(w.equalsIgnoreCase("=")) break;
+        }
+        List<String> tt = new LinkedList<String>();
+        List<String> sp = new LinkedList<String>();
+        for(int i=0; i<words.length; i++){
+            if(i < k - 1)
+                if(!words[i].equalsIgnoreCase("+")){
+                    tt.add(words[i]);
+                }
+            if(i >= k)
+                if(!words[i].equalsIgnoreCase("+")){
+                    sp.add(words[i]);
+                }
+        }
+        Pair<List, List> e = new Pair<List,List>(tt,sp);
+        return e;
+    }
+    private List<Integer> canbang(String s){
+        int sobien, sochat = 0;
+        List <String> TT1 = new LinkedList<String>();
+        List <Integer> TT2 = new LinkedList<Integer>();
+        List <String> SP1 = new LinkedList<String>();
+        List <Integer> SP2 = new LinkedList<Integer>();
+        List <String> VT = new LinkedList<String>(); 
+        //tìm các chất tham gia, sản phẩm trong chuỗi
+        List<String> tt = tachchat(s).getKey();
+        List<String> sp = tachchat(s).getValue();
+        ///Tách các chất tham gia, sản phẩm
+        List <String> temp1;
+        List <Integer> temp2;
+        for(int i=0; i<tt.size(); i++){
+            temp1 = setChat(tt.get(i)).getKey();
+            temp2 = setChat(tt.get(i)).getValue();
+            for(int j=0; j<temp1.size(); j++){
+                TT1.add(temp1.get(j));
+                TT2.add(temp2.get(j));  
+            }
+        }
+        for(int i=0; i<sp.size(); i++){
+            temp1 = setChat(sp.get(i)).getKey();
+            temp2 = setChat(sp.get(i)).getValue();
+            for(int j=0; j<temp1.size(); j++){
+                SP1.add(temp1.get(j));
+                SP2.add(temp2.get(j));
+            }
+        }
+        ///Thành lập ma trận
+        sobien = tt.size() + sp.size();
+        for(int i=0; i<TT1.size(); i++){
+            VT.add(TT1.get(i));
+            if(i>0){
+                for(int j=i-1; j>=0; j--){
+                    if(TT1.get(j).equals(TT1.get(i))){
+                       VT.remove(VT.size()-1);
+                        break;
+                    }
+                }
+            }
+        }   
+        sochat = VT.size();
+        int [][]matrix = new int [sochat][sobien];
+        for(int i=0; i<tt.size(); i++){
+            int j=0;
+            temp1 = setChat(tt.get(i)).getKey();
+            for(int e=0; e<temp1.size(); e++){
+                while(j<TT1.size()){
+                    int kt=0;
+                    if(temp1.get(e).equals(TT1.get(j))){  
+                        for(int t=0; t<VT.size(); t++){
+                            if(TT1.get(j).equals(VT.get(t))){
+                                if(matrix[t][i] == 0){
+                                    matrix[t][i] = TT2.get(j);
+                                    TT1.remove(j);
+                                    TT2.remove(j);
+                                    kt=1;
+                                    break;
+                                }
+                            } 
+                        }
+                        break;
+                    }
+                    if(kt == 0)  j++;
+                    else{
+                        kt=0;
+                        j=0;
+                    }
+                }
+            }
+        }
+        for(int i=0; i<sp.size(); i++){
+            int j=0;
+            temp1 = setChat(sp.get(i)).getKey();
+            for(int e=0; e<temp1.size(); e++){
+                while(j<SP1.size()){
+                    int kt=0;
+                    if(temp1.get(e).equals(SP1.get(j))){  
+                        for(int t=0; t<VT.size(); t++){
+                            if(SP1.get(j).equals(VT.get(t))){
+                                if(matrix[t][i+tt.size()] == 0){
+                                    matrix[t][i+tt.size()] = -SP2.get(j);
+                                    SP1.remove(j);
+                                    SP2.remove(j);
+                                    kt=1;
+                                    break;
+                                }
+                            } 
+                        }
+                        break;
+                    }
+                    if(kt == 0)  j++;
+                    else{
+                        kt=0;
+                        j=0;
+                    }
+                }
+            }
+        }
+        List<Integer> e = giaimatran(matrix,sochat,sobien);
+        return e;
+    }
+    private String printReaction(String[] result, List <Integer> heso){
+        String s = "";
+        int d = 0;
+        for (int i=0; i<result.length; i++){
+            if (result[i].equals("+") || result[i].equals("=")){
+                s += result[i];
+            }
+            else{
+                if (heso.get(d) > 1){
+                    s += heso.get(d);                    
+                }
+                s += result[i];
+                d += 1;
+            }
+            s += " ";
+        }
+        return s;
+    }
+// Hanh    
     
     public static boolean hasValue(String key, NguyenTo X){        
         for (int i=0; i<knowledge.kienThuc.get(key).size(); i++){            
@@ -19,14 +317,14 @@ public class pu {
         return false;
     }  
     
-    public static boolean checkNameInNguyenTo(String X){
+    /*public static boolean checkNameInNguyenTo(String X){
         for (String key: knowledge.nguyenTo.keySet()){
             if (knowledge.nguyenTo.get(key).getSymbol().equals(X)) return true;
         }
         return false;
-    }
+    }*/
     
-    public static boolean checkNameInAnion(String X){
+    /*public static boolean checkNameInAnion(String X){
         for (String key: knowledge.anion.keySet()){
             if (knowledge.anion.get(key).getSymbol().equals(X)) return true;
         }
@@ -39,13 +337,13 @@ public class pu {
         }
         return false;
     }
-    
-    public static boolean checkNameInDonChat(String X){
+    */
+    /*public static boolean checkNameInDonChat(String X){
         for (String key: knowledge.donChat.keySet()){
             if (knowledge.donChat.get(key).getCTHH().equals(X)) return true;
         }
         return false;
-    }
+    }*/
     
     public static boolean checkForHC(String y){
         return (y.indexOf("hc") >= 0);
@@ -79,11 +377,11 @@ public class pu {
                     Anion A;                    
                     if (t > -1){                        
                         C = knowledge.cation.get(listOfReferences.get(t));
-                        A = getAnionFromName(a);                           
+                        A = knowledge.getAnionFromName(a);                           
                     }
                     else{
                         t = checkIn(a, listOfVariables);
-                        C = getCationFromName(c);
+                        C = knowledge.getCationFromName(c);
                         A = knowledge.anion.get(listOfReferences.get(t));
                     }                    
                     HopChat hc = new HopChat(C, A);
@@ -97,7 +395,7 @@ public class pu {
                 else{
                     int t = checkIn(v[1], listOfVariables);                      
                     if (listOfType.get(t) == "dc"){                                 
-                        NguyenTo x = knowledge.donChat.get(getKeyDonChatFromName(listOfReferences.get(t))).getDaiDien();                      
+                        NguyenTo x = knowledge.donChat.get(knowledge.getKeyDonChatFromName(listOfReferences.get(t))).getDaiDien();                      
                         if (!hasValue(v[0], x)) return false;                    
                     }                
                     else{
@@ -137,8 +435,8 @@ public class pu {
                         
                         if (!isACation(Y)) Y += "_0";    
                                                 
-                        int t1 = posOfDienHoa2(X);
-                        int t2 = posOfDienHoa1(Y);                              
+                        int t1 = knowledge.posOfDienHoa2(X);
+                        int t2 = knowledge.posOfDienHoa1(Y);                              
                         if (t1 >= t2) return false;                        
                         if (t1 == -1 || t2 == -1) return false;
                     }
@@ -149,7 +447,7 @@ public class pu {
         return true;
     }
     
-    public static void print(String X){
+    private void print(String X){
         System.out.print(X);
     }
     
@@ -158,8 +456,7 @@ public class pu {
         int index = X.indexOf(",");
         String c = X.substring(0, index);
         String a = X.substring(index + 1, X.length());        
-        Pair <String, String> e = new Pair<String, String>(c, a);
-        
+        Pair <String, String> e = new Pair<String, String>(c, a);        
         return e;
     }
     
@@ -172,81 +469,7 @@ public class pu {
             if (L.get(i).equals(X)) return i;
         }
         return -1;
-    }
-    
-    public static Cation getCationFromName(String name){
-        int min = 8;
-        Cation ans = knowledge.cation.get("H_1");
-        for (String key: knowledge.cation.keySet()){
-            Cation choose = knowledge.cation.get(key);
-            if (choose.getSymbol().equals(name) &&
-                min > choose.getHoaTri()) {
-                ans = choose;
-                min = choose.getHoaTri();
-            }
-        }
-        return ans;
-    }
-    
-    public static int getHighestCation(String name){        
-        int max = 0;
-        for (String key: knowledge.cation.keySet()){
-            if (knowledge.cation.get(key).getSymbol().equals(name)) 
-                if (max < knowledge.cation.get(key).getHoaTri()){
-                    max = knowledge.cation.get(key).getHoaTri();                    
-                }
-        }
-        return max;
-    }
-    
-    public static Anion getAnionFromName(String name){        
-        Anion result = knowledge.anion.get("OH_1");
-        for (String key: knowledge.anion.keySet()){
-            if (knowledge.anion.get(key).getSymbol().equals(name)) result = knowledge.anion.get(key);            
-        }        
-        return result;
-    }
-    
-    public static String getKeyDonChatFromName(String name){
-        for (String key: knowledge.donChat.keySet()){
-            if (knowledge.donChat.get(key).getCTHH().equals(name)) return key;
-        }
-        return "";
-    }
-    
-    public static DonChat getDonChatFromDaiDien(NguyenTo dd){
-        for (String key: knowledge.donChat.keySet()){
-            if (knowledge.donChat.get(key).getDaiDien().getSymbol().equals(dd.getSymbol())) return knowledge.donChat.get(key);
-        }
-        return knowledge.donChat.get("O_2");
-    }  
-
-    public static DonChat getDonChatFromAnion(Anion an){
-        DonChat result = knowledge.donChat.get("O_2");
-        String name = an.getSymbol();
-        for (int i=1; i<=5; i++){
-            String temp = name + "_" + String.valueOf(i);
-            if (knowledge.donChat.containsKey(temp)) {
-                result = knowledge.donChat.get(temp);
-                break;
-            }
-        }
-        return result;
-    }
-    
-    public static int posOfDienHoa2(String X){
-        for (int i=0; i<knowledge.dienHoa.size(); i++){
-            if (knowledge.dienHoa.get(i).getValue().equals(X)) return i;
-        }
-        return -1;
-    }
-    
-    public static int posOfDienHoa1(String X){
-        for (int i=0; i<knowledge.dienHoa.size(); i++){
-            if (knowledge.dienHoa.get(i).getKey().equals(X)) return i;
-        }
-        return -1;
-    }
+    }        
     
     public static HopChat map(Cation XC){
         Cation F = knowledge.cation.get("H_1");
@@ -260,7 +483,7 @@ public class pu {
                     break;
                 }
             }
-        }  
+        }
         HopChat hc = new HopChat(F, S);
         return hc;
     }
@@ -285,8 +508,8 @@ public class pu {
             //print(Z+"\n");
             //if (Z.equals("O_2")) return result;
             
-            int t1 = posOfDienHoa2(X);
-            int t2 = posOfDienHoa1(Y);                     
+            int t1 = knowledge.posOfDienHoa2(X);
+            int t2 = knowledge.posOfDienHoa1(Y);                     
             //System.out.println(X + " " + Y);
             X = knowledge.dienHoa.get(t1).getKey();
             Y = knowledge.dienHoa.get(t2).getValue();
@@ -331,7 +554,7 @@ public class pu {
             Cation XC = knowledge.cation.get(X);            
             HopChat hc1 = map(XC);            
             HopChat hc2 = new HopChat(knowledge.cation.get(Y), knowledge.anion.get("OH_1"));
-            return pu(hc1, hc2);
+            return execute(hc1, hc2);
         }
         
         if (useage.equals("phanhuy")){                        
@@ -350,7 +573,7 @@ public class pu {
             int t = 0;
             String c = listOfReferences.get(t);            
             Cation C = knowledge.cation.get(c);
-            int Highest = getHighestCation(C.getSymbol());
+            int Highest = knowledge.getHighestCation(C.getSymbol());
             if (Highest > C.getHoaTri()){
                 C = knowledge.cation.get(C.getSymbol() + "_" + Highest);
                 HopChat hc = new HopChat(C, knowledge.anion.get("O_2"));            
@@ -377,12 +600,12 @@ public class pu {
                     DonChat d;
                     if (listOfType.get(t) == "ca"){                        
                         NguyenTo dd = knowledge.cation.get(listOfReferences.get(t)).getDaiDien();
-                        d = getDonChatFromDaiDien(dd);
+                        d = knowledge.getDonChatFromDaiDien(dd);
                     }
                     else
                         if (listOfType.get(t) == "an"){
                             String name = listOfReferences.get(t);    
-                            d = getDonChatFromAnion(knowledge.anion.get(name));
+                            d = knowledge.getDonChatFromAnion(knowledge.anion.get(name));
                         }
                         else{                            
                             d = knowledge.donChat.get(listOfReferences.get(t));                    
@@ -403,7 +626,7 @@ public class pu {
                     if (listOfType.get(t) == "ca")
                         ca = knowledge.cation.get(listOfReferences.get(t));
                     else{                        
-                        ca = getCationFromName(listOfReferences.get(t));
+                        ca = knowledge.getCationFromName(listOfReferences.get(t));
                     }
                 }
                 else{
@@ -416,9 +639,9 @@ public class pu {
                         an = knowledge.anion.get(listOfReferences.get(t));                        
                     }
                     else{                                               
-                        String key = getKeyDonChatFromName(listOfReferences.get(t));
+                        String key = knowledge.getKeyDonChatFromName(listOfReferences.get(t));
                         NguyenTo temp = knowledge.donChat.get(key).getDaiDien();                            
-                        an = getAnionFromName(temp.getSymbol());                                  
+                        an = knowledge.getAnionFromName(temp.getSymbol());                                  
                     }
                 }
                 else{
@@ -449,7 +672,7 @@ public class pu {
         for (int i=0; i<L.size(); i++){            
             String X = L.get(i);            
             if (knowledge.notExist.containsKey(X)){                
-                List <String> v = pu(knowledge.notExist.get(X));                                
+                List <String> v = execute(knowledge.notExist.get(X));                                
                 for (int j=0; j<v.size(); j++) 
                     result.add(v.get(j));                
             }
@@ -460,7 +683,7 @@ public class pu {
         return result;
     }
     
-    public static List<String> pu(HopChat X){        
+    public static List<String> execute(HopChat X){        
         List <String> result = new Vector<String>();
         for (int i=0; i<knowledge.luat.size(); i++){
             String[] v = knowledge.luat.get(i).getRule().split("\\s");                   
@@ -515,7 +738,7 @@ public class pu {
         return result;
     }
     
-    public static List<String> pu(DonChat X, HopChat Y){
+    public static List<String> execute(DonChat X, HopChat Y){
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = "); 
         List <String> result = new Vector<String>();
         for (int i=0; i<knowledge.luat.size(); i++){
@@ -580,7 +803,7 @@ public class pu {
         return result;
     }
     
-    public static List<String> pu(DonChat X, DonChat Y){
+    public static List<String> execute(DonChat X, DonChat Y){
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = ");
         List <String> result = new Vector<String>();
         for (int i=0; i<knowledge.luat.size(); i++){
@@ -625,7 +848,7 @@ public class pu {
         return result;
         //System.out.println("Can not make a reaction!");        
     }
-    public static List<String> pu(HopChat X, HopChat Y){                
+    public static List<String> execute(HopChat X, HopChat Y){                
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = \n");  
         List <String> result = new Vector<String>();
         boolean ok = (!knowledge.khongTan.containsKey(X.getCTHH()) || !knowledge.khongTan.containsKey(Y.getCTHH()));
@@ -719,4 +942,6 @@ public class pu {
         //System.out.println("Can not make a reaction!");
         return result;
     }
+    
+    
 }
