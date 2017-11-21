@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 import javafx.util.*;
 import knowledge.knowledge;
+import Interface.*;
 import java.util.LinkedList;
 import process.*;
 import Interface.*;
@@ -78,8 +79,8 @@ public class ChemistryApp {
         //String x = "FeS -> H2S -> SO2 -> Na2SO3 -> Na2SO4 -> NaCl -> Cl2 -> H2SO4 -> SO2 -> H2SO3 -> S -> FeS";// page 13
        // String x ="FeS -> H2S -> S -> NO2 -> HNO3 -> Al(NO3)3 -> O2";
         //String x = "FeS -> H2S -> SO2 -> H2SO4 -> ZnSO4 -> Zn(NO3)2 -> O2";
-       //String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
-        String x = "NaHCO3 -> CaCO3";
+       String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
+        //String x = "NaHCO3 -> CaCO3";
         //String x = "KClO3 -> O2 -> CO2 -> BaCO3 -> BaCl2 -> Ba(NO3)2 -> O2";
         //String x ="HgO -> O2 -> O3 -> I2 -> KI -> I2 -> S";
         //String x ="S -> SO2 -> SO3 -> H2SO4 -> CuSO4 -> Cu(NO3)2 -> O2 -> ZnO -> Zn(NO3)2 -> Zn"; // page 12
@@ -104,7 +105,6 @@ public class ChemistryApp {
         for(int i=0; i<sb.size(); i++)
             System.out.print(sb.get(i) + " ");
         System.out.println();*/
-       // giaodien gd = new giaodien();
-       // gd.show();
+        
     } 
 } 

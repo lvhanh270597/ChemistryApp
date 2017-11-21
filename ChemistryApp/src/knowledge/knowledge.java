@@ -27,16 +27,16 @@ import javafx.util.Pair;
  * @author Hanh
  */
 public class knowledge {
-    private static final String NguyenToPath = "knowledge\\nguyento.txt";
-    private static final String AnionPath = "knowledge\\anion.txt";
-    private static final String CationPath = "knowledge\\cation.txt";
-    private static final String DonChatPath = "knowledge\\donchat.txt";
-    private static final String DienHoaPath = "knowledge\\dienhoa.txt";
-    private static final String LuatPath = "knowledge\\luat.txt";
-    private static final String KienThucPath = "knowledge\\class.txt";
-    private static final String NotExistPath = "knowledge\\khongtontai.txt";
-    private static final String KhongTanPath = "knowledge\\khongtan2.txt";
-    private static final String KhiPath = "knowledge\\khi.txt";
+    private static final String NguyenToPath = "knowledge/nguyento.txt";
+    private static final String AnionPath = "knowledge/anion.txt";
+    private static final String CationPath = "knowledge/cation.txt";
+    private static final String DonChatPath = "knowledge/donchat.txt";
+    private static final String DienHoaPath = "knowledge/dienhoa.txt";
+    private static final String LuatPath = "knowledge/luat.txt";
+    private static final String KienThucPath = "knowledge/class.txt";
+    private static final String NotExistPath = "knowledge/khongtontai.txt";
+    private static final String KhongTanPath = "knowledge/khongtan2.txt";
+    private static final String KhiPath = "knowledge/khi.txt";
     public static Map <String, NguyenTo> nguyenTo;
     public static Map <String, Anion> anion;
     public static Map <String, Cation> cation;
