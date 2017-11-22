@@ -18,7 +18,64 @@ import javafx.util.Pair;
  * @author Thien Trang
  */
 public class canBang {
-    public static List<Integer> giaimatran(int [][]a, int n, int m){
+    private static int soChat;
+    private static int heso;
+    private static List<String> tt;
+    private static List<String> sp;
+    private static List <String> TT1 = new LinkedList<String>();
+    private static List <Integer> TT2 = new LinkedList<Integer>();
+    private static List <String> SP1 = new LinkedList<String>();
+    private static List <Integer> SP2 = new LinkedList<Integer>();
+    private static List <String> VT = new LinkedList<String>();
+    private List<String> chat = new Vector<String>();
+    private List<Integer> bien = new LinkedList<Integer>();
+    private static void setTT(String s){
+        tt = tachchat(s).getKey();
+        List <String> temp1;
+        List <Integer> temp2;
+        for(int i=0; i<tt.size(); i++){
+            temp1 = setChat(tt.get(i)).getKey();
+            temp2 = setChat(tt.get(i)).getValue();
+            for(int j=0; j<temp1.size(); j++){
+                TT1.add(temp1.get(j));
+                TT2.add(temp2.get(j));  
+            }
+        }
+    }
+    private static void setSP(String s){
+        sp = tachchat(s).getValue();
+        List <String> temp1;
+        List <Integer> temp2;
+        for(int i=0; i<sp.size(); i++){
+            temp1 = setChat(sp.get(i)).getKey();
+            temp2 = setChat(sp.get(i)).getValue();
+            for(int j=0; j<temp1.size(); j++){
+                SP1.add(temp1.get(j));
+                SP2.add(temp2.get(j));
+            }
+        }
+    }
+    private static void setVT(){
+        for(int i=0; i<TT1.size(); i++){
+            VT.add(TT1.get(i));
+            if(i>0){
+                for(int j=i-1; j>=0; j--){
+                    if(TT1.get(j).equals(TT1.get(i))){
+                       VT.remove(VT.size()-1);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public static void setNum(String s){
+        setTT(s);
+        setSP(s);
+        heso = tt.size() + sp.size();   
+        soChat = VT.size();
+        System.out.println(heso + " "+ soChat);
+    }
+    private static List<Integer> giaimatran(int [][]a, int n, int m){
         ///biến về ma trận tam giác trên
         int t = 0;
         while(t < n - 1){
@@ -74,7 +131,7 @@ public class canBang {
             e.add(x[i]);
         return e;
     }
-    public static Pair<List, List> setChat(String s){
+    private static Pair<List, List> setChat(String s){
         List <String> res1 = new Vector <String>();
         List <Integer> res2 = new Vector <Integer>();
         if(dieuChe.Kiemtra(s) == true){
@@ -87,7 +144,7 @@ public class canBang {
         Pair <List, List> e = new Pair <List, List>(res1, res2);
         return e;
     }
-    public static Pair<List, List> tachchat(String s){
+    private static Pair<List, List> tachchat(String s){
         String []words = s.split("\\s");
         int k =0;
         for(String w:words){
@@ -109,50 +166,114 @@ public class canBang {
         Pair<List, List> e = new Pair<List,List>(tt,sp);
         return e;
     }
-    public static List<Integer> canbang(String s){
-        int sobien, sochat = 0;
-        List <String> TT1 = new LinkedList<String>();
-        List <Integer> TT2 = new LinkedList<Integer>();
-        List <String> SP1 = new LinkedList<String>();
-        List <Integer> SP2 = new LinkedList<Integer>();
-        List <String> VT = new LinkedList<String>(); 
-        //tìm các chất tham gia, sản phẩm trong chuỗi
-        List<String> tt = tachchat(s).getKey();
-        List<String> sp = tachchat(s).getValue();
-        ///Tách các chất tham gia, sản phẩm
-        List <String> temp1;
-        List <Integer> temp2;
-        for(int i=0; i<tt.size(); i++){
-            temp1 = setChat(tt.get(i)).getKey();
-            temp2 = setChat(tt.get(i)).getValue();
-            for(int j=0; j<temp1.size(); j++){
-                TT1.add(temp1.get(j));
-                TT2.add(temp2.get(j));  
-            }
+    public static void hihi(String s){
+        setNum(s);
+        if (soChat >= heso -1){
+            return;
         }
-        for(int i=0; i<sp.size(); i++){
-            temp1 = setChat(sp.get(i)).getKey();
-            temp2 = setChat(sp.get(i)).getValue();
-            for(int j=0; j<temp1.size(); j++){
-                SP1.add(temp1.get(j));
-                SP2.add(temp2.get(j));
-            }
-        }
-        ///Thành lập ma trận
-        sobien = tt.size() + sp.size();
-        for(int i=0; i<TT1.size(); i++){
-            VT.add(TT1.get(i));
-            if(i>0){
-                for(int j=i-1; j>=0; j--){
-                    if(TT1.get(j).equals(TT1.get(i))){
-                       VT.remove(VT.size()-1);
-                        break;
-                    }
+        if(soChat < heso - 1){
+            String s1="";
+            String s2="";
+            List <String> temp5 = new LinkedList<String>();
+            for(int i=0; i<tt.size(); i++){
+                s1+=tt.get(i)+" ";
+                s2+=tt.get(i)+" ";
+                if(i < tt.size()-1){
+                    s1+="+ ";
+                    s2+="+ ";
                 }
             }
-        }   
-        sochat = VT.size();
-        int [][]matrix = new int [sochat][sobien];
+            s1+="= ";
+            s2+="= ";
+            for(int i=0; i<sp.size()-1; i++){
+                List<String> temp3 = setChat(sp.get(i)).getKey();
+                for(int j=i+1; j<sp.size();i++){
+                    List<String> temp4 = setChat(sp.get(j)).getKey();
+                    int temp = 0;
+                    for(int k=0; k<temp3.size(); k++){
+                        for(int p=0; p<temp4.size(); p++){
+                            if(!temp3.get(k).equals(temp4.get(p))){
+                                temp=1;
+                            }
+                            break;
+                        }
+                        if(temp==1){
+                            if(temp5.size() == 0){
+                                s1+=sp.get(i)+ " ";
+                                s2+=sp.get(i)+ " ";
+                                temp5.add(sp.get(i));
+                            }
+                            else{
+                                int temp6=0;
+                                for(int q=0; q<temp5.size();q++){
+                                    if(sp.get(i).equals(temp5.get(q))){
+                                        temp6=1;
+                                        break;
+                                    }
+                                }
+                                if(temp6==1){
+                                    s1+=sp.get(j)+ " ";
+                                    s2+=sp.get(j)+ " ";
+                                    temp5.add(sp.get(j));
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    if(temp==0){
+                        if(temp5.size() == 0){
+                                s1+=sp.get(i)+" ";
+                                s2+=sp.get(j)+" ";
+                                temp5.add(sp.get(i));
+                                temp5.add(sp.get(j));
+                                
+                        }
+                        else{
+                            
+                            int temp6=0;
+                            for(int q=0; q<temp5.size();q++){
+                                if(sp.get(i).equals(temp5.get(q))){
+                                    temp6=1;
+                                    break;
+                                }
+                            }
+                            if(temp6==0){
+                                s1+=sp.get(i)+ " ";
+                                temp5.add(sp.get(i));
+                            }
+                            temp6=0;
+                            for(int q=0; q<temp5.size();q++){
+                                if(sp.get(j).equals(temp5.get(q))){
+                                    temp6=1;
+                                    break;
+                                }
+                            }
+                            if(temp6==0){
+                                s2+=sp.get(j)+ " ";
+                                temp5.add(sp.get(j));
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            System.out.println(s1);
+            System.out.println(s2);
+            System.out.println("de quy");
+            hihi(s1);
+            hihi(s2);
+        }
+    }
+    public static void canbang(String s){
+        List <String> temp1;
+        List <Integer> temp2;
+        setTT(s);
+        setSP(s);
+        setVT();
+        ///Thành lập ma trận
+        setNum(s);
+        hihi(s);
+        /*int [][]matrix = new int [soChat][heso];
         for(int i=0; i<tt.size(); i++){
             int j=0;
             temp1 = setChat(tt.get(i)).getKey();
@@ -209,7 +330,7 @@ public class canBang {
                 }
             }
         }
-        List<Integer> e = giaimatran(matrix,sochat,sobien);
-        return e;
+        List<Integer> e = giaimatran(matrix,soChat,heso);
+        return e;*/
     }
 }

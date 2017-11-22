@@ -18,7 +18,7 @@ public class ChemistryApp {
     
     public static void main(String[] args) {          
         knowledge.readData();
-        String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
+       /* String x = "S -> SO2 -> Na2SO3 -> Na2SO4 -> O2 -> ZnO -> Zn(NO3)2 -> Zn";
         String y = "";// các chất được tác dụng
         Vector vt = dieuChe.DieuChe(x,y);
         for(int i=0;i<vt.size();i++){
@@ -41,5 +41,11 @@ public class ChemistryApp {
         //for (int i=0; i<rs.size(); i++){
          //   System.out.println(rs.get(i));
         //}
+     //   giaodien gd = new giaodien();
+     //   gd.show();
+        String s = "Fe + HNO3 = Fe(NO3)3 + NO + N2O + NO2 + N2 + H2O";
+        canBang.canbang(s);
+        canBang.setNum(s);
+       // canBang.hihi(s);
     } 
 } 

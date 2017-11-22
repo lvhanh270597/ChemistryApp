@@ -8,6 +8,12 @@ import process.*;
 import chemistryapp.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Cursor;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Thien Trang
@@ -33,6 +39,8 @@ public class gdcanbang extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -55,6 +63,7 @@ public class gdcanbang extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 18, 50));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\Home.png")); // NOI18N
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -85,19 +94,34 @@ public class gdcanbang extends javax.swing.JFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(750, 281));
         jPanel2.setPreferredSize(new java.awt.Dimension(750, 281));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Cân bằng");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel9)
+                .addGap(0, 518, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel8)
+                .addGap(81, 81, 81)
+                .addComponent(jLabel9)
+                .addGap(0, 138, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 750, -1));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\exit.png")); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -191,6 +215,8 @@ public class gdcanbang extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 750, 250));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\icon.png")); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, 40));
 
         jLabel4.setText("Chemistry");
@@ -207,17 +233,23 @@ public class gdcanbang extends javax.swing.JFrame {
        input.setText(""); // TODO add your handling code here:
     }//GEN-LAST:event_inputMouseClicked
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-       String s = input.getText(); // TODO add your handling code here:
-       pu p = new pu(s);       
-       output.setText(p.getPTHH());
-    }//GEN-LAST:event_button1ActionPerformed
-
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new giaodien().setVisible(true);// TODO add your handling code here:
         gdcanbang.this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        String s = input.getText(); // TODO add your handling code here:
+        if(s.equals("")){
+            JOptionPane.showMessageDialog(null, "Nhập phương trình cần cân bằng!",
+                  "Lưu ý", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+           pu p = new pu(s);       
+           output.setText(p.getPTHH());
+        }
+    }//GEN-LAST:event_button1ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -264,6 +296,8 @@ public class gdcanbang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
