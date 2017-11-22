@@ -1,6 +1,6 @@
 KT = Ba Na K Ca
 KLK = Na K
-KL = Li Be Na Mg Al K Ca Cr Mn Fe Cu Zn Ag Ba Hg Pb Au Sn Ni
+KL = Li Be Na Mg Al K Ca Cr Mn Fe Cu Zn Ag Ba Hg Pb Au Sn Ni Si
 KLKK = Mg Al Cr Mn Fe Cu Zn Ag Hg Pb Au Sn Ni
 PK = He B C N O F Ne Si P S Cl Ar Br I
 F = H Li Be Na Mg Al K Ca Cr Mn Fe Cu Zn Ag Ba Hg Pb Au Sn Ni C N P S

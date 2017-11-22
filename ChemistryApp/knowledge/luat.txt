@@ -20,6 +20,12 @@ hc(Cu_2,O_2) hc(H_1,S_2) = dc(Cu_1) hc(S_4,O_2) hc(H_1,O_2)
 hc(H_1,S_2) hc(Cu_2,O_2) = dc(Cu_1) hc(S_4,O_2) hc(H_1,O_2)
 0
 0
+hc(h_1,S_2) hc(H_1,SO3_2) = dc(S_1) hc(H_1,O_2)
+0
+0
+hc(H_1,SO3_2) hc(h_1,S_2) = dc(S_1) hc(H_1,O_2)
+0
+0
 hc(X,O_2) hc(C_2,O_2) = dc(X) hc(C_4,O_2)
 1
 DH Mg X
@@ -28,7 +34,7 @@ dc(C_1) hc(X,O_2) = dc(X) hc(C_4,O_2)
 1
 DH Mg X
 0
-hc(X,O_2) dc(C_1) = dc(X) hc(C_2,O_2)
+hc(X,O_2) dc(C_1) = dc(X) hc(C_4,O_2)
 1
 DH Mg X
 0
@@ -307,13 +313,19 @@ hc(Na_1,NO3_1) hc(H_1,SO4_2) = hc(H_1,NO3_1) hc(Na_1,HSO4_1)
 dc(P_1) hc(K_1,ClO3_1) = hc(P_5,O_2) hc(K_1,Cl_1)
 0
 0
-hc(C_4,O_2) dc(X) = hc(X,O_2) dc(C_1)
-1
-DH Mg X
+hc(C_4,O_2) dc(Mg_1) = hc(X,O_2) dc(C_1)
 0
-dc(X) hc(C_4,O_2) = hc(X,O_2) dc(C_1)
+0
+dc(Mg_1) hc(C_4,O_2) = hc(X,O_2) dc(C_1)
+0
+0
+dc(Cl_2) hc(X,OH_1) = hc(X,ClO3_1) hc(X,Cl_1) hc(H_1,O_2)
 1
-KL X
+KT X
+0
+hc(X,OH_1) dc(Cl_2) = hc(X,ClO3_1) hc(X,Cl_1) hc(H_1,O_2)
+1
+KT X
 0
 hc(X,HCO3_1) hc(X,OH_1) = Hc(X,CO3_2) hc(H_1,O_2)
 1
@@ -322,17 +334,34 @@ KL X
 hc(Si_4,O_2) dc(Mg_1) = dc(Si_1) hc(Mg_2,O_2)
 0
 0
-hc(X,OH_1) hc(X,HCO3_1) = Hc(X,CO3_2) hc(H_1,O_2)
-1
-KL X
-0
-hc(X,HCO3_1) hc(Y,OH_1) = hc(Y,CO3_2) hc(X,CO3_2) hc(H_1,O_2)
-3
-KL X
-KL Y
-X # Y
-0
 dc(Si_1) dc(X) = hc(Si_4,X)
 1
 PK X
+0
+hc(K_1,ClO3_1) hc(H_1,Cl_1) = hc(K_1,Cl_1) hc(H_1,O_2) dc(Cl_2)
+0
+0
+hc(H_1,Cl_1) hc(K_1,ClO3_1) = hc(K_1,Cl_1) hc(H_1,O_2) dc(Cl_2)
+0
+0
+hc(Fe_2,S_1) dc(O_2) = hc(Fe_3,O_2) hc(S_4,O_2)
+0
+0
+dc(O_2) hc(Fe_2,S_1) = hc(Fe_3,O_2) hc(S_4,O_2)
+0
+0
+hc(H_1,Br_1) hc(H_1,SO4_2) = dc(Br_2) hc(S_4,O_2) hc(H_1,O_2)
+0
+0
+hc(H_1,SO4_2) hc(H_1,Br_1) = dc(Br_2) hc(S_4,O_2) hc(H_1,O_2)
+0
+0
+dc(O_2) hc(H_1,Br_1) = dc(Br_2) hc(H_1,O_2)
+0
+0
+dc(Ag_1) dc(O_3) = hc(Ag_1,O_2) dc(O_2)
+0
+0
+dc(O_3) dc(Ag_1) = hc(Ag_1,O_2) dc(O_2)
+0
 0
