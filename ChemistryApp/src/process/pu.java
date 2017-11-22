@@ -723,7 +723,7 @@ public class pu {
                // System.out.println(luat.get(i).getRule());
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                    
                     String rule = knowledge.luat.get(i).getRule();                                          
-                    //System.out.println("use rule: " + rule);                    
+                    //   System.out.println("use rule: " + rule);                    
                     List <String> temp = create(rule, listOfVariables, listOfReferences, listOfType, useage);  
                     result = temp;
 //                    for (int j=0; j<result.size() - 1; j++){

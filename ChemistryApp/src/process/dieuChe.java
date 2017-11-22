@@ -15,15 +15,24 @@ import knowledge.knowledge;
  * @author OS
  */
 public class dieuChe {
-    public static void  DieuChe(String b){
+    public static Vector DieuChe(String b,String a){
         String[] word = dieuChe.TachChuoi(b);
+        String[] wordx = dieuChe.TachChuoi(a);
+        Vector vt = new Vector();
         int i =0;
         while (i<=word.length-2){
-            System.out.println("từ "+word[i]+ " -> "+ word[i+2]);
-                    String d = dieuChe.ChatDC(word[i], word[i+2]);
-                    System.out.println("Chất điều chế "+ d);
+            String k = "từ "+word[i]+ " -> "+ word[i+2];
+            vt.add(k);
+            String d = dieuChe.ChatDC(word[i], word[i+2],wordx);
+            if(d=="NULL"){
+                vt.add("Phản ứng không thể tìm thấy !!!");
+            }
+            else{
+                vt.add(d);
+            }
             i = i+2;
         }
+        return vt ;
     }
     public static String[] TachChuoi(String a){
         String [] word = a.split("\\s");
@@ -53,28 +62,23 @@ public class dieuChe {
         }
         return u;
     }
-    public static String ChatDC(String a,String b){
+    public static String ChatDC(String a,String b,String [] q){
         //---------------Phan Huy---------------------------
-        if(Kiemtra(a)==false){
-            String k ="NULL";
-            String st=" ";
+        if(Kiemtra(a)==false&& q.length==1){
+            String st="NULL";
             HopChat x = LayHC(a);
             if(Kiemtra(b)==true){
                 DonChat y = LayDC(b);
                 if(pu.execute(x).size()!=0){
                 List <String> result = pu.execute(x);
                 for(int i=0;i<result.size();i++){
-                    //System.out.println(result.get(i)+ " = "+ y.getCTHH());
                     if(result.get(i).equals(y.getCTHH())){
-                         //System.out.println("Yes");
-                        k = "Nhiet độ";
                         st = x.getCTHH()+ " -> ";
                         for(int j =0;j< result.size()-1 ;j++){
                              st += result.get(j) + " + ";
                         }
                         st+= result.get(result.size()-1);
-                        System.out.println(st);
-                        return k;
+                        return st ;
                     }
                 }
             }
@@ -84,14 +88,12 @@ public class dieuChe {
                     List <String> result = pu.execute(x);
                     for(int i=0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                            k = y.getCTHH();
                             st = x.getCTHH()+ " -> ";
                             for(int j =0;j< result.size();j++){
                                  st += result.get(j) + " + ";
                             }
                             st+= result.get(result.size()-1);
-                            System.out.println(st);
-                            return k;
+                            return st;
                         }
                     }
                 }
@@ -100,8 +102,48 @@ public class dieuChe {
         if(Kiemtra(a)== true&&Kiemtra(b)==false) {
             DonChat x = LayDC(a);
             HopChat z = LayHC(b);
-            String k="NULL";
-            String st="";
+            String st="NULL";
+            // TH Buộc phải sử dụng các chất 
+            if(q.length!=1){
+                String st1="NULL";
+                for(int i =0;i<q.length;i++){
+                    DonChat n;
+                    HopChat m ;
+                    if(Kiemtra(q[i])==true){
+                       n = LayDC(q[i]);
+                       if(pu.execute(x,n).size()!=0){
+                            List <String> result = pu.execute(x,n);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(z.getCTHH())){
+                                   st1=  n.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                    else {
+                        m = LayHC(q[i]);
+                        if(pu.execute(x,m).size()!=0){
+                            List <String> result = pu.execute(x,m);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(z.getCTHH())){
+                                   st= x.getCTHH() + " + " +  m.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st += result.get(k)+ " + ";
+                                   }
+                                   st += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                }
+                return st1;
+            }
             // TH Don chat + DonChat -> Hop chat
             for(String w:knowledge.donChat.keySet()){
                 DonChat y = knowledge.donChat.get(w);
@@ -113,14 +155,12 @@ public class dieuChe {
                     else result = pu.execute(x,y);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(z.getCTHH())){
-                        k=y.getCTHH();
                         st=  y.getCTHH() + " + " + x.getCTHH()+ " = ";
                         for(int j = 0;j<result.size()-1;j++){
                             st += result.get(j)+ " + ";
                         }
                         st += result.get(result.size() - 1);
-                        System.out.println(st);
-                        return k;   
+                        return st; 
                     }
                 }
             }
@@ -133,15 +173,12 @@ public class dieuChe {
                     List <String> result = pu.execute(x, c);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(z.getCTHH())){
-                            k=c.getCTHH();
                             st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                             for(int j = 0;j<result.size()-1;j++){
-                                //System.out.println(result.get(j));
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
-                            System.out.println(st);
-                            return k;
+                            return st;
                         } 
                     }
                 }
@@ -153,15 +190,12 @@ public class dieuChe {
                     List <String> result = pu.execute(x, c);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(z.getCTHH())){
-                            k=c.getCTHH();
                             st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                             for(int j = 0;j<result.size()-1;j++){
-                                //System.out.println(result.get(j));
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
-                            System.out.println(st);
-                            return k;
+                            return (st);
                         } 
                     }
                 }
@@ -174,15 +208,13 @@ public class dieuChe {
                         List <String> result = pu.execute(x,c);
                         for(int w=0 ;w<result.size();w++){
                            if(result.get(w).equals(z.getCTHH())){
-                                k=c.getCTHH();
                                 st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                                 for(int p = 0;p<result.size()-1;p++){
                                     //System.out.println(result.get(j));
                                     st += result.get(p)+ " + ";
                                 }
                                 st += result.get(result.size() - 1);
-                                System.out.println(st);
-                                return k;
+                                return st;
                            }
                         }
                     }
@@ -192,23 +224,62 @@ public class dieuChe {
         // TH Hop chat + Đơn chất -> Dơn chất
         else if (Kiemtra(a)== false&&Kiemtra(b)==true){//Hop chat vs don chat 
             HopChat x = LayHC(a);
-            DonChat y = LayDC(b);
-            String k="NULL";
-            String st=" ";
+            DonChat y = LayDC(b); 
+            String st="NULL";
+            // TH Buộc phải sử dụng các chất 
+            if(q.length!=1){
+                String st1="NULL";
+                for(int i =0;i<q.length;i++){
+                    DonChat n;
+                    HopChat m ;
+                    if(Kiemtra(q[i])==true){
+                       n = LayDC(q[i]);
+                       if(pu.execute(n, x).size()!=0){
+                            List <String> result = pu.execute(n, x);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1=  n.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                    else {
+                        m = LayHC(q[i]);
+                        if(pu.execute(x,m).size()!=0){
+                            List <String> result = pu.execute(x,m);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1= x.getCTHH() + " + " +  m.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                }
+                return st1;
+            }
+            //TH HopChat + DonChat => DonChat
             for(String w:knowledge.donChat.keySet()){
                  DonChat c = knowledge.donChat.get(w);
                 if(pu.execute(c, x).size()!=0){
                 List <String> result = pu.execute(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                            k=c.getCTHH();
                             st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                             for(int j = 0;j<result.size()-1;j++){
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
-                            System.out.println(st);
-                            return k;
+                            return st;
                         } 
                     }
                 }
@@ -222,14 +293,12 @@ public class dieuChe {
                             //System.out.println(result);
                             for(int i =0;i<result.size();i++){
                                 if(result.get(i).equals(b)){
-                                k=c.getCTHH();
                                 st=  c.getCTHH() + " + " + x.getCTHH()+ " = ";
                                 for(int j = 0;j<result.size()-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
                                 st += result.get(result.size() - 1);
-                                System.out.println(st);
-                                return k;
+                                return st;
                                 }
                             }
                         }
@@ -245,8 +314,48 @@ public class dieuChe {
                 x=y;
                 y = temp;
             }
-            String z="NULL";
-            String st =" ";
+            String st ="NULL";
+            // TH Buộc phải sử dụng các chất 
+            if(q.length!=1){
+                String st1="NULL";
+                for(int i =0;i<q.length;i++){
+                    DonChat n;
+                    HopChat m ;
+                    if(Kiemtra(q[i])==true){
+                       n = LayDC(q[i]);
+                       if(pu.execute(n, x).size()!=0){
+                            List <String> result = pu.execute(n, x);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1=  n.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                    else {
+                        m = LayHC(q[i]);
+                        if(pu.execute(x,m).size()!=0){
+                            List <String> result = pu.execute(x,m);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1= x.getCTHH() + " + " +  m.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                }
+                return st1;
+            }
             //--------------TH Hop Chat + Don chat -> Hop chat------------------
             for(String w: knowledge.donChat.keySet()){
                 DonChat c = knowledge.donChat.get(w);
@@ -254,15 +363,13 @@ public class dieuChe {
                     List <String> result = pu.execute(c, x);
                     for(int i =0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                            z=c.getCTHH();
                             st= x.getCTHH() + " + " + c.getCTHH()+ " = ";
                             for(int j = 0;j<result.size()-1;j++){
                                 //System.out.println(result.get(j));
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
-                            System.out.println(st);
-                            return z ;
+                            return st ;
                         }
                     }
                 }
@@ -279,17 +386,15 @@ public class dieuChe {
                     }   
                     if(pu.execute(x, k).size()!=0){
                         List <String> result = pu.execute(x, k);
-                        st=  " ";
+                        st=  "NULL";
                         for(int i =0;i< result.size();i++){
                             if(result.get(i).equals(y.getCTHH())){
-                                z=k.getCTHH();
                                 st=x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int j = 0 ;j<result.size()-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
                             st += result.get(result.size()-1);   
-                            System.out.println(st);
-                            return z;
+                            return st;
                             }
                         }
                     }
@@ -305,18 +410,16 @@ public class dieuChe {
                     }
                     if(pu.execute(x, k).size()!=0){
                         List <String> result = pu.execute(x, k);
-                        st=  "";
+                        st=  "NULL";
                         int n = result.size();
                         for(int i =0;i<n;i++){
                             if(result.get(i).equals(y.getCTHH())){
-                                z=k.getCTHH();
                                 st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int j = 0 ;j<n-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
-                                System.out.println(st);
-                                return z;
+                                return st;
                             }
                         }
                     }   
@@ -331,26 +434,64 @@ public class dieuChe {
                         //System.out.println(result);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
-                                z=k.getCTHH();
                                 st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int n = 0 ;n<result.size()-1;n++){
                                     st += result.get(n)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
-                                System.out.println(st);
-                                return z;
+                                return st;
                             }
                         }
                     }
                 }
             }
         }
-        else if(Kiemtra(a)==true && Kiemtra(b)==true) {
+        else if(Kiemtra(a)==true && Kiemtra(b)==true){
             //TH DonChat => DonChat(Moi)
-            String st ="";
-            String z="NULL";
+            String st ="NULL";
             DonChat x= LayDC(a);
             DonChat y = LayDC(b);
+            // TH Buộc phải sử dụng các chất 
+            if(q.length!=1){
+                String st1="NULL";
+                for(int i =0;i<q.length;i++){
+                    DonChat n;
+                    HopChat m ;
+                    if(Kiemtra(q[i])==true){
+                       n = LayDC(q[i]);
+                       if(pu.execute(n, x).size()!=0){
+                            List <String> result = pu.execute(n, x);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1=  n.getCTHH() + " + " + x.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                    else {
+                        m = LayHC(q[i]);
+                        if(pu.execute(x,m).size()!=0){
+                            List <String> result = pu.execute(x,m);
+                            for(int j = 0;j<result.size();j++){
+                               if(result.get(j).equals(y.getCTHH())){
+                                   st1= x.getCTHH() + " + " +  m.getCTHH()+ " = ";
+                                   for(int k = 0;k<result.size()-1;k++){
+                                       st1 += result.get(k)+ " + ";
+                                   }
+                                   st1 += result.get(result.size() - 1);
+                                   return st1;
+                               }
+                            }
+                        }
+                    }
+                }
+                return st1;
+            }
             for(String i:knowledge.cation.keySet()){
                 for(String j: knowledge.anion.keySet()){
                     HopChat k = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
@@ -358,19 +499,18 @@ public class dieuChe {
                         List <String> result= pu.execute(x,k);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
-                                z=k.getCTHH();
                                 st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int n = 0 ;n<result.size()-1;n++){
                                     st += result.get(n)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
-                                System.out.println(st);return z;
+                                return st;
                             }
                         }
                     }
                 }
             }
         }
-        return "không tìm thấy dc";
+        return "NULL";
     }
 }
