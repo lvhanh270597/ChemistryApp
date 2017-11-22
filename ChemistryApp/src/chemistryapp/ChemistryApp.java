@@ -3,6 +3,7 @@ package chemistryapp;
 
 import Basic.*;
 import Math.*;
+import NetWork.*;
 import java.io.*;
 import java.util.*;
 import javafx.util.*;
@@ -41,21 +42,8 @@ public class ChemistryApp {
     
     public static void main(String[] args) {          
         knowledge.readData();                                       
-        HopChat[] A = {new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1")), 
-                       new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("CO3_2")),
-                       new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("SO4_2"))};      
-        List <HopChat> G = new Vector<HopChat>();
-        for (int i=0; i<A.length; i++) G.add(A[i]);
-        HopChat[] B = {new HopChat(knowledge.cation.get("C_4"), knowledge.anion.get("O_2")),
-                       new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"))};  
-        List <HopChat> E = new Vector<HopChat>();
-        //for (int i=0; i<B.length; i++) E.add(B[i]);
-        phanBiet.phanBiet(G, E);                     
-        /*HopChat A = new HopChat(knowledge.cation.get("Na_1"), knowledge.anion.get("Cl_1"));
-        HopChat B = new HopChat(knowledge.cation.get("H_1"), knowledge.anion.get("O_2"));
-        List<String> result = pu.pu(A, B);
-        for (String vl : result){
-            print(vl + " ");
-        }*/
+        
+        NetWork.Calc.run();
+                
     } 
 } 

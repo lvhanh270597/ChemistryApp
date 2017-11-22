@@ -312,7 +312,7 @@ public class knowledge {
                
             while((line = bufferedReader.readLine()) != null) {                                                                
                 String []v = line.split("\\s");                             
-                HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]), v[2]);
+                HopChat temp = new HopChat(cation.get(v[0]), anion.get(v[1]), v[2]);                
                 khongTan.put(temp.getCTHH(), temp);
             }                               
             bufferedReader.close();         
@@ -326,14 +326,7 @@ public class knowledge {
             System.out.println(
                 "Error reading file '" 
                 + KhongTanPath + "'");                              
-        }
-        
-        for (String key: cation.keySet()){
-            if (key.equals("H_1")) continue;
-            Cation c = cation.get(key);            
-            HopChat hc = new HopChat(c, anion.get("O_2"));
-            khongTan.put(hc.getCTHH(), hc);
-        }                    
+        }                
         
         //--------------------------------------------------------------------//
         
@@ -363,7 +356,20 @@ public class knowledge {
                 "Error reading file '" 
                 + KhiPath + "'");                              
         }
-        
+                       
         //--------------------------------------------------------------------//
+    }
+    
+    public static HopChat getHC(String X){
+        for (String keyC : cation.keySet()){
+            for (String keyA : anion.keySet()){
+                HopChat A = new HopChat(cation.get(keyC), anion.get(keyA));                                
+                String dm = A.getCTHH();                      
+                if (X.equals(dm)){                    
+                    return A;
+                }
+            }
+        }
+        return null;
     }
 }

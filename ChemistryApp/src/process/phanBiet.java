@@ -22,8 +22,8 @@ public class phanBiet {
     
     public static HopChat coKetTua(List <String> G){
         for (int i=0; i<G.size(); i++){
-            String v = G.get(i);
-            if (knowledge.khongTan.containsKey(v)){
+            String v = G.get(i);            
+            if (knowledge.khongTan.containsKey(v)){                
                 return knowledge.khongTan.get(v);
             }
         }
@@ -69,7 +69,7 @@ public class phanBiet {
                         for (int j=0; j<phanUng.size() - 1; j++){
                             System.out.print(phanUng.get(j) + " + ");
                         }
-                        System.out.println(phanUng.get(phanUng.size() - 1) + " ==> kết tủa");
+                        System.out.println(phanUng.get(phanUng.size() - 1) + " ==> kết tủa " + Color.getColor());
                     }
                     else{
                         if (!x && y){
@@ -84,7 +84,7 @@ public class phanBiet {
                             for (int j=0; j<phanUng.size() - 1; j++){
                                 System.out.print(phanUng.get(j) + " + ");
                             }
-                            System.out.println(phanUng.get(phanUng.size() - 1) + " ==> vừa khí vừa kết tủa");
+                            System.out.println(phanUng.get(phanUng.size() - 1) + " ==> vừa khí vừa kết tủa " + Color.getColor());
                         }
                     }
                 }
@@ -125,7 +125,7 @@ public class phanBiet {
                     }
                     else{
                         T.add(v);
-                        T_color.add(Color);
+                        T_color.add(Color);                        
                     }
                 }
             }
@@ -243,6 +243,8 @@ public class phanBiet {
             return ;
         }
         
+        // Những chất đã phân biệt được
+        List <HopChat> OK = new Vector<HopChat>();
         // Luật phản ứng với một chất
         X.clear();  Y.clear();  Z.clear();        
         if (E.size() == 0){
@@ -281,11 +283,11 @@ public class phanBiet {
                             System.out.print("Phản ứng tạo kết tủa gồm những chất: ");
                             for (int i=0; i<Y.size(); i++) System.out.print(Y.get(i).getCTHH() + " ");
                             System.out.println();
-                            if (phanBietMau(Y_color)){
-                                showMau(Y_color, Y);
+                            if (!phanBietMau(Y_color)){                            
+                                NeedTo.add(Y);
                             }
                             else{
-                                NeedTo.add(Y);
+                                for (HopChat hc : Y) OK.add(hc); 
                             }
                         }
                         if (Z.size() > 0){
@@ -298,16 +300,24 @@ public class phanBiet {
                             System.out.print("Phản ứng vừa tạo khí vừa tạo kết tủa gồm những chất: ");
                             for (int i=0; i<T.size(); i++) System.out.print(T.get(i).getCTHH() + " ");
                             System.out.println();
-                             if (phanBietMau(T_color)){
-                                showMau(T_color, T);
+                            if (!phanBietMau(T_color)){                            
+                                NeedTo.add(T);
                             }
                             else{
-                                NeedTo.add(T);
+                                for (HopChat hc : T) OK.add(hc);
                             }
                         }
 
                         Show(G, any);
-
+                        
+                        if (OK.size() > 0){
+                            System.out.print("Đã phân biệt được các chất: ");
+                        }
+                        for (HopChat hc : OK){
+                            System.out.print(hc.getCTHH() + " ");
+                        }
+                        System.out.println();
+                        
                         for (int i=0; i<NeedTo.size(); i++) 
                             phanBiet(NeedTo.get(i), E);
                         return ;
@@ -321,58 +331,66 @@ public class phanBiet {
                 List <List<HopChat> > L = Collect(G, any);                               
 
                 X = L.get(0);
-                    Y = L.get(1);
-                    Y_color = L.get(2);
-                    Z = L.get(3);
-                    T = L.get(4);
-                    T_color = L.get(5);
+                Y = L.get(1);
+                Y_color = L.get(2);
+                Z = L.get(3);
+                T = L.get(4);
+                T_color = L.get(5);
 
-                    List <List<HopChat>> NeedTo = new Vector<List<HopChat>>();
-                    
-                    cnt = (X.size() >= 1 ? 1 : 0) + (Y.size() >= 1 ? 1 : 0) + (Z.size() >= 1 ? 1 : 0) + (T.size() >= 1 ? 1 : 0);
-                    if (cnt > 1){                                                           
-                        System.out.println("Chúng ta dùng chất " + any.getCTHH() + " để chia làm " + cnt + " nhóm");
-                        if (X.size() > 0){
-                            System.out.print("Phản ứng không có hiện tượng gồm những chất: ");
-                            for (int i=0; i<X.size(); i++) System.out.print(X.get(i).getCTHH() + " ");
-                            System.out.println();
-                            NeedTo.add(X);
-                        }
-                        if (Y.size() > 0){
-                            System.out.print("Phản ứng tạo kết tủa gồm những chất: ");
-                            for (int i=0; i<Y.size(); i++) System.out.print(Y.get(i).getCTHH() + " ");
-                            System.out.println();
-                            if (phanBietMau(Y_color)){
-                                showMau(Y_color, Y);
-                            }
-                            else{
-                                NeedTo.add(Y);
-                            }
-                        }
-                        if (Z.size() > 0){
-                            System.out.print("Phản ứng tạo khí gồm những chất: ");
-                            for (int i=0; i<Z.size(); i++) System.out.print(Z.get(i).getCTHH() + " ");
-                            System.out.println();
-                            NeedTo.add(Z);
-                        }
-                        if (T.size() > 0){
-                            System.out.print("Phản ứng vừa tạo khí vừa tạo kết tủa gồm những chất: ");
-                            for (int i=0; i<T.size(); i++) System.out.print(T.get(i).getCTHH() + " ");
-                            System.out.println();
-                             if (phanBietMau(T_color)){
-                                showMau(T_color, Y);
-                            }
-                            else{
-                                NeedTo.add(T);
-                            }
-                        }
+                List <List<HopChat>> NeedTo = new Vector<List<HopChat>>();
 
-                        Show(G, any);
-
-                        for (int i=0; i<NeedTo.size(); i++) 
-                            phanBiet(NeedTo.get(i), E);
-                        return ;
+                cnt = (X.size() >= 1 ? 1 : 0) + (Y.size() >= 1 ? 1 : 0) + (Z.size() >= 1 ? 1 : 0) + (T.size() >= 1 ? 1 : 0);
+                if (cnt > 1){                                                           
+                    System.out.println("Chúng ta dùng chất " + any.getCTHH() + " để chia làm " + cnt + " nhóm");
+                    if (X.size() > 0){
+                        System.out.print("Phản ứng không có hiện tượng gồm những chất: ");
+                        for (int i=0; i<X.size(); i++) System.out.print(X.get(i).getCTHH() + " ");
+                        System.out.println();
+                        NeedTo.add(X);
                     }
+                    if (Y.size() > 0){
+                        System.out.print("Phản ứng tạo kết tủa gồm những chất: ");
+                        for (int i=0; i<Y.size(); i++) System.out.print(Y.get(i).getCTHH() + " ");
+                        System.out.println();
+                        if (!phanBietMau(Y_color)){                            
+                            NeedTo.add(Y);
+                        }
+                        else{
+                            for (HopChat hc : Y) OK.add(hc); 
+                        }
+                    }
+                    if (Z.size() > 0){
+                        System.out.print("Phản ứng tạo khí gồm những chất: ");
+                        for (int i=0; i<Z.size(); i++) System.out.print(Z.get(i).getCTHH() + " ");
+                        System.out.println();
+                        NeedTo.add(Z);
+                    }
+                    if (T.size() > 0){
+                        System.out.print("Phản ứng vừa tạo khí vừa tạo kết tủa gồm những chất: ");
+                        for (int i=0; i<T.size(); i++) System.out.print(T.get(i).getCTHH() + " ");
+                        System.out.println();
+                        if (!phanBietMau(T_color)){                            
+                            NeedTo.add(T);
+                        }
+                        else{
+                            for (HopChat hc : T) OK.add(hc);
+                        }
+                    }
+
+                    Show(G, any);
+
+                    if (OK.size() > 0){
+                        System.out.print("Đã phân biệt được các chất: ");
+                    }
+                    for (HopChat hc : OK){
+                        System.out.print(hc.getCTHH() + " ");
+                    }
+                    System.out.println();
+
+                    for (int i=0; i<NeedTo.size(); i++) 
+                        phanBiet(NeedTo.get(i), E);
+                    return ;
+                }
             }            
         }
         System.out.print("Không thể phân biệt được: ");
