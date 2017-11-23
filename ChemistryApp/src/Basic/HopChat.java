@@ -65,15 +65,15 @@ public class HopChat{
         if (this.tile.getA() > 1){
             if (this.A.getCnt() > 1) t = "(" + A.getSymbol() + ")";
             t += Integer.toString(this.tile.getA());
-        }                                
+        }                   
         String X = s + t;
         return X;
     }
     
     public String getCTHH(){
-        String X = this.simpleCTHH();
-        String Y = this.shorted(X);             
-        if (X.equals(Y)) return X;                 
+        String X = simpleCTHH();
+        String Y = shorted(X);
+        if (X.equals(Y)) return X;        
         Cation C = this.C;
         for (String key: knowledge.anion.keySet()){
             Anion A = knowledge.anion.get(key);
@@ -125,7 +125,7 @@ public class HopChat{
         this.A = A;
         this.C = C;        
         this.Color = Color;
-        this.tile = new PhanSo(C.getHoaTri(), A.getHoaTri());        
+        this.tile = new PhanSo(C.getHoaTri(), A.getHoaTri());
     }
     public HopChat(Cation C, Anion A){
         this(C, A, "none");
