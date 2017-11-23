@@ -27,7 +27,9 @@ public class canBang {
     private static List <String> SP1 = new LinkedList<String>();
     private static List <Integer> SP2 = new LinkedList<Integer>();
     private static List <String> VT = new LinkedList<String>();
-    private List<String> chat = new Vector<String>();
+    private List<String> chat = new Vector<String>(){
+       
+    };
     private List<Integer> bien = new LinkedList<Integer>();
     private static void setTT(String s){
         tt = tachchat(s).getKey();
@@ -73,7 +75,7 @@ public class canBang {
         setSP(s);
         heso = tt.size() + sp.size();   
         soChat = VT.size();
-        System.out.println(heso + " "+ soChat);
+       // System.out.println(heso + " "+ soChat);
     }
     private static List<Integer> giaimatran(int [][]a, int n, int m){
         ///biến về ma trận tam giác trên

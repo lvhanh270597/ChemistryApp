@@ -45,7 +45,7 @@ public class ChemistryApp {
      //   gd.show();
         String s = "Fe + HNO3 = Fe(NO3)3 + NO + N2O + NO2 + N2 + H2O";
         canBang.canbang(s);
-        canBang.setNum(s);
+       // canBang.setNum(s);
        // canBang.hihi(s);
     } 
 } 
