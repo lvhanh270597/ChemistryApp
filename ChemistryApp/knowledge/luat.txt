@@ -51,7 +51,8 @@ hc(H_1,X) hc(Y,OH_1) = hc(Y,X) hc(H_1,O_2)
 X # O
 0
 hc(Y,OH_1) hc(H_1,X) = hc(Y,X) hc(H_1,O_2)
-0
+1
+X # O
 0
 hc(H_1,X) hc(Y,O_2) = hc(Y,X) hc(H_1,O_2)
 1
@@ -87,7 +88,7 @@ dc(O_2) hc(X,O_2)
 0
 1
 oxihoa
-hc(X,O_2) dc(O_2)
+dc(Cl_2) hc(X,Cl_1)
 0
 1
 oxihoa
@@ -101,11 +102,6 @@ hc(H_1,O_2) hc(Y,O_2)
 PK Y
 1
 beta
-hc(X,OH_1) hc(Y,O_2) = hc(X,Y) hc(H_1,O_2)
-2
-KL X
-PK Y
-0
 hc(Y,O_2) hc(X,OH_1)
 2
 X # H_1

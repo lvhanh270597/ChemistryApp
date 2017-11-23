@@ -378,7 +378,9 @@ public class dieuChe {
             // Th tìm Anion cho Hop chat
             if(x.getAnion()==y.getAnion()){
                 for(String w:knowledge.anion.keySet()){
-                    HopChat k = new HopChat(y.getCation(),knowledge.anion.get(w));
+                    HopChat k = new HopChat(y.getCation(), knowledge.anion.get(w));
+                    String k_name = k.getCTHH();
+                    if (knowledge.khongTan.containsKey(k_name) || knowledge.notExist.containsKey(k_name)) continue;                   
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
                         HopChat temp = x;
                         x=k;
@@ -403,6 +405,8 @@ public class dieuChe {
             // TH tìm Cation cho hop chat 
                for(String w: knowledge.cation.keySet()){
                     HopChat k = new HopChat(knowledge.cation.get(w),y.getAnion());
+                    String k_name = k.getCTHH();  
+                    if (knowledge.khongTan.containsKey(k_name) || knowledge.notExist.containsKey(k_name)) continue; 
                     if(x.getAnion().getSymbol()=="OH"&& k.getCation().getSymbol()=="H"){
                         HopChat temp = x;
                         x=k;

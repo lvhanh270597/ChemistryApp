@@ -200,10 +200,18 @@ public class pu {
             tmp += result.get(i) + " + ";
         }
         tmp += result.get(n - 1);
-        
+        //System.out.println(tmp);
         pu p = new pu(tmp);
         this.PTHH = p.getPTHH();        
         return result;
+    }
+    
+    public static List<String> phanUng(String X, String Y, boolean addition){
+        duDoan dd = new duDoan(X + " " + Y);                
+        if (addition) dd.deduce2(X); 
+        else dd.deduce2(Y);
+        dd.getReaction();
+        return dd.getSanPham();
     }
     
 // Trang
@@ -608,8 +616,8 @@ public class pu {
                                 List <String> listOfReferences,
                                 List <String> listOfType,
                                 String useage){
-                
-        
+                        
+        //System.out.println(rule);
         List <String> result = new Vector<String>();        
         if (useage.equals("alpha")){            
             String X = listOfReferences.get(0) + "_0";                                          
@@ -679,16 +687,18 @@ public class pu {
             result.add(hc.getCTHH());
             result.add(H2O.getCTHH());
             return result;
-        }
-                
-        if (useage.equals("oxihoa")){
-            int t = 0;
-            String c = listOfReferences.get(t);            
+        }        
+        
+        if (useage.equals("oxihoa")){            
+            String c = listOfReferences.get(0);            
             Cation C = knowledge.cation.get(c);
+            String a = listOfReferences.get(1);
+            Anion A = knowledge.anion.get(a);
+            //System.out.print(c);
             int Highest = knowledge.getHighestCation(C.getSymbol());
             if (Highest > C.getHoaTri()){
                 C = knowledge.cation.get(C.getSymbol() + "_" + Highest);
-                HopChat hc = new HopChat(C, knowledge.anion.get("O_2"));            
+                HopChat hc = new HopChat(C, A);            
                 result.add(hc.getCTHH());                            
             }
             return result;                        
@@ -900,7 +910,9 @@ public class pu {
                 }                                                   
                 
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                                           
-                    String rule = knowledge.luat.get(i).getRule();                                            
+                    String rule = knowledge.luat.get(i).getRule();                          
+                    if (useage.equals("oxihoa")) 
+                        listOfReferences.add(my_anion);
                     result = create(rule, listOfVariables, listOfReferences, listOfType, useage);                    
 //                    System.out.println(" --- use rule: " + rule);                    
 //                    for (int j=0; j<result.size() - 1; j++){

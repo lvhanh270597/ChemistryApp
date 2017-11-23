@@ -67,3 +67,4 @@ Hg_2 S_2 black
 Hg_2 I_1 yellow
 Mn_2 S_2 pink
 Sn_2 S_2 brown
+Sn_2 OH_1 white
