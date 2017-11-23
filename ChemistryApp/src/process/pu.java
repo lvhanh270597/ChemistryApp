@@ -178,10 +178,11 @@ public class pu {
                 result = execute(this.X.get(0), this.Y.get(0));
             }
             else{
-                if (m == 2){
+                if (m == 2){                   
                     result = execute(this.Y.get(0), this.Y.get(1)); 
-                    if (result == null) 
+                    if (result.size() == 0) {                        
                         result = execute(this.Y.get(1), this.Y.get(0));                     
+                    }
                 }
                 else{
                     result = execute(this.Y.get(0));
@@ -596,6 +597,7 @@ public class pu {
         // tìm một gốc axit tương ứng
         for (String k: knowledge.anion.keySet()){
             Anion a = knowledge.anion.get(k);    
+            if (a.getSymbol().contains("H")) continue; 
             if (a.differ().equals(XC.getSymbol())){                                        
                 if (a.getOxiHoa() == XC.getHoaTri()){                        
                     S = a;
@@ -616,8 +618,8 @@ public class pu {
                                 List <String> listOfReferences,
                                 List <String> listOfType,
                                 String useage){
-                        
-        //System.out.println(rule);
+        
+//        System.out.println(rule);
         List <String> result = new Vector<String>();        
         if (useage.equals("alpha")){            
             String X = listOfReferences.get(0) + "_0";                                          
@@ -659,7 +661,7 @@ public class pu {
             //System.out.println();                
             return result;
         }        
-        if (useage.equals("beta")){                                       
+        if (useage.equals("beta")){                 
             String X = listOfReferences.get(0);
             Cation XC = knowledge.cation.get(X);            
             HopChat hc = map(XC);            
@@ -667,6 +669,22 @@ public class pu {
                 result.add(hc.getCTHH());            
             return result; 
         }            
+        
+        if (useage.equals("taolao")){
+            String X = listOfReferences.get(1);
+            Cation XC = knowledge.cation.get(X);            
+            HopChat hc = map(XC);            
+            Anion XA = hc.getAnion();
+                        
+            String Y = listOfReferences.get(0);
+            XC = knowledge.cation.get(Y);
+            
+            hc = new HopChat(XC, XA);
+            
+            if (!hc.getAnion().getSymbol().equals("OH")) 
+                result.add(hc.getCTHH());            
+            return result; 
+        }
                
         if (useage.equals("beta2")){
             String X = listOfReferences.get(0);
@@ -741,14 +759,15 @@ public class pu {
             else{                                
                 Pair <String, String> get = takeCA(v[i]);
                 String c = get.getKey();
-                String a = get.getValue();                            
+                String a = get.getValue();                              
                 int t = checkIn(c, listOfVariables);                
                 Cation ca;
                 if (t > -1){     
                     if (listOfType.get(t) == "ca")
                         ca = knowledge.cation.get(listOfReferences.get(t));
-                    else{                        
-                        ca = knowledge.getCationFromName(listOfReferences.get(t));
+                    else{                     
+                        DonChat dc = knowledge.getDC(listOfReferences.get(t));
+                        ca = knowledge.getCationFromName(dc.getDaiDien().getSymbol());
                     }
                 }
                 else{
@@ -785,7 +804,8 @@ public class pu {
         boolean ok = false;        
         for (int i=0; i<L.size(); i++){
             String X = L.get(i);
-            if (knowledge.notExist.containsKey(X) || knowledge.khongTan.containsKey(X)){
+            if (knowledge.notExist.containsKey(X) || knowledge.khongTan.containsKey(X) 
+                || knowledge.khi.containsKey(X)){
                 ok = true;
                 break;
             }
@@ -877,6 +897,7 @@ public class pu {
                 //print(c + " : " + a + "\n" + my_cation +" : "+my_anion +"\n");
                 String dc = bocVo(v[0]);
                 
+                
                 if (knowledge.cation.containsKey(c) && !my_cation.equals(c)) continue;
                 if (knowledge.anion.containsKey(a) && !my_anion.equals(a)) continue;
                 
@@ -931,13 +952,21 @@ public class pu {
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = ");
         List <String> result = new Vector<String>();
         for (int i=0; i<knowledge.luat.size(); i++){
+            //System.out.println(knowledge.luat.get(i).getRule());
             String[] v = knowledge.luat.get(i).getRule().split("\\s");             
             if (checkForDC(v[0]) && checkForDC(v[1])){           
                 v[0] = bocVo(v[0]);
-                v[1] = bocVo(v[1]);
-                // Đơn chất để ở dạng công thức hóa học nha                
-                if (knowledge.donChat.containsKey(v[0]) && !v[0].equals(X.getCTHH())) continue;                
-                if (knowledge.donChat.containsKey(v[1]) && !v[1].equals(Y.getCTHH())) continue;
+                v[1] = bocVo(v[1]);                
+                
+                if (knowledge.donChat.containsKey(v[0])){                    
+                    String name = knowledge.donChat.get(v[0]).getCTHH();
+                    if (!name.equals(X.getCTHH())) continue;                                                               
+                }                                               
+
+                 if (knowledge.donChat.containsKey(v[1])){                     
+                    String name = knowledge.donChat.get(v[1]).getCTHH();
+                    if (!name.equals(Y.getCTHH())) continue;                                                                                   
+                }   
                 
                 List <String> listOfCondition = knowledge.luat.get(i).getCdt();
                 List <String> listOfVariables = new Vector<String>();
@@ -972,14 +1001,32 @@ public class pu {
         return result;
         //System.out.println("Can not make a reaction!");        
     }
-    public static List<String> execute(HopChat X, HopChat Y){                
+    
+    public static boolean sameType(HopChat X, HopChat Y){
+        return (phanBiet.bazo(X) && phanBiet.bazo(Y));               
+    }
+    
+    public static List<String> execute(HopChat X, HopChat Y){                        
         //System.out.print(X.getCTHH() + " + " + Y.getCTHH() + " = \n");  
+        // Nếu X hoặc Y không bền thì không phản ứng được                
         List <String> result = new Vector<String>();
-        boolean ok = (!knowledge.khongTan.containsKey(X.getCTHH()) || !knowledge.khongTan.containsKey(Y.getCTHH()));
-        ok = ok || knowledge.khi.containsKey(X.getCTHH()) || knowledge.khi.containsKey(Y.getCTHH());
+        
+        if (sameType(X, Y)) return result;
+        
+        /*if (knowledge.notExist.containsKey(Y.getCTHH()) || knowledge.notExist.containsKey(X.getCTHH()))  
+            return result;*/
+        
+        boolean ok = true;
+        
+        if (phanBiet.muoi(X) && phanBiet.muoi(Y)){               
+            ok = (!knowledge.khongTan.containsKey(X.getCTHH()) && !knowledge.khongTan.containsKey(Y.getCTHH()));                        
+        }
+        
+        ok = ok || knowledge.khi.containsKey(X.getCTHH()) || knowledge.khi.containsKey(Y.getCTHH());        
         if (!ok){
             return result;
         }        
+        
         for (int i=0; i<knowledge.luat.size(); i++){                        
             String[] v = knowledge.luat.get(i).getRule().split("\\s");  
             

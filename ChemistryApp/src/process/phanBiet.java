@@ -42,15 +42,15 @@ public class phanBiet {
         return this.phanTich;
     }
     
-    private boolean axit(HopChat X){
+    public static boolean axit(HopChat X){
         return X.getCation().getSymbol().equals("H");
     }
     
-    private boolean bazo(HopChat X){
+    public static boolean bazo(HopChat X){
         return X.getAnion().getSymbol().equals("OH");
     }
     
-    private boolean muoi(HopChat X){
+    public static boolean muoi(HopChat X){
         return !(axit(X) || bazo(X));
     }
     

@@ -326,14 +326,7 @@ public class knowledge {
             System.out.println(
                 "Error reading file '" 
                 + KhongTanPath + "'");                              
-        }
-        
-        for (String key: cation.keySet()){
-            if (key.equals("H_1")) continue;
-            Cation c = cation.get(key);            
-            HopChat hc = new HopChat(c, anion.get("O_2"));
-            khongTan.put(hc.getCTHH(), hc);
-        }                    
+        }                
         
         //--------------------------------------------------------------------//
         

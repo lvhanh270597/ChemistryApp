@@ -25,17 +25,15 @@ public class ChemistryApp {
             System.out.println(vt.get(i));
         }
         //DonChat a = knowledge.donChat.get("Fe_1");  
-        /*
-        HopChat a = knowledge.getHC("ZnO");
-        HopChat b = knowledge.getHC("HNO3");
-        List <String> result = pu.execute(a, b);
-        System.out.println(result);*/
-        /*pu p = new pu("Fe Cl2");
-        System.out.println(p.predict()); 
+        */
+       
+        
+        /*System.out.println(p.predict()); 
         //p.predict();
-        System.out.println(p.getPTHH());*/
+        System.out.println(p.getPTHH());
+        */
         /*System.out.println("du doan");
-        String thamGia = "K H2O H2SO4";
+        String thamGia = "K H2O H2SO4 FeCl2";
         duDoan dd = new duDoan(thamGia);
         List <String> rs = dd.deduce();
         for (int i=0; i<rs.size(); i++){
@@ -44,10 +42,14 @@ public class ChemistryApp {
         System.out.println("can bang");
      //   giaodien gd = new giaodien();
      //   gd.show();*/
-//        String s = "Fe + HNO3 = Fe(NO3)3 + NO + N2O + NO2 + N2 + H2O";
-//        pu p = new pu(s);
-//        System.out.println(p.getPTHH());        
-//        System.out.println("dieu che");
+        /*String s = "Fe + HNO3 = Fe(NO3)3 + NO + N2O + NO2 + N2 + H2O";
+        pu p = new pu(s);
+        System.out.println(p.getPTHH());        
+        System.out.println("dieu che"); 
+        //String s = "Fe -> FeSO4 -> FeCl2 -> FeCl3 -> Fe(OH)3 -> Fe2O3 -> Fe";
+        s = "BaCl2 -> BaSO3 -> SO2 -> H2SO4 -> Fe2(SO4)3 -> Fe(OH)3 -> Fe2O3 -> FeCl3 -> AgCl";
+        List <String> L = dieuChe.DieuChe(s, "");
+        for (String st : L) System.out.println(st);
         /*DonChat a = knowledge.getDC("S");
         DonChat b = knowledge.getDC("O2");
         System.out.println(pu.execute(a, b));*/
@@ -56,6 +58,7 @@ public class ChemistryApp {
         System.out.println(a.deduce());
         System.out.println(a.getReaction());
   */
-        System.out.println(pu.phanUng("Fe", "Cl2", true));
+        System.out.println(pu.phanUng("N2", "O2", false));
+        //System.out.println(pu.phanUng("P", "O3", false));
     } 
 } 
