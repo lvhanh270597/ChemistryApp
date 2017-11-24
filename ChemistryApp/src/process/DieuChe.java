@@ -93,6 +93,8 @@ public class DieuChe {
                                  st += result.get(j) + " + ";
                             }
                             st+= result.get(result.size()-1);
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return st;
                         }
                     }
@@ -120,6 +122,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st);
+                                    st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -136,6 +140,8 @@ public class DieuChe {
                                        st += result.get(k)+ " + ";
                                    }
                                    st += result.get(result.size() - 1);
+                                   pu p = new pu(st1);
+                                   st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -160,6 +166,8 @@ public class DieuChe {
                             st += result.get(j)+ " + ";
                         }
                         st += result.get(result.size() - 1);
+                        pu p = new pu(st);
+                        st = p.getPTHH();
                         return st; 
                     }
                 }
@@ -178,6 +186,8 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return st;
                         } 
                     }
@@ -195,6 +205,8 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return (st);
                         } 
                     }
@@ -214,6 +226,8 @@ public class DieuChe {
                                     st += result.get(p)+ " + ";
                                 }
                                 st += result.get(result.size() - 1);
+                                pu p = new pu(st);
+                            st = p.getPTHH();
                                 return st;
                            }
                         }
@@ -243,6 +257,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st1);
+                                    st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -259,6 +275,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st);
+                                    st = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -279,6 +297,8 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return st;
                         } 
                     }
@@ -298,6 +318,8 @@ public class DieuChe {
                                     st += result.get(j)+ " + ";
                                 }
                                 st += result.get(result.size() - 1);
+                                pu k = new pu(st);
+                                st = k.getPTHH();
                                 return st;
                                 }
                             }
@@ -332,6 +354,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st1);
+                                    st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -348,6 +372,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st1);
+                                    st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -369,6 +395,8 @@ public class DieuChe {
                                 st += result.get(j)+ " + ";
                             }
                             st += result.get(result.size() - 1);
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return st ;
                         }
                     }
@@ -395,7 +423,9 @@ public class DieuChe {
                                 for(int j = 0 ;j<result.size()-1;j++){
                                     st += result.get(j)+ " + ";
                                 }
-                            st += result.get(result.size()-1);   
+                            st += result.get(result.size()-1); 
+                            pu p = new pu(st);
+                            st = p.getPTHH();
                             return st;
                             }
                         }
@@ -423,6 +453,8 @@ public class DieuChe {
                                     st += result.get(j)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
+                                pu p = new pu(st);
+                                st = p.getPTHH();
                                 return st;
                             }
                         }
@@ -432,17 +464,21 @@ public class DieuChe {
             for(String i:knowledge.cation.keySet()){
                 for(String j: knowledge.anion.keySet()){
                     HopChat k = new HopChat(knowledge.cation.get(i),knowledge.anion.get(j));
-                    if(pu.execute(x, k).size()!=0){
+                    if(pu.execute(x, k).size()!=0|| pu.execute(k, x).size()!=0){
                        // System.out.println("Yes");
-                        List <String> result= pu.execute(x,k);
-                        //System.out.println(result);
+                        List <String> result;
+                        if(pu.execute(x,k).size()!=0) result= pu.execute(x, k);
+                        else result= pu.execute(k,x);
                         for(int m=0;m<result.size();m++){
                             if(result.get(m).equals(y.getCTHH())){
+                                System.out.println("Yes");
                                 st= x.getCTHH() + " + " + k.getCTHH()+ " = ";
                                 for(int n = 0 ;n<result.size()-1;n++){
                                     st += result.get(n)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
+                                pu p = new pu(st);
+                                st = p.getPTHH();
                                 return st;
                             }
                         }
@@ -472,6 +508,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st);
+                                    st = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -488,6 +526,8 @@ public class DieuChe {
                                        st1 += result.get(k)+ " + ";
                                    }
                                    st1 += result.get(result.size() - 1);
+                                   pu p = new pu(st1);
+                                     st1 = p.getPTHH();
                                    return st1;
                                }
                             }
@@ -508,6 +548,8 @@ public class DieuChe {
                                     st += result.get(n)+ " + ";
                                 }
                                 st += result.get(result.size()-1);
+                                pu p = new pu(st);
+                                st = p.getPTHH();
                                 return st;
                             }
                         }
