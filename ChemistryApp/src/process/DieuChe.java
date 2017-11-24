@@ -14,16 +14,16 @@ import knowledge.knowledge;
  *
  * @author OS
  */
-public class dieuChe {
+public class DieuChe {
     public static Vector DieuChe(String b,String a){
-        String[] word = dieuChe.TachChuoi(b);
-        String[] wordx = dieuChe.TachChuoi(a);
+        String[] word = DieuChe.TachChuoi(b);
+        String[] wordx = DieuChe.TachChuoi(a);
         Vector vt = new Vector();
         int i =0;
         while (i<=word.length-2){
             String k = "từ "+word[i]+ " -> "+ word[i+2];
             vt.add(k);
-            String d = dieuChe.ChatDC(word[i], word[i+2],wordx);
+            String d = DieuChe.ChatDC(word[i], word[i+2],wordx);
             if(d=="NULL"){
                 vt.add("Phản ứng không thể tìm thấy !!!");
             }

@@ -275,12 +275,12 @@ public class pu {
     private Pair<List, List> setChat(String s){
         List <String> res1 = new Vector <String>();
         List <Integer> res2 = new Vector <Integer>();
-        if(dieuChe.Kiemtra(s) == true){
-           res1.add(dieuChe.LayDC(s).getDaiDien().getSymbol());
-           res2.add(dieuChe.LayDC(s).getCnt());
+        if(DieuChe.Kiemtra(s) == true){
+           res1.add(DieuChe.LayDC(s).getDaiDien().getSymbol());
+           res2.add(DieuChe.LayDC(s).getCnt());
         }
         else{
-            return dieuChe.LayHC(s).getComponents();
+            return DieuChe.LayHC(s).getComponents();
         }
         Pair <List, List> e = new Pair <List, List>(res1, res2);
         return e;

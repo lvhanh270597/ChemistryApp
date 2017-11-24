@@ -58,7 +58,9 @@ public class ChemistryApp {
         System.out.println(a.deduce());
         System.out.println(a.getReaction());
   */
-        System.out.println(pu.phanUng("N2", "O2", false));
+           inter gd = new inter();
+           gd.show();
+        //System.out.println(pu.phanUng("N2", "O2", false));
         //System.out.println(pu.phanUng("P", "O3", false));
     } 
 } 
