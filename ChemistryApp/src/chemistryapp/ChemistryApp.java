@@ -54,12 +54,17 @@ public class ChemistryApp {
         DonChat b = knowledge.getDC("O2");
         System.out.println(pu.execute(a, b));*/
         
-/*        duDoan a = new duDoan("K NaOH");
-        System.out.println(a.deduce());
-        System.out.println(a.getReaction());
-  */
-           inter gd = new inter();
-           gd.show();
+       /*duDoan a = new duDoan("K NaOH HCl");
+       List<String> b = a.deduce();
+       String s="";
+       for(int i=0; i<b.size();i++)
+           s+=b.get(i)+"\n";
+       
+       System.out.println(s);*/
+       //System.out.println(a.getReaction());
+  
+        giaodien gd = new giaodien();
+        gd.show();
         //System.out.println(pu.phanUng("N2", "O2", false));
         //System.out.println(pu.phanUng("P", "O3", false));
     } 

@@ -5,14 +5,6 @@
  */
 package Interface;
 import process.*;
-import chemistryapp.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Cursor;
 import javax.swing.JOptionPane;
 /**
  *
