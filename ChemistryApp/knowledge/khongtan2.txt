@@ -4,7 +4,6 @@ Ag_1 I_1 yellow
 Ag_1 PO4_3 white
 Ag_1 Cr2O7_2 oranges
 Ag_1 S_2 black
-Ag_1 SO4_2 white
 Ag_1 CO3_2 white
 Ca_2 CO3_2 white
 Ca_2 PO4_3 white

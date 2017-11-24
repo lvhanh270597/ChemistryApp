@@ -220,7 +220,7 @@ public class gdnhanbiet extends javax.swing.JFrame {
         List<String> temp =pb.getPhanTich();
         String out ="";
         for(int i=0; i<temp.size(); i++)
-            out+=temp.get(i)+"\n";
+            out+=temp.get(i);
         output.setText(out);
     }//GEN-LAST:event_jButton1MouseClicked
 

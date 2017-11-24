@@ -4,6 +4,11 @@ hc(H_1,CO3_2) hc(H_1,S_2) = dc(S_1) hc(H_1,O_2)
 dc(N_2) dc(O_2) = hc(N_2,O_2)
 0
 0
+hc(X,O_2) hc(H_1,NO3_1)
+1
+KLKK X
+1
+axitmanh
 dc(H_2) hc(X,O_2) = dc(X) hc(H_1,O_2)
 2
 DH Mg X
@@ -146,6 +151,11 @@ Z # N
 KL X
 1
 after
+dc(X) hc(H_1,NO3_1)
+1
+KLKK X
+1
+axitmanh
 dc(X) hc(Y,Z)
 4
 DH X Y

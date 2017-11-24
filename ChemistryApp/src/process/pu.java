@@ -14,11 +14,11 @@ public class pu {
     private String PTHH;
     private List<DonChat> X;
     private List<HopChat> Y;
-    private Map<String, Boolean> Check;
+    private Map<String, Boolean> Check;    
     
     public pu(){}
     public pu(String X){        
-        Check = new HashMap<String, Boolean>();
+        Check = new HashMap<String, Boolean>();        
         String [] temp = {"N2O", "NO", "NO2", "N2", "S", "SO2", "H2S"};
         for (String st : temp) Check.put(st, Boolean.TRUE);          
         if (X.indexOf("=") > -1){
@@ -189,7 +189,7 @@ public class pu {
                 }
             }
         
-        String tmp = this.PTHH;        
+        String tmp = this.PTHH;                
         n = result.size();
         //System.out.println(result);
         if (n == 0){
@@ -619,7 +619,7 @@ public class pu {
                                 List <String> listOfType,
                                 String useage){
         
-//        System.out.println(rule);
+        //System.out.println(rule);
         List <String> result = new Vector<String>();        
         if (useage.equals("alpha")){            
             String X = listOfReferences.get(0) + "_0";                                          
@@ -722,7 +722,40 @@ public class pu {
             return result;                        
         }
               
-        
+        if (useage.equals("axitmanh")){
+            String c = listOfReferences.get(0);                                             
+            if (listOfType.get(0).equals("dc")){                
+                int Highest = knowledge.getHighestCation(c);
+                Cation C = knowledge.cation.get(c + "_" + Highest);
+                Anion A = knowledge.anion.get(listOfReferences.get(1));
+                HopChat hc = new HopChat(C, A);
+                result.add(hc.getCTHH());
+                String [] temp = {"N2O", "NO", "NO2", "N2"};
+                for (int i=0; i<4; i++) {                
+                    result.add(temp[i]);
+                }
+                result.add("H2O");
+                return result;
+            }
+            else{                
+                Cation C = knowledge.cation.get(c);
+                c = C.getSymbol();
+                int Highest = knowledge.getHighestCation(c);                                
+                Anion A = knowledge.anion.get("NO3_1");                                        
+                if (C.getHoaTri() < Highest){                    
+                    C = knowledge.cation.get(c + "_" + Highest);
+                    String [] temp = {"N2O", "NO", "NO2", "N2"};
+                    for (int i=0; i<4; i++) {                
+                        result.add(temp[i]);
+                    }
+                    
+                }                   
+                HopChat hc = new HopChat(C, A);             
+                result.add(hc.getCTHH());                   
+                result.add("H2O");
+                return result;
+            }
+        }
     //----------------------------------------------------------------------------//    
         String[] v = rule.split("\\s");               
         int index = 0;
@@ -932,7 +965,7 @@ public class pu {
                 
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                                           
                     String rule = knowledge.luat.get(i).getRule();                          
-                    if (useage.equals("oxihoa")) 
+                    if (useage.equals("oxihoa") || useage.equals("axitmanh")) 
                         listOfReferences.add(my_anion);
                     result = create(rule, listOfVariables, listOfReferences, listOfType, useage);                    
 //                    System.out.println(" --- use rule: " + rule);                    
@@ -1018,7 +1051,7 @@ public class pu {
         
         boolean ok = true;
         
-        if (phanBiet.muoi(X) && phanBiet.muoi(Y)){               
+        if ((phanBiet.muoi(X) && phanBiet.muoi(Y)) || (phanBiet.bazo(X) && phanBiet.muoi(Y)) || (phanBiet.muoi(X) && phanBiet.bazo(Y))){                       
             ok = (!knowledge.khongTan.containsKey(X.getCTHH()) && !knowledge.khongTan.containsKey(Y.getCTHH()));                        
         }
         
@@ -1085,7 +1118,7 @@ public class pu {
                // System.out.println(luat.get(i).getRule());
                 if (checkRule(listOfCondition, listOfVariables, listOfReferences, listOfType)){                       
                     String rule = knowledge.luat.get(i).getRule();                                          
-                    //System.out.println(rule);                    
+                    //System.out.println(rule);                            
                     List <String> temp = create(rule, listOfVariables, listOfReferences, listOfType, useage);                       
                     if (useage.equals("after")){                        
                         temp = checkAfter(temp);

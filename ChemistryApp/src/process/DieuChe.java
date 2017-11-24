@@ -20,9 +20,7 @@ public class DieuChe {
         String[] wordx = DieuChe.TachChuoi(a);
         Vector vt = new Vector();
         int i =0;
-        while (i<=word.length-2){
-            String k = "từ "+word[i]+ " -> "+ word[i+2];
-            vt.add(k);
+        while (i<=word.length-2){            
             String d = DieuChe.ChatDC(word[i], word[i+2],wordx);
             if(d=="NULL"){
                 vt.add("Phản ứng không thể tìm thấy !!!");
@@ -88,12 +86,12 @@ public class DieuChe {
                     List <String> result = pu.execute(x);
                     for(int i=0;i<result.size();i++){
                         if(result.get(i).equals(y.getCTHH())){
-                            st = x.getCTHH()+ " -> ";
-                            for(int j =0;j< result.size();j++){
+                            st = x.getCTHH()+ " = ";
+                            for(int j =0;j< result.size() - 1;j++){
                                  st += result.get(j) + " + ";
                             }
-                            st+= result.get(result.size()-1);
-                            pu p = new pu(st);
+                            st+= result.get(result.size()-1);                                                        
+                            pu p = new pu(st);                            
                             st = p.getPTHH();
                             return st;
                         }
@@ -123,7 +121,7 @@ public class DieuChe {
                                    }
                                    st1 += result.get(result.size() - 1);
                                    pu p = new pu(st);
-                                    st1 = p.getPTHH();
+                                   st1 = p.getPTHH();
                                    return st1;
                                }
                             }

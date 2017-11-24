@@ -66,6 +66,9 @@ public class ChemistryApp {
         giaodien gd = new giaodien();
         gd.show();
         //System.out.println(pu.phanUng("N2", "O2", false));
-        //System.out.println(pu.phanUng("P", "O3", false));
+        //System.out.println(pu.phanUng("P", "O3", false));                
+//        pu p = new pu("Fe2O3 HNO3");
+//        p.predict();
+//        System.out.println(p.getPTHH());
     } 
 } 
