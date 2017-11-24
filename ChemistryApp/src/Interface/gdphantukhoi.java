@@ -5,6 +5,9 @@
  */
 package Interface;
 
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import process.phantukhoi;
 
 /**
@@ -18,6 +21,16 @@ public class gdphantukhoi extends javax.swing.JFrame {
      */
     public gdphantukhoi() {
         initComponents();
+        createJFrame();
+    }
+    public void createJFrame(){
+        Dimension windowSize = getSize();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Point centerPoint = ge.getCenterPoint();
+
+        int dx = centerPoint.x - windowSize.width / 2;
+        int dy = centerPoint.y - windowSize.height / 2;    
+        setLocation(dx, dy);
     }
     //giaodien gd = new giaodien();
     /**
@@ -41,8 +54,10 @@ public class gdphantukhoi extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(450, 250));
         setMinimumSize(new java.awt.Dimension(700, 569));
         setUndecorated(true);
@@ -90,6 +105,7 @@ public class gdphantukhoi extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(102, 204, 255));
         jButton1.setText("Tính");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -158,6 +174,14 @@ public class gdphantukhoi extends javax.swing.JFrame {
         jLabel4.setText("Chemistry");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel2MouseDragged(evt);
+            }
+        });
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 520, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,6 +198,11 @@ public class gdphantukhoi extends javax.swing.JFrame {
         float A = phantukhoi.PhanTuKhoi(s);
         output.setText(Float.toString(A));
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
+        // TODO add your handling code here:
+        this.setLocation(this.getX()+evt.getX(), this.getY()+evt.getY());
+    }//GEN-LAST:event_jLabel2MouseDragged
 
     /**
      * @param args the command line arguments
@@ -216,6 +245,7 @@ public class gdphantukhoi extends javax.swing.JFrame {
     private javax.swing.JTextField input;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

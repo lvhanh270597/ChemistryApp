@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Interface;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import process.*;
 import javax.swing.JOptionPane;
 /**
@@ -17,8 +20,17 @@ public class gdcanbang extends javax.swing.JFrame {
      */
     public gdcanbang() {
         initComponents();
+        createJFrame();
     }
+    public void createJFrame(){
+        Dimension windowSize = getSize();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Point centerPoint = ge.getCenterPoint();
 
+        int dx = centerPoint.x - windowSize.width / 2;
+        int dy = centerPoint.y - windowSize.height / 2;    
+        setLocation(dx, dy);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,9 +52,11 @@ public class gdcanbang extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(450, 250));
         setMinimumSize(new java.awt.Dimension(778, 569));
         setUndecorated(true);
@@ -103,6 +117,7 @@ public class gdcanbang extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(204, 204, 255));
         jButton1.setText("Cân bằng");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -157,6 +172,14 @@ public class gdcanbang extends javax.swing.JFrame {
         jLabel4.setText("Chemistry");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jLabel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel6MouseDragged(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 6, 600, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,6 +206,11 @@ public class gdcanbang extends javax.swing.JFrame {
            output.setText(p.getPTHH());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseDragged
+        // TODO add your handling code here:
+        this.setLocation(this.getX()+evt.getX(), this.getY()+evt.getY());
+    }//GEN-LAST:event_jLabel6MouseDragged
     
     /**
      * @param args the command line arguments
@@ -228,6 +256,7 @@ public class gdcanbang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
