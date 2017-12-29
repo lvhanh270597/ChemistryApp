@@ -1,5 +1,0 @@
-H_1 CO3_2
-H_1 SO3_2
-Ag_1 OH_1
-Hg_2 OH_1
-Si_4 OH_1
