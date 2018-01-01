@@ -52,12 +52,15 @@ dkpu(X, Y, L):-
     dk(X, X_L),
     dk(Y, Y_L),
     mergeList(X_L, Y_L, L).
-
+% klk + klkt
+klk_t(X):-
+    klk(X);
+    klkt(X).
 %name with don chat.
 name(X, Y, Z):-
     isnumber(Z),
     nguyento(Y, _),
-    combine(X, Y, Z).
+    combine(X, Y, Z), !.
 %name with hopchat.
 name(Name, C, A):-
     cation(C, CC, HC, _),
@@ -67,15 +70,15 @@ name(Name, C, A):-
     HAA is div(HA, U),
     combine(X, CC, HAA),
     combine(Y, AA, HCC),
-    atom_concat(X, Y, Name).
+    atom_concat(X, Y, Name), !.
 donchat(X):-
     \+ dangphantu(X),
     name(X, _, Z),
-    isnumber(Z).
+    isnumber(Z), !.
 donchat(X):-
     dangphantu(X),
     name(X, _, Z),
-    isnumber(Z), Z > 1.
+    isnumber(Z), Z > 1, !.
 hopchat(X):-
     \+ donchat(X).
 getM(X, M):-
@@ -93,34 +96,27 @@ getM(X, M):-
     HAA is div(HA, U),
     M is MC * HAA + MA * HCC.
 oxitBazo(Name):-
-    hopchat(Name),
     name(Name, C, 'O'),
     cation(C, CC, _, _),
     kl(CC).
 oxitAxit(Name):-
-    hopchat(Name),
     name(Name, C, 'O'),
     cation(C, CC, _, _),
     pk(CC).
-oxit(Name):- oxitAxit(Name).
-oxit(Name):- oxitBazo(Name).
-
+oxit(Name):- oxitAxit(Name); oxitBazo(Name).
 axit(Name):-
-    \+ donchat(Name),
-    \+ nguyento(Name, _),
-    hopchat(Name),
-    \+ name(Name, _, 'O'),
-    name(Name, 'H', _).
+    dif(Name, 'H2O'),
+    name(Name, 'H', X),
+    \+ isnumber(X).
 bazo(Name):-
-    hopchat(Name),
-    \+ name(Name, 'H', _),
+    dif(Name, 'HOH'),
     name(Name, _, 'OH').
 muoi(Name):-
-    \+ oxit(Name),
-    \+ axit(Name),
-    \+ bazo(Name),
-    \+ nguyento(Name, _),
-    \+ name(Name, _, 'O').
+    name(Name, C, A),
+    \+ isnumber(A),
+    dif(C, 'H'),
+    dif(A, 'OH'),
+    dif(A, 'O').
 muoiAxit(Name):-
     muoi(Name),
     name(Name, _, A),
@@ -136,73 +132,61 @@ pu(X, 'H2O', [Z]):-
     name(Z, 'H', A), !.
 % oxit cua kim loai kiem, kiem tho + H2O = dd Bazo
 pu(X, 'H2O', [Z]):-
-    oxitBazo(X),
-    name(X, C, _),
-    klk(C),
-    name(Z, C, 'OH'), !.
-pu(X, 'H2O', [Z]):-
-    oxitBazo(X),
-    name(X, C, _),
-    klkt(C),
+    % kiem tra oxit bazo
+    name(X, C, 'O'),
+    klk_t(C),
     name(Z, C, 'OH'), !.
 %pu voi oxi
-pu(X, 'O2', [X, 'O2']):-
-    nguyento(X, _),
-    dangphantu(X), !.
+%don chat + oxi
+pu('H2', 'O2', ['H2O']):- !.
 pu(X, 'O2', [Z]):-
-    donchat(X),
-    name(X, D, _),
-    \+ halogen(D),
-    cation(D, D, _, _),
+    name(X, D, V),
+    isnumber(V),
+    \+ dangphantu(D),
     name(Z, D, 'O'), !.
+%TH: Fe + O2 = FeO, not Fe2O3
 pu(X, 'O2', [Z]):-
-    donchat(X),
-    dif(X, 'O'),
-    name(X, D, _),
-    \+ halogen(D),
-    \+ cation(D, D, _, _),
+    name(X, D, V),
+    isnumber(V),
+    \+ dangphantu(D),
     next('O', D, T),
     name(Z, T, 'O'), !.
+
 pu(X, 'O2', [Z]):-
-    oxit(X),
-    name(X, C, _),
-    \+ cation(C, C, _, _),
+    name(X, C, 'O'),
+    dif(X, 'H'),
+    \+ dangphantu(C),
     next('O', C, D),
     name(Z, D, 'O'), !.
 %pu voi halogen
 pu(X, Y, [Z]):-
-    donchat(Y),
+    kl(X),
     name(Y, H, _),
     halogen(H),
-    kl(X),
     cation(C, X, _, _),
     max('O', C, C1),
-    anion(A, H, _, _),
-    name(Z, C1, A), !.
+    name(Z, C1, H), !.
 pu(X, 'Cl2', [Z]):-
-    muoi(X),
     name(X, C, 'Cl'),
     max('O', C, C1),
+    dif(C, C1),
     name(Z, C1, 'Cl'), !.
 %pu voi luu huynh
 pu(X, 'S', [Z]):-
     kl(X),
     name(X, D, _),
-    cation(D, D, _, _),
+    \+ dangphantu(D),
     name(Z, D, 'S_2'), !.
 pu(X, 'S', [Z]):-
     kl(X),
     name(X, D, _),
-    \+ cation(D, D, _, _),
+    \+ dangphantu(D),
     next('S', D, T),
-    name(Z, T, 'S_2').
+    name(Z, T, 'S_2'), !.
 
 % kim loai kiem, kiem tho + H2O = dd Bazo + H2.
 pu(X, 'H2O', [Z, 'H2']):-
-    klk(X),
-    name(Z, X, 'OH'), !.
-pu(X, 'H2O', [Z, 'H2']):-
-    klkt(X),
+    klk_t(X),
     name(Z, X, 'OH'), !.
 %axit + oxitBazo = muoi + nuoc
 pu(X, Y, [Z, 'H2O']):-
@@ -223,16 +207,15 @@ pu(X, Y, [Z, 'H2O']):-
 pu(X, Y, [Z, 'H2O']):-
     axit(X),
     bazo(Y),
-    \+ khongtontai(X, _),
+%    \+ khongtontai(X, _),
     name(X, _, A),
     name(Y, C, _),
     name(Z, C, A), !.
 %axit + muoi = muoi moi + axit moi
 pu(X, Y, L):-
     axit(X),
-    khongtontai(X, _),
     muoi(Y),
-    name(X, _, A1),
+    name(X, 'H', A1),
     name(Y, C, A2),
     name(Z, C, A1),
     name(T, 'H', A2),
@@ -242,7 +225,8 @@ pu(X, Y, L):-
 pu(X, Y, L):-
     bazo(X),
     muoi(Y),
-    name(X, C1, _),
+    \+ khongtan(X, _),
+    name(X, C1, 'OH'),
     name(Y, C2, A),
     name(Z, C1, A),
     name(T, C2, 'OH'),
@@ -257,26 +241,21 @@ pu(X, Y, L):-
     name(T, C2, A1),
     dkpu(Z, T, L), !.
 % luat alpha, Fe + Cu2+ = Fe2+ + Cu
+pu('Fe', X, [Z]):-
+    name(X, 'Fe_3', A),
+    name(Z, 'Fe_2', A), !.
 pu(X, Y, [Z, T]):-
     kl(X),
+    \+ klk(X),
+    \+ klkt(X),
     muoi(Y),
     name(Y, C, A),
     dienhoa(CX, X, NX),
-    dienhoa(C, D, NC),
+    dienhoa(C, T, NC),
     NX < NC,
     name(Z, CX, A),
-    nguyento(D, _),
-    name(T, D, 1), !.
-pu(X, Y, [Z, T]):-
-    kl(X),
-    muoi(Y),
-    name(Y, C, A),
-    dienhoa(CX, X, NX),
-    dienhoa(C, D, NC),
-    NX < NC,
-    name(Z, CX, A),
-    \+ nguyento(D, _),
-    name(T, D, A), !.
+    nguyento(T, _), !.
+
 % kim loai + Axit = muoi + H2
 pu(X, Y, [Z, 'H2']):-
     kl(X),
@@ -288,22 +267,18 @@ pu(X, Y, [Z, 'H2']):-
     name(Z, CX, A), !.
 %halogen truoc day halogen sau ra khoi axit
 pu(X, Y, [Z, T]):-
-    donchat(X),
-    name(X, H1, _),
+    name(X, H1, 2),
     halogen(H1),
-    axit(Y),
     name(Y, 'H', H2),
     halogen(H2),
-    dienhoa(H1, _, NH1),
-    dienhoa(H2, _, NH2),
+    dienhoa(H1, H1, NH1),
+    dienhoa(H2, H2, NH2),
     NH1 < NH2,
     name(Z, 'H', H1),
     name(T, H2, 2), !.
 
 %dot chay
 pu(X, 'O2', [Z, T]):-
-    hopchat(X),
-    \+ oxit(X),
     name(X, C1, A),
     anion(A, A1, _, _),
     max('O', C1, C2),
@@ -325,16 +300,21 @@ pu(X, 'CO', [Y, 'CO2']):-
     dienhoa(C, _, N2),
     N1 =< N2,
     cation(C, Y, _, _), !.
+pu(X, 'C', [Y, 'CO2']):-
+    oxitBazo(X),
+    name(X, C, _),
+    dienhoa('Mg', 'Mg', N1),
+    dienhoa(C, _, N2),
+    N1 =< N2,
+    cation(C, Y, _, _), !.
 %phan huy bazo
 pu(X, [Y, 'H2O']):-
-    bazo(X),
     khongtan(X, _),
-    name(X, C, _),
+    name(X, C, 'OH'),
     max('O', C, CC),
     name(Y, CC, 'O'), !.
 % phan huy muoi NO3-
 pu(X, [Y, 'NO2', 'O2']):-
-    muoi(X),
     name(X, C, 'NO3'),
     cation(C, C1, _, _),
     kl(C1),
@@ -349,9 +329,9 @@ pu(X, [Y, 'NO2', 'O2']):-
     name(Y, C2, 'O'), !.
 
 pu(X, [Y, 'NO2', 'O2']):-
-    muoi(X),
     name(X, C, 'NO3'),
     cation(C, D, _, _),
+    kl(D),
     dienhoa(C, _, NC),
     dienhoa('Cu_2', 'Cu', NCu),
     NCu < NC,
@@ -380,12 +360,15 @@ pu(X, [Z, 'CO2']):-
     kl(C1),
     name(Z, C, 'O'), !.
 % phan huy muoi NO3-
+pu(X, Y):-
+    khongtontai(X, Y), !.
 pu(X, [Y, 'O2']):-
     muoi(X),
     name(X, C, 'NO3'),
     cation(C, C1, _, _),
     klk(C1),
     name(Y, C, 'NO2'), !.
+
 pu('NH4NO3', ['N2O', 'H2O']).
 pu('NH4Cl', ['NH3', 'HCl']).
 pu('NH4NO2', ['N2', 'H2O']).
@@ -416,8 +399,8 @@ xaydung(X, Y):-
 chuoi(X, Y, R):-
     kl(X),
     muoi(Y),
-    cation(C, X, _, _),
     name(Y, C, A),
+    cation(C, X, _, _),
     name(R, 'H', A),
     pu(X, R, L),
     member(Y, L), !.
@@ -433,12 +416,7 @@ chuoi(X, Y, R):-
 % kl  --> bazo
 % kl + H2O
 chuoi(X, Y, 'H2O'):-
-    klk(X),
-    bazo(Y),
-    name(Y, C, _),
-    \+ dif(C, X), !.
-chuoi(X, Y, 'H2O'):-
-    klkt(X),
+    klk_t(X),
     bazo(Y),
     name(Y, C, _),
     \+ dif(C, X), !.
@@ -463,14 +441,7 @@ chuoi(X, Y, 'H2O'):-
     name(X, C1, _),
     name(Y, C2, _),
     \+ dif(C1, C2),
-    klk(C1), !.
-chuoi(X, Y, 'H2O'):-
-    oxitBazo(X),
-    bazo(Y),
-    name(X, C1, _),
-    name(Y, C2, _),
-    \+ dif(C1, C2),
-    klkt(C1), !.
+    klk_t(C1), !.
 % oxitBazo --> muoi
 % oxitBazo + axit = muoi
 chuoi(X, Y, R):-
@@ -577,7 +548,10 @@ dieuche([_], []).
 dieuche([H1, H2 | T1], [H | T]):-
     chuoi(H1, H2, H), dieuche([H2 | T1], T), !.
 
-
+getAxit(X, Y):-
+    anion(X, _, _, _),
+    name(Y, 'H', X),
+    axit(Y).
 
 
 

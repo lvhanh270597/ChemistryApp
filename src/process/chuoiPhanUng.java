@@ -16,21 +16,17 @@ import static process.phanUng.makeQuery;
  * @author Hanh
  */
 public class chuoiPhanUng {
-    private String[] chuoi;
     public static String makeQuery(String X){
         String [] v = X.split("\\s");
         String res = "";
-        for (int i=0; i<v.length - 1; i++){
-            String x = v[i];
-            res += "\'" + x + "\',";
+        int n = v.length;
+        for (int i=0; i<n - 1; i++){         
+            res += "\'" + v[i] + "\',";
         }
-        res += "\'" + v[v.length - 1] + "\'";
+        res += "\'" + v[n - 1] + "\'";
         return res;
-    }
-    public chuoiPhanUng(String X){        
-        this.chuoi = X.split("\\s");
-    }
-    public List<String> find(String X){
+    }    
+    public static List<String> find(String X){
         List <String> res = new Vector<String>();
               
         String chuoi = makeQuery(X);
@@ -45,15 +41,27 @@ public class chuoiPhanUng {
         else{
             Term []arr = qr.oneSolution().get("X").toTermArray();            
             for (int i=0; i<arr.length; i++){
-                res.add(arr[i].toString());
+                String x = phanUng.clean(arr[i].toString());
+                res.add(x);
             }            
         }
         return res;
-    }
-    public List <String> getChuoi(){
+    }   
+    public static List <String> showAll(String X){
         List <String> res = new Vector<String>();
-        for (int i=0; i<this.chuoi.length; i++)
-            res.add(this.chuoi[i]);
+        List <String> result = find(X);
+        if (result == null) return null;
+        
+        String []v = X.split("\\s");
+        
+        for (int i=0; i<result.size(); i++){         
+            
+            String resi = result.get(i);
+            if (resi.equals("on")){                
+                resi = "";
+            }
+            res.add(phanUng.showReaction(v[i] + " " + resi));
+        }
         return res;
     }
 }

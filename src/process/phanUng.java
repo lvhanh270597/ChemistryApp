@@ -23,20 +23,19 @@ public class phanUng {
         }
         return res;
     }
-    
+    public static String clean(String X){
+        return X.substring(1, X.length() - 1);
+    }
     public static List <String> phanUng(String v){        
         String in = makeQuery(v);
-        String []inp = v.split("\\s");
-        
-        List <String> input = new Vector<String>();
-        for (int i=0; i<inp.length; i++) input.add(inp[i]);
+        String []inp = v.split("\\s");        
+        List <String> input = convertArr(inp);
         
         Query q = new Query("pu(" + in + " X)");                
         if (!q.hasSolution()){
             int n = input.size();
             String X = "";
-            for (int i=n - 1; i>=0; i--)
-                X += inp[i];
+            for (int i=n - 1; i>=0; i--) X += inp[i] + " ";            
             in = makeQuery(X); 
             q = new Query("pu(" + in + " X)");    
         }
@@ -47,8 +46,38 @@ public class phanUng {
         
         List <String> res = new Vector<String>();
         for (int i=0; i<arr.length; i++){
-            res.add(arr[i].toString());
+            String X = arr[i].toString();
+            res.add(clean(X));
         }            
+        return res;
+    }
+    
+    public static List <String> convertArr(String [] strs){
+        List <String> res = new Vector<String>();
+        for (String x : strs){
+            res.add(x);                    
+        }
+        return res;
+    }
+    
+    public static String makePlus(List <String> L){
+        String res = "";
+        int n = L.size();
+        for (int i=0; i<n - 1; i++){
+            res += L.get(i) + " + ";
+        }
+        res += L.get(n - 1);
+        return res;
+    }
+    public static String showReaction(String X){        
+        List <String> result = phanUng(X);
+        if (result == null) return "Khong phan ung"; 
+        String []v = X.split("\\s");
+        List <String> con = convertArr(v);
+        
+        String res = makePlus(con);
+        res += " = ";
+        res += makePlus(result);        
         return res;
     }
 }
