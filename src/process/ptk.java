@@ -5,6 +5,7 @@
  */
 package process;
 
+import knowledge.knowledge;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import java.util.Vector;
  * @author Hanh
  */
 public class ptk {
+    
+    public static String replace;
     
     public static boolean isNum(char c){
         return c >= '0' && c <= '9';
@@ -46,6 +49,10 @@ public class ptk {
     }
     
     public static Map<String, Integer> split(String X){
+        
+        replace = "";
+        String old_nt = "(";
+        
         List <String> L1 = new Vector<String>();
         int n = X.length();
         int i = 0;
@@ -55,8 +62,15 @@ public class ptk {
         int close = 0;
         while (i < n){            
             String nt = next(X, i, n);            
+                        
+            
             //System.out.println(nt);
             if (isNum(nt.charAt(0))){
+                
+                //--------------
+                replace = replace + " x " + nt;
+                //--------------
+                
                 int cnt = Integer.parseInt(nt);
                 if (str_.get(sl).equals(")")){                    
                     int j = sl - 1;
@@ -69,18 +83,35 @@ public class ptk {
                         j -= 1;
                     }
                 }
-                else{                    
+                else{                                        
+                    
                     int old = cnt_.get(sl);
                     cnt_.set(sl, old * cnt);
                 }
             }
             else{
+                
+                float m = knowledge.nguyenTo(nt);
+                String T = Float.toString(m);
+                //--------------------                
+                if (nt.equals("(") || nt.equals(")")){                                    
+                    replace += nt;
+                }
+                else{
+                    if (!old_nt.equals("(")) 
+                        replace += " + " + T;
+                    else 
+                        replace += T;
+                }
+                //--------------------
+                
                 sl ++;
-                if (nt.equals(")")) close += 1;
+                if (nt.equals(")")) close += 1;                                   
                 str_.add(nt);
                 cnt_.add(1);
             }
             i += nt.length();
+            old_nt = nt;
         }
         
         Map <String, Integer> split = new HashMap <String, Integer> ();
@@ -98,8 +129,18 @@ public class ptk {
             }
         }
 //        System.out.println(str_);
-//        System.out.println(cnt_);
+//        System.out.println(cnt_);        
         return split;
+    }
+    
+    public static String getDescription(String X){
+        Map <String, Integer> M = split(X);
+        float res = 0;
+        for (String st : M.keySet()){            
+            float m = knowledge.nguyenTo(st);
+            res += m * M.get(st);
+        }
+        return replace + " = " + res;
     }
     
     public static float getM(String X){

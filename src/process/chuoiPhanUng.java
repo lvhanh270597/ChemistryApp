@@ -5,11 +5,12 @@
  */
 package process;
 
+import knowledge.phanUng;
 import java.util.List;
 import java.util.Vector;
 import org.jpl7.Query;
 import org.jpl7.Term;
-import static process.phanUng.makeQuery;
+import static knowledge.phanUng.makeQuery;
 
 /**
  *
@@ -36,7 +37,7 @@ public class chuoiPhanUng {
         
         if (!qr.hasSolution()){
             System.out.println("Khong ton tai");
-            return res;
+            return null;
         }
         else{
             Term []arr = qr.oneSolution().get("X").toTermArray();            
