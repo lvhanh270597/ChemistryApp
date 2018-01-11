@@ -16,7 +16,7 @@ import knowledge.*;
  */
 public class timChat {
     public static List <String> Found(){
-        List <String> S;
+        List <String> dsc = new Vector<String>();
         System.out.print("Ban co quy tim khong \n 1:Yes 2:No ");
         Scanner x = new Scanner(System.in);
         int k = x.nextInt();
@@ -38,9 +38,11 @@ public class timChat {
         else {
             temp = knowledge.getAllHC();
         }
-        S = temp;
-        System.out.println(S);
-        temp = null;
+       // dsc = temp;
+        for(int i = 0; i < temp.size(); i++)
+            dsc.add(temp.get(i));
+        System.out.println(dsc);
+        temp.clear();
         
         
         /* Danh sách thuốc thử */
@@ -54,8 +56,6 @@ public class timChat {
         for(int i =0; i< u.size(); i++){
             System.out.println("Ban co: "+ u.get(i) + "khong?");
             k = x.nextInt();
-            if(S.size() == 1 || S.size() == 0)
-                return S;
             if (k == 1){
                 System.out.println("Ban co the cho biet no co hien tuong gi khong? \n 1: kết tủa đồng thời có khí \n 2: khí \n 3: kết tủa \n 4: không có hiện tượng");
                 int t = x.nextInt();
@@ -63,49 +63,55 @@ public class timChat {
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
                     System.out.println("Ban cho toi biet ket tua mau gi");
                     String in = x.nextLine();
-                    for(int j = 0; j < S.size(); j++){
-                        String b = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKT(); 
-                        String c = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKhi();
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b != null && c != null) // có kết tủa và có khí
                             if(b == in) // màu giống màu kết tủa
-                                temp.add(S.get(j));
+                                temp.add(dsc.get(j));
                     }
                 }
-                else if(t == 2){
+                if(t == 2){
                     /*Lấy các chất có khí*/
-                    for(int j = 0; j < S.size(); j++){
-                        String b = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKT(); 
-                        String c = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKhi();
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b == null && c != null) // có khí
-                            temp.add(S.get(j));
+                            temp.add(dsc.get(j));
                     }
                 }
-                else if(t == 3){
+                if(t == 3){
                     /*Lấy các chất có kết tủa*/
                     System.out.println("Ban cho toi biet ket tua mau gi");
                     String in = x.nextLine();
-                    for(int j = 0; j < S.size(); j++){
-                        String b = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKT(); 
-                        String c = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKhi();
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b != null && c == null) // có kết tủa
+                            System.out.println("a");
                             if(b == in) // màu giống màu kết tủa
-                                temp.add(S.get(j));
+                                temp.add(dsc.get(j));
                     }
+                    System.out.println(temp);
                 }
-                else if(t == 4){
+                if(t == 4){
                     /*Lấy các chất không có hiện tượng*/
-                    for(int j = 0; j < S.size(); j++){
-                        String b = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKT(); 
-                        String c = knowledge.getKetTua_Khi(S.get(j) + " " + u.get(i)).getKhi();
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b == null && c == null)
-                            temp.add(S.get(j));
+                            temp.add(dsc.get(j));
                     }
                 }
                 
-                S = temp;
-                temp = null;
+                for(int g = 0; g < temp.size(); g++)
+                    dsc.add(temp.get(g));
+                temp.clear();
+               // System.out.println(dsc);
             }
+            if(dsc.size() == 1 || dsc.size() == 0)
+                return dsc;
         }
-        return S;
+        return dsc;
     }
 }

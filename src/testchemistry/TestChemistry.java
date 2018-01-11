@@ -47,6 +47,6 @@ public class TestChemistry {
         /*hopchat hc = knowledge.knowledge.getCA("FeCl3");
         System.out.println(hc.getCation());       
         System.out.println(hc.getAnion()); */
-        timChat.Found();
+        System.out.println(timChat.Found());
     }     
 }

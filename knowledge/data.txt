@@ -197,7 +197,7 @@ dangphantu('I').
 khongtan('AgBr', 'cream').
 khongtan('AgCl', 'white').
 khongtan('AgI', 'yellow').
-khongtan('Ag3PO4', 'white').
+khongtan('Ag3PO4', 'yellow').
 khongtan('Ag2Cr2O7', 'orange').
 khongtan('Ag2S', 'black').
 khongtan('Ag2CO3', 'white').
@@ -268,3 +268,99 @@ khi('CO').
 khi('SO2').
 khi('SO3').
 khi('H2S').
+:-dynamic mau/2.
+mau('AgBr', 'cream').
+mau('AgCl', 'white').
+mau('AgI', 'yellow').
+mau('Ag3PO4', 'white').
+mau('Ag2Cr2O7', 'orange').
+mau('Ag2S', 'black').
+mau('Ag2CO3', 'white').
+mau('CaCO3', 'white').
+mau('Ca3(PO4)2', 'white').
+mau('CaSO4', 'white').
+mau('CaSO3', 'white').
+mau('CaSiO3', 'white').
+mau('Cu(OH)2', 'blue').
+mau('Cu3(PO4)2', 'blue').
+mau('CuCO3', 'green').
+mau('CuCr2O7', 'black').
+mau('CuS', 'black').
+mau('CdS', 'yellow').
+mau('ZnCO3', 'white').
+mau('Zn(OH)2', 'white').
+mau('Zn3(PO4)2', 'white').
+mau('ZnCr2O7', 'orange').
+mau('ZnS', 'white').
+mau('MgCO3', 'white').
+mau('Mg(OH)2', 'white').
+mau('Mg3(PO4)2', 'white').
+mau('Al(OH)3', 'white').
+mau('AlPO4', 'white').
+mau('Al2(SiO3)3', 'none').
+mau('Al2S3', 'yellow').
+mau('Fe(OH)2', 'cream').
+mau('FeCO3', 'gray').
+mau('FeS', 'black').
+mau('Fe3(PO4)2', 'none').
+mau('Fe(OH)3', 'rust_red').
+mau('Fe2S3', 'none').
+mau('Fe2(SiO3)3', 'none').
+mau('FePO4', 'white').
+mau('BaSO3', 'white').
+mau('BaSO4', 'white').
+mau('BaCO3', 'white').
+mau('BaSiO3', 'white').
+mau('Ba3(PO4)2', 'white').
+mau('BaCr2O7', 'orange').
+mau('Pb(OH)2', 'white').
+mau('PbS', 'black').
+mau('PbSO3', 'white').
+mau('PbSO4', 'white').
+mau('PbCO3', 'white').
+mau('PbCO3', 'white').
+mau('PbPO4', 'white').
+mau('Cr(OH)2', 'yellow').
+mau('Cr(OH)3', 'green').
+mau('HgS', 'black').
+mau('HgI2', 'yellow').
+mau('MnS', 'pink').
+mau('SnS', 'brown').
+mau('Sn(OH)2', 'white').
+mau('KMnO4', 'violet').
+mau('K2MnO4', 'luc tham').
+mau('NaCl', 'none').
+mau('Ca(OH)2', 'white').
+mau('Al2O3', 'white').
+mau('AlCl3', 'none').
+mau('Al2(SO4)3', 'white').
+mau('Fe', 'trang xam').
+mau('FeCl2', 'luc nhat').
+mau('FeCl3', 'vang nau').
+mau('FeO', 'den').
+mau('Fe2O3', 'do').
+mau('Cu', 'do').
+mau('Cu(NO3)2', 'xanh lam').
+mau('CuCl2', 'green').
+mau('CuSO4', 'xanh lam').
+mau('Cu2O', 'do gach').
+mau('CuO', 'den').
+mau('MnCl2', 'xanh luc').
+mau('MnO2', 'den').
+mau('Mn(OH)4', 'nau').
+mau('ZnCl2', 'white').
+mau('Zn3P2', 'nau xam').
+mau('ZnSO4', 'none').
+mau('Cr2O3', 'do tham').
+mau('CrCl2', 'luc sam').
+mau('K2Cr2O7', 'do da cam').
+mau('K2CrO4', 'vang cam').
+mau('Ag2CrO4', 'do gach').
+mau('As2S3', 'vang').
+mau('Mg(OH)2', 'white').
+mau('PbI2', 'vang tuoi').
+mau('Hg2I2', 'vang luc').
+mau('Hg2CrO4', 'do').
+mau('P2O5', 'white').
+mau('NO','nau').
+mau('FeSO4', 'bluegreen').
