@@ -19,11 +19,11 @@ public class timChat {
         List <String> dsc = new Vector<String>();
         System.out.print("Ban co quy tim khong \n 1:Yes 2:No ");
         Scanner x = new Scanner(System.in);
-        int k = x.nextInt();
+        String k = x.nextLine();
         List <String> temp = new Vector<String>();
         /// nếu có quì tím nhận dạng được axit, bazo, muối
-        if(k == 1){
-            System.out.println("Ban thay quy tim mau gi ? \n 1:Mau do 2:Mau xanh 3: Khong mau");
+        if(k.equals("yes")){
+            System.out.println("Ban thay quy tim mau gi ? \n 1: Mau do \n 2: Mau xanh \n 3: Khong mau");
             int a = x.nextInt();
             if(a== 1) temp = knowledge.getAllAxit(); 
             else if (a ==2) temp = knowledge.getAllBazo();
@@ -41,7 +41,7 @@ public class timChat {
        // dsc = temp;
         for(int i = 0; i < temp.size(); i++)
             dsc.add(temp.get(i));
-        System.out.println(dsc);
+        //System.out.println(dsc);
         temp.clear();
         
         
@@ -51,23 +51,26 @@ public class timChat {
         for(String i : a){
             u.add(i);
         }
-        
         ///Nhận dạng bằng cách chạy qua các chất trên
         for(int i =0; i< u.size(); i++){
-            System.out.println("Ban co: "+ u.get(i) + "khong?");
-            k = x.nextInt();
-            if (k == 1){
+            if(dsc.size() == 1 || dsc.size() == 0)
+                return dsc;
+            System.out.println("Ban co "+ u.get(i) + "  khong?");
+            x.nextLine();
+            k = x.nextLine();
+            if (k.equals("yes")){
                 System.out.println("Ban co the cho biet no co hien tuong gi khong? \n 1: kết tủa đồng thời có khí \n 2: khí \n 3: kết tủa \n 4: không có hiện tượng");
                 int t = x.nextInt();
                 if( t == 1){
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
-                    System.out.println("Ban cho toi biet ket tua mau gi");
+                    System.out.println("Ban cho toi biet ket tua mau gi?");
+                    x.nextLine();
                     String in = x.nextLine();
                     for(int j = 0; j < dsc.size(); j++){
                         String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
                         String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b != null && c != null) // có kết tủa và có khí
-                            if(b == in) // màu giống màu kết tủa
+                            if(knowledge.color(b).equals(in)) // màu giống màu kết tủa
                                 temp.add(dsc.get(j));
                     }
                 }
@@ -82,17 +85,20 @@ public class timChat {
                 }
                 if(t == 3){
                     /*Lấy các chất có kết tủa*/
-                    System.out.println("Ban cho toi biet ket tua mau gi");
+                    System.out.println("Ban cho toi biet ket tua mau gi?");
+                    x.nextLine();
                     String in = x.nextLine();
                     for(int j = 0; j < dsc.size(); j++){
                         String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
                         String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
                         if(b != null && c == null) // có kết tủa
-                            System.out.println("a");
-                            if(b == in) // màu giống màu kết tủa
+                           // System.out.println(knowledge.color(b) + " " + in);
+                            if(knowledge.color(b).equals(in)){ // màu giống màu kết tủa
                                 temp.add(dsc.get(j));
+                              //  System.out.println("a");
+                            }
                     }
-                    System.out.println(temp);
+                   // System.out.println(temp);
                 }
                 if(t == 4){
                     /*Lấy các chất không có hiện tượng*/
@@ -103,14 +109,11 @@ public class timChat {
                             temp.add(dsc.get(j));
                     }
                 }
-                
+                dsc.clear();
                 for(int g = 0; g < temp.size(); g++)
                     dsc.add(temp.get(g));
                 temp.clear();
-               // System.out.println(dsc);
             }
-            if(dsc.size() == 1 || dsc.size() == 0)
-                return dsc;
         }
         return dsc;
     }
