@@ -1,5 +1,5 @@
 readKnowledge:-
-    open('D:/Java/Projects/testChemistry/knowledge/data.txt', read, Str),
+    open('/home/hanh/Desktop/ChemistryApp/knowledge/data.txt', read, Str),
     read_data(Str, TL),
     write(TL),
     close(Str).
@@ -80,7 +80,11 @@ donchat(X):-
     name(X, _, Z),
     isnumber(Z), Z > 1, !.
 hopchat(X):-
-    \+ donchat(X).
+    axit(X), !.
+hopchat(X):-
+    bazo(X), !.
+hopchat(X):-
+    muoi(X).
 getM(X, M):-
     donchat(X),
     name(X, NT, N),
@@ -110,11 +114,18 @@ axit(Name):-
     \+ isnumber(X).
 bazo(Name):-
     dif(Name, 'HOH'),
-    name(Name, _, 'OH').
+    name(Name, C, 'OH'),
+    cation(C, C1, _, _),
+    kl(C1), !.
+bazo(Name):-
+    dif(Name, 'HOH'),
+    name(Name, C, 'OH'),
+    \+ dif(C, 'NH4').
 muoi(Name):-
     name(Name, C, A),
     \+ isnumber(A),
-    dif(C, 'H'),
+    cation(C, C1, _, _),
+    kl(C1),
     dif(A, 'OH'),
     dif(A, 'O').
 muoiAxit(Name):-
@@ -219,6 +230,7 @@ pu(X, Y, L):-
     name(Y, C, A2),
     name(Z, C, A1),
     name(T, 'H', A2),
+    dif(A1, A2),
     dkpu(Z, T, L), !.
 %////////////////////////////////////
 %bazo + muoi = muoi moi + bazo moi
@@ -235,6 +247,8 @@ pu(X, Y, L):-
 pu(X, Y, L):-
     muoi(X),
     muoi(Y),
+    \+ khongtan(X, _),
+    \+ khongtan(Y, _),
     name(X, C1, A1),
     name(Y, C2, A2),
     name(Z, C1, A2),
@@ -548,16 +562,25 @@ dieuche([_], []).
 dieuche([H1, H2 | T1], [H | T]):-
     chuoi(H1, H2, H), dieuche([H2 | T1], T), !.
 
-getAxit(X, Y):-
+getAxit(X):-
+    anion(Y, _, _, _),
+    name(X, 'H', Y),
+    axit(X).
+getBazo(X):-
+    cation(Y, _, _, _),
+    name(X, Y, 'OH'),
+    bazo(X).
+getMuoi(X):-
+    cation(C, _, _, _),
+    anion(A, _, _, _),
+    name(X, C, A),
+    muoi(X).
+getHC(Z):-
     anion(X, _, _, _),
-    name(Y, 'H', X),
-    axit(Y).
-
-
-
-
-
-
-
-
-
+    cation(Y, _, _, _),
+    name(Z, Y, X),
+    hopchat(Z).
+getCA(X, CA, AN):-
+	name(X, C, A),
+	cation(C, CA, _, _),
+	anion(A, AN, _, _).

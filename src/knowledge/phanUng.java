@@ -32,13 +32,13 @@ public class phanUng {
         String []inp = v.split("\\s");        
         List <String> input = convertArr(inp);
         
-        Query q = new Query("pu(" + in + " X)");                
+        Query q = new Query("pu(" + in + " X)");          
         if (!q.hasSolution()){
-            int n = input.size();
+        /*    int n = input.size();
             String X = "";
             for (int i=n - 1; i>=0; i--) X += inp[i] + " ";            
             in = makeQuery(X); 
-            q = new Query("pu(" + in + " X)");    
+            q = new Query("pu(" + in + " X)");    */
         }
         
         if (!q.hasSolution()) return null;
@@ -49,7 +49,7 @@ public class phanUng {
         for (int i=0; i<arr.length; i++){
             String X = arr[i].toString();
             res.add(clean(X));
-        }            
+        }        
         return res;
     }       
     
