@@ -7,9 +7,11 @@ import java.util.Vector;
 import static knowledge.phanUng.phanUng;
 import math.*;
 import org.jpl7.*;
+import java.lang.Integer;
 
 
 public class knowledge {
+    
 
     public static void prepare(){
         Query q1 = new Query("consult('knowledge/app.pl')");        
@@ -24,6 +26,15 @@ public class knowledge {
         Term a = q.oneSolution().get("X");
         return a.floatValue();
     }
+    
+    public static int getOxh(String T){        
+        Query qr = new Query("name('" + T + "', X, Y)");
+        String X = qr.oneSolution().get("X").toString();
+        qr = new Query("cation(" + X + ", _ , X, Y)");
+        X = qr.oneSolution().get("X").toString();
+        int result = Integer.parseInt(X);
+        return result;
+    }    
     
     public static boolean axit(String X){
         Query qr = new Query("axit(" + X + ")");

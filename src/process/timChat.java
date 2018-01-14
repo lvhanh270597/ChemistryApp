@@ -15,15 +15,18 @@ import knowledge.*;
  * @author OS
  */
 public class timChat {
+    public static List<String> talk = new Vector<String>();
     public static List <String> Found(){
         List <String> dsc = new Vector<String>();
-        System.out.print("Ban co quy tim khong \n 1:Yes 2:No ");
+        talk.add("");
         Scanner x = new Scanner(System.in);
         String k = x.nextLine();
+        
+       
         List <String> temp = new Vector<String>();
         /// nếu có quì tím nhận dạng được axit, bazo, muối
         if(k.equals("yes")){
-            System.out.println("Ban thay quy tim mau gi ? \n 1: Mau do \n 2: Mau xanh \n 3: Khong mau");
+            talk.add("Ban thay quy tim mau gi ? \n 1: Mau do \n 2: Mau xanh \n 3: Khong mau");
             int a = x.nextInt();
             if(a== 1) temp = knowledge.getAllAxit(); 
             else if (a ==2) temp = knowledge.getAllBazo();
@@ -55,15 +58,15 @@ public class timChat {
         for(int i =0; i< u.size(); i++){
             if(dsc.size() == 1 || dsc.size() == 0)
                 return dsc;
-            System.out.println("Ban co "+ u.get(i) + "  khong?");
+            talk.add("Ban co "+ u.get(i) + "  khong?");
             x.nextLine();
             k = x.nextLine();
             if (k.equals("yes")){
-                System.out.println("Ban co the cho biet no co hien tuong gi khong? \n 1: kết tủa đồng thời có khí \n 2: khí \n 3: kết tủa \n 4: không có hiện tượng");
+                talk.add("Ban co the cho biet no co hien tuong gi khong? \n 1: kết tủa đồng thời có khí \n 2: khí \n 3: kết tủa \n 4: không có hiện tượng");
                 int t = x.nextInt();
                 if( t == 1){
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
-                    System.out.println("Ban cho toi biet ket tua mau gi?");
+                    talk.add("Ban cho toi biet ket tua mau gi?");
                     x.nextLine();
                     String in = x.nextLine();
                     for(int j = 0; j < dsc.size(); j++){
@@ -85,7 +88,7 @@ public class timChat {
                 }
                 if(t == 3){
                     /*Lấy các chất có kết tủa*/
-                    System.out.println("Ban cho toi biet ket tua mau gi?");
+                    talk.add("Ban cho toi biet ket tua mau gi?");
                     x.nextLine();
                     String in = x.nextLine();
                     for(int j = 0; j < dsc.size(); j++){
