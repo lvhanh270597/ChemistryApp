@@ -10,13 +10,19 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import knowledge.knowledge;
+<<<<<<< HEAD
 import math.PwL;
 import math.sh;
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 import process.*;
 import static process.timChat.talk;
 
@@ -33,7 +39,11 @@ public class chatBotInterface extends javax.swing.JFrame {
    
   //  private String getText;
    // private boolean initGame;
+<<<<<<< HEAD
     private int xScroll = 5000;
+=======
+    private int xScroll = 1000;
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
     /**
      * Creates new form chatBotInterface
      */
@@ -43,12 +53,18 @@ public class chatBotInterface extends javax.swing.JFrame {
     }
     public void initText(String s, int x, int y){
         
+<<<<<<< HEAD
         x = sh.max(100, s.length() * 7);
         
         javax.swing.JLabel area = new JLabel();
         area.setOpaque(true);
         area.setText(s);
         area.setFont(new Font("Helvetica", Font.PLAIN, 12));
+=======
+        javax.swing.JLabel area = new JLabel();
+        area.setOpaque(true);
+        area.setText(s);
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         area.setLocation(weight_, height_);
         area.setSize(x,y);
         area.setVisible(true);
@@ -63,7 +79,11 @@ public class chatBotInterface extends javax.swing.JFrame {
     public void initAva(int x){
         javax.swing.JLabel ava = new JLabel();
         ava.setOpaque(true);
+<<<<<<< HEAD
         ava.setIcon(new javax.swing.ImageIcon("hoahoc/Bot.png"));
+=======
+        ava.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\Bot.png"));
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         ava.setLocation(5, x);
         ava.setSize(35,35);
         ava.setBackground(Color.white);
@@ -73,12 +93,21 @@ public class chatBotInterface extends javax.swing.JFrame {
     }
     public void initScroll(){
         jScrollPane1 =  new JScrollPane(jPanel3);
+<<<<<<< HEAD
           //jScrollPane2 = new JScrollPane(jPanel3);         
+=======
+          //jScrollPane2 = new JScrollPane(jPanel3);
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
           getContentPane().setLayout(null);
         //jScrollPane1.setViewportView(jPanel3);
 
        getContentPane().add(jScrollPane1);
+<<<<<<< HEAD
         jScrollPane1.setBounds(0, 50, 530, 503);
+=======
+        jScrollPane1.setBounds(0, 50, 530,505);
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         jPanel3.setPreferredSize(new Dimension(100,jPanel3.getHeight()+ xScroll));
        // final JScrollPane jScrollPane1 = new JScrollPane(this.jPanel3, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //jPanel3.setLayout();
@@ -112,6 +141,7 @@ public class chatBotInterface extends javax.swing.JFrame {
             initText("1: Màu đỏ 2: Màu xanh 3: Không màu",220,35);
             initText("Bây giờ bạn hãy chọn một số.....",200,35);
             waitBot();
+<<<<<<< HEAD
                         
         //--hanh
             
@@ -135,11 +165,28 @@ public class chatBotInterface extends javax.swing.JFrame {
             else if (a ==2) temp = knowledge.getAllBazo();
             else if (a==3){                
                 temp = knowledge.getAllMuoi();
+=======
+            Integer a = Integer.parseInt(text.getText());
+            while(a != 1 && a!=2 && a!= 3){
+                initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                waitBot();
+                a = Integer.parseInt(text.getText());
+            }
+            if(a== 1) temp = knowledge.getAllAxit(); 
+            else if (a ==2) temp = knowledge.getAllBazo();
+            else if (a==3){
+                java.util.List<String> temp1 = knowledge.getAllHC();
+                for(int i =0 ;i<temp1.size();i++){
+                    if(knowledge.getCA(temp1.get(i)).getCation() != "H" && knowledge.getCA(temp1.get(i)).getCation() != "OH")
+                        temp.add(temp1.get(i));
+                }
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
             }
         }
         else {
             temp = knowledge.getAllHC();
         }
+<<<<<<< HEAD
         
         
         dsc = PwL.copy(temp);                
@@ -154,20 +201,40 @@ public class chatBotInterface extends javax.swing.JFrame {
             initText("Các chất điển hình là: ", 200, 35);
             for (int k=0; k<sh.min(3, dsc.size()); k++) initText(dsc.get(k), 200, 35);
             if(dsc.size() == 1){
+=======
+        for(int i = 0; i < temp.size(); i++)
+            dsc.add(temp.get(i));
+        temp.clear();
+        String []a = {"AgNO3","BaCl2","Ba(OH)2","HCl","H2SO4","Pb(NO3)2","CaCl2","Ca(OH)2"};
+        java.util.List<String> u = new Vector<String>();
+        for(String i : a){
+            u.add(i);
+        }
+        ///Nhận dạng bằng cách chạy qua các chất trên
+        for(int i =0; i< u.size(); i++){
+            if(dsc.size() == 1 || dsc.size() == 0){
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
                 initText("Tôi nghĩ chất đó có thể là:.........",200,35);
                 initText(dsc.get(0),200,35);
                 return;
             }
+<<<<<<< HEAD
             if ( dsc.size() == 0){
                 initText("Bạn đùa tôi rồi. Chẳng có chất nào như vậy cả.", 100, 35);                
                 return;
             }
             
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
             initText("Bạn có "+ u.get(i) + " không? Có hay không?",200,35);
             initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
             waitBot();
             ans = text.getText();
+<<<<<<< HEAD
             if(!ans.equals("co") && !ans.equals("khong")){
+=======
+            if(!ans.equals("co") && !ans.equals("không")){
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
                 initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
                 waitBot();
                 ans = text.getText();
@@ -178,6 +245,7 @@ public class chatBotInterface extends javax.swing.JFrame {
                 initText("3: kết tủa    4: không có hiện tượng",200,35);
                 initText("Bây giờ bạn hãy chọn một số.....",200,35);
                 waitBot();
+<<<<<<< HEAD
                 
                 // hanh
                 boolean ok = knowledge.isNumeric(text.getText());
@@ -196,6 +264,14 @@ public class chatBotInterface extends javax.swing.JFrame {
                     }
                 }   
                 
+=======
+                Integer t = Integer.parseInt(text.getText());
+                while(t != 1 && t!=2 && t!= 3 && t!=4){
+                    initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                    waitBot();
+                    t = Integer.parseInt(text.getText());
+                }
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
                 if( t == 1){
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
                     initText("Bạn cho tôi biết kết tủa màu gì?",200,35);
@@ -273,7 +349,11 @@ public class chatBotInterface extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
+<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+=======
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setForeground(new java.awt.Color(204, 255, 255));
@@ -331,7 +411,11 @@ public class chatBotInterface extends javax.swing.JFrame {
                 .addComponent(text, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
+<<<<<<< HEAD
                 .addContainerGap(88, Short.MAX_VALUE))
+=======
+                .addContainerGap(76, Short.MAX_VALUE))
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +473,10 @@ public class chatBotInterface extends javax.swing.JFrame {
         height_ += 30;
         jPanel3.add(area);
         functions.buttonClicked = true;
+<<<<<<< HEAD
         
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -444,7 +531,10 @@ public class chatBotInterface extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(chatBotInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+<<<<<<< HEAD
         //</editor-fold>
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -49,10 +49,19 @@ public class canBangF extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
+<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
+=======
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\giphy.gif")); // NOI18N
+
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         jLabel6.setText("Cân bằng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -255,7 +264,10 @@ public class canBangF extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(canBangF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+<<<<<<< HEAD
         //</editor-fold>
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
