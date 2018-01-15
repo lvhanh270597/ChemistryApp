@@ -7,15 +7,23 @@ package ChemistryApp;
 
 import knowledge.phanUng;
 import Interface.*;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import math.LCS;
+import process.phanBiet;
 /**
  *
  * @author hanh
  */
 public class main {
-    public static void main(String[] args){
-        //knowledge.knowledge.prepare();        
-        //System.out.println(); 
+    public static void main(String[] args) throws IOException{
+        knowledge.knowledge.prepare();        
+        System.out.println(); 
         //System.out.println(phanUng.phanUng("Na2SO4 BaCl2"));
-        new mainInterface();
+        mainInterface a = new mainInterface();
+        a.show();    
+                
+/*        */
     }
 }

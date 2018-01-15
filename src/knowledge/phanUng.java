@@ -7,6 +7,8 @@ package knowledge;
 
 import java.util.List;
 import java.util.Vector;
+import static knowledge.knowledge.prepare;
+
 import org.jpl7.Query;
 import org.jpl7.Term;
 import math.*;
@@ -27,18 +29,18 @@ public class phanUng {
     public static String clean(String X){
         return X.substring(1, X.length() - 1);
     }
-    public static List <String> phanUng(String v){        
+    public static List <String> phanUng(String v){            
         String in = makeQuery(v);
         String []inp = v.split("\\s");        
         List <String> input = convertArr(inp);
         
         Query q = new Query("pu(" + in + " X)");          
         if (!q.hasSolution()){
-        /*    int n = input.size();
+            int n = input.size();
             String X = "";
             for (int i=n - 1; i>=0; i--) X += inp[i] + " ";            
             in = makeQuery(X); 
-            q = new Query("pu(" + in + " X)");    */
+            q = new Query("pu(" + in + " X)");    
         }
         
         if (!q.hasSolution()) return null;

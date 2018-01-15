@@ -5,6 +5,7 @@
  */
 package process;
 
+import java.awt.Color;
 import knowledge.phanUng;
 import java.util.*;
 
@@ -117,6 +118,15 @@ public class hienTuong {
     public List <String> get(){
         return this.ds;
     }
+    public List <Color> getColor(){
+        List <Color> result = new Vector<Color>();
+        List <String> tmp = knowledge.knowledge.getColor(get_cl());
+        for (String st : tmp){
+            Color c = knowledge.knowledge.colors.get(st);
+            if (c != null) result.add(c);
+        }
+        return result;
+    }
     public List <String> get_khi(){
         List <String> res = new Vector<String>();
         for (String st : this.ds){
@@ -125,11 +135,24 @@ public class hienTuong {
         }
         return res;
     }
+    public List <String> get_cl(){
+        List <String> res = new Vector<String>();
+        for (String st : this.ds)
+            if (!knowledge.knowledge.kettua(st) && 
+                !knowledge.knowledge.isKhi(st)) res.add(st);
+        return res;
+    }
     public List <String> get_kettua(){
         List <String> res = new Vector<String>();
         for (String st : this.ds)
             if (knowledge.knowledge.kettua(st)) res.add(st);
         return res;
+    }
+    public void del_khi(){
+        List <String> res = new Vector<String>();
+        for (String st : this.ds)
+            if (!knowledge.knowledge.isKhi(st)) res.add(st);
+        this.ds = res;
     }
     public void del_kettua(){
         List <String> res = new Vector<String>();

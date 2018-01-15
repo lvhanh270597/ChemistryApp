@@ -92,9 +92,19 @@ public class ptk {
             else{
                 
                 float m = knowledge.nguyenTo(nt);
-                String T = Float.toString(m);
+                String T;
+                int m1 = (int)m;
+                if (m - m1 < 0.01){
+                    T = Integer.toString(m1);
+                }
+                else{
+                    T = Float.toString(m);
+                }
                 //--------------------                
                 if (nt.equals("(") || nt.equals(")")){                                    
+                    if (replace.length() > 0){
+                        if (nt.equals("(")) replace += " + ";
+                    }
                     replace += nt;
                 }
                 else{
@@ -137,7 +147,7 @@ public class ptk {
         Map <String, Integer> M = split(X);
         float res = 0;
         for (String st : M.keySet()){            
-            float m = knowledge.nguyenTo(st);
+            float m = knowledge.nguyenTo(st);            
             res += m * M.get(st);
         }
         return replace + " = " + res;

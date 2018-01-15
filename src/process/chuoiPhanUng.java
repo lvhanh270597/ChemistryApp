@@ -8,6 +8,7 @@ package process;
 import knowledge.phanUng;
 import java.util.List;
 import java.util.Vector;
+import static knowledge.knowledge.prepare;
 import org.jpl7.Query;
 import org.jpl7.Term;
 import static knowledge.phanUng.makeQuery;
@@ -27,7 +28,8 @@ public class chuoiPhanUng {
         res += "\'" + v[n - 1] + "\'";
         return res;
     }    
-    public static List<String> find(String X){
+    public static List<String> find(String X){               
+        
         List <String> res = new Vector<String>();
               
         String chuoi = makeQuery(X);
@@ -55,14 +57,17 @@ public class chuoiPhanUng {
         
         String []v = X.split("\\s");
         
+        canBang cb = new canBang();
+        
         for (int i=0; i<result.size(); i++){         
             
             String resi = result.get(i);
             if (resi.equals("on")){                
                 resi = "";
             }
-            res.add(phanUng.showReaction(v[i] + " " + resi));
+            res.add(cb.canbang(phanUng.showReaction(v[i] + " " + resi)));
         }
+        
         return res;
     }
 }
