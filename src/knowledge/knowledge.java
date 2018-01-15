@@ -44,6 +44,10 @@ public class knowledge {
         Query qr = new Query("bazo(" + X + ")");
         return qr.hasSolution();
     }
+    public static boolean oxit(String X){
+        Query qr = new Query("oxit('" + X + "')");
+        return qr.hasSolution();
+    }
     public static boolean muoi(String X){
         Query qr = new Query("muoi(" + X + ")");
         return qr.hasSolution();

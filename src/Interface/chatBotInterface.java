@@ -6,8 +6,12 @@
 package Interface;
 
 import ChemistryApp.functions;
+import com.sun.glass.events.KeyEvent;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import knowledge.knowledge;
 import process.*;
@@ -18,53 +22,97 @@ import static process.timChat.talk;
  * @author Thien Trang
  */
 public class chatBotInterface extends javax.swing.JFrame {
-    private int weight_ = 15;
+    private int weight_ = 50;
     private int height_ = 10;
     private int x_size = 200;
     private int y_size = 50;
     
    
-    private String getText;
-    private boolean initGame;
+  //  private String getText;
+   // private boolean initGame;
+    private int xScroll = 1000;
     /**
      * Creates new form chatBotInterface
      */
     public chatBotInterface() {
-        initComponents();        
+        initComponents();
+       
     }
     public void initText(String s, int x, int y){
-        javax.swing.JTextArea area = new JTextArea();
+        
+        javax.swing.JLabel area = new JLabel();
         area.setOpaque(true);
         area.setText(s);
         area.setLocation(weight_, height_);
         area.setSize(x,y);
         area.setVisible(true);
+        initAva(height_);
+       // area.setSelectionColor(Color.yellow);
         height_ += y + 10;
         jPanel3.add(area);
-        area.disable();
+        
+      //  area.disable();
         repaint();
     }
-    public void Bot(){
-        java.util.List <String> dsc = new Vector<String>();
-        java.util.List <String> temp = new Vector<String>();
-        
+    public void initAva(int x){
+        javax.swing.JLabel ava = new JLabel();
+        ava.setOpaque(true);
+        ava.setIcon(new javax.swing.ImageIcon("D:\\Learn\\PT&TKTT\\DoAn\\ChemistryApp\\ChemistryApp\\hoahoc\\Bot.png"));
+        ava.setLocation(5, x);
+        ava.setSize(35,35);
+        ava.setBackground(Color.white);
+        ava.setVisible(true);
+        jPanel3.add(ava);
+        repaint();
+    }
+    public void initScroll(){
+        jScrollPane1 =  new JScrollPane(jPanel3);
+          //jScrollPane2 = new JScrollPane(jPanel3);
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+          getContentPane().setLayout(null);
+        //jScrollPane1.setViewportView(jPanel3);
+
+       getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 50, 530,505);
+        jPanel3.setPreferredSize(new Dimension(100,jPanel3.getHeight()+ xScroll));
+       // final JScrollPane jScrollPane1 = new JScrollPane(this.jPanel3, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //jPanel3.setLayout();
+        //add(jScrollPane1);
+        //jPanel3.autocroll(true);
+       // pack();
+    }
+    
+    public void waitBot(){
         functions.buttonClicked = false;
         while (functions.buttonClicked == false){
             System.out.print("");
         }                
         repaint();
+    }
+    public void Bot(){
+        java.util.List <String> dsc = new Vector<String>();
+        java.util.List <String> temp = new Vector<String>();
+        initScroll();
+        waitBot();
         String ans;
         ans = text.getText();
-        if(ans.equals("yes")){
-            initText("Ban thay quy tim mau gi ? \n 1: Mau do \n 2: Mau xanh \n 3: Khong mau\nHãy chọn một số.....",200,85);
-            
-            functions.buttonClicked = false;
-            while (functions.buttonClicked == false){
-                System.out.print("");
-            }                
-            repaint();
-            
+        while(!ans.equals("co") && !ans.equals("khong")){
+           initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+           waitBot();
+           ans = text.getText();
+        }
+        
+        if(ans.equals("co")){
+            initText("Bạn thấy quỳ tím màu gì?",160,35);
+            initText("1: Màu đỏ 2: Màu xanh 3: Không màu",220,35);
+            initText("Bây giờ bạn hãy chọn một số.....",200,35);
+            waitBot();
             Integer a = Integer.parseInt(text.getText());
+            while(a != 1 && a!=2 && a!= 3){
+                initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                waitBot();
+                a = Integer.parseInt(text.getText());
+            }
             if(a== 1) temp = knowledge.getAllAxit(); 
             else if (a ==2) temp = knowledge.getAllBazo();
             else if (a==3){
@@ -88,33 +136,37 @@ public class chatBotInterface extends javax.swing.JFrame {
         }
         ///Nhận dạng bằng cách chạy qua các chất trên
         for(int i =0; i< u.size(); i++){
-            if(dsc.size() == 1 || dsc.size() == 0)
-                initText(dsc.get(0),200,100);
-            initText("Ban co "+ u.get(i) + " khong?\nYes or No?",200,35);
-            
-            functions.buttonClicked = false;
-            while (functions.buttonClicked == false){
-                System.out.print("");
-            }                
-            repaint();
+            if(dsc.size() == 1 || dsc.size() == 0){
+                initText("Tôi nghĩ chất đó có thể là:.........",200,35);
+                initText(dsc.get(0),200,35);
+                return;
+            }
+            initText("Bạn có "+ u.get(i) + " không? Có hay không?",200,35);
+            initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
+            waitBot();
             ans = text.getText();
-            
-            if (ans.equals("yes")){
-                initText("Ban co the cho biet no co hien tuong gi khong? \n 1: kết tủa đồng thời có khí \n 2: khí \n 3: kết tủa \n 4: không có hiện tượng\nHãy chọn một số.....",200,100);
-                functions.buttonClicked = false;
-                while (functions.buttonClicked == false){
-                    System.out.print("");
-                }                
-                repaint();
+            if(!ans.equals("co") && !ans.equals("không")){
+                initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                waitBot();
+                ans = text.getText();
+            } 
+            if (ans.equals("co")){
+                initText("Bạn có thể cho biết nó có hiện tượnng gì không?",280,35);
+                initText("1: kết tủa đồng thời có khí   2: khí",200,35);
+                initText("3: kết tủa    4: không có hiện tượng",200,35);
+                initText("Bây giờ bạn hãy chọn một số.....",200,35);
+                waitBot();
                 Integer t = Integer.parseInt(text.getText());
+                while(t != 1 && t!=2 && t!= 3 && t!=4){
+                    initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                    waitBot();
+                    t = Integer.parseInt(text.getText());
+                }
                 if( t == 1){
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
-                    initText("Ban cho toi biet ket tua mau gi?\nHãy nhập tên màu.....",200,35);
-                    functions.buttonClicked = false;
-                    while (functions.buttonClicked == false){
-                        System.out.print("");
-                    }                
-                    repaint();
+                    initText("Bạn cho tôi biết kết tủa màu gì?",200,35);
+                    initText("Hãy nhập tên màu.....",150,35);
+                    waitBot();
                     ans = text.getText();
                     
                     for(int j = 0; j < dsc.size(); j++){
@@ -136,12 +188,9 @@ public class chatBotInterface extends javax.swing.JFrame {
                 }
                 if(t == 3){
                     /*Lấy các chất có kết tủa*/
-                    initText("Ban cho toi biet ket tua mau gi?\nHãy nhập tên màu.....",200,35);
-                    functions.buttonClicked = false;
-                    while (functions.buttonClicked == false){
-                        System.out.print("");
-                    }                
-                    repaint();
+                    initText("Bạn cho tôi biết kết tủa màu gì?",200,35);
+                    initText("Hãy nhập tên màu.....",150,35);
+                    waitBot();
                     ans = text.getText();
                     
                     for(int j = 0; j < dsc.size(); j++){
@@ -171,6 +220,7 @@ public class chatBotInterface extends javax.swing.JFrame {
                 temp.clear();
             }
         }
+        initText("Tôi nghĩ chất đó có thể là:.........",200,20);
         initText(dsc.get(0),200,100);
     }
     /**
@@ -183,26 +233,34 @@ public class chatBotInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         text = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setForeground(new java.awt.Color(204, 255, 255));
 
+        jLabel1.setText("ChatBot");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 53, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -212,8 +270,13 @@ public class chatBotInterface extends javax.swing.JFrame {
                 textMouseClicked(evt);
             }
         });
+        text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textKeyPressed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Send");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -234,7 +297,7 @@ public class chatBotInterface extends javax.swing.JFrame {
                 .addComponent(text, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,30 +309,17 @@ public class chatBotInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
-        );
-
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 490, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,22 +328,15 @@ public class chatBotInterface extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -302,16 +345,15 @@ public class chatBotInterface extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        javax.swing.JTextArea area = new JTextArea();
+        javax.swing.JLabel area = new JLabel();
         area.setOpaque(true);
         area.setText(text.getText());
-        area.setLocation(weight_, height_);
-        area.setSize(20, 20);
+        area.setLocation(450, height_);
+        area.setSize(30, 20);
         area.setVisible(true);
-        area.disable();
+        //area.disable();
         height_ += 30;
-        jPanel4.add(area);               
-                
+        jPanel3.add(area);
         functions.buttonClicked = true;
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -323,6 +365,23 @@ public class chatBotInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
         text.setText("");
     }//GEN-LAST:event_textMouseClicked
+
+    private void textKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            javax.swing.JLabel area = new JLabel();
+        area.setOpaque(true);
+        area.setText(text.getText());
+        area.setLocation(450, height_);
+        area.setSize(30, 20);
+        area.setVisible(true);
+       // text.setText("");
+        //area.disable();
+        height_ += 30;
+        jPanel3.add(area);
+        functions.buttonClicked = true;
+        }
+    }//GEN-LAST:event_textKeyPressed
 
     /**
      * @param args the command line arguments
@@ -358,13 +417,13 @@ public class chatBotInterface extends javax.swing.JFrame {
             }
         });
     }
-
+    private javax.swing.JScrollPane jScrollPane1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField text;
     // End of variables declaration//GEN-END:variables
 }

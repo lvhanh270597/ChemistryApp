@@ -268,6 +268,10 @@ khi('CO').
 khi('SO2').
 khi('SO3').
 khi('H2S').
+khi('NO2').
+khi('N2').
+khi('NO').
+khi('N2O').
 :-dynamic mau/2.
 mau('AgBr', 'cream').
 mau('AgCl', 'white').

@@ -28,7 +28,7 @@ public class imagePanel extends JComponent implements ActionListener{
         initImage(path);            
         initTimer(delay);
     }
-    private void initImage(String[] path){
+    public void initImage(String[] path){
         
         next = 0;
         
