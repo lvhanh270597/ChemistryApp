@@ -50,6 +50,8 @@ public class hienTuongForm extends javax.swing.JFrame implements KeyListener {
         initVars();
         
         initEvent();        
+
+        setTitle("Hiện tượng");
     }
 
     private void initEvent(){

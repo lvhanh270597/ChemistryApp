@@ -118,10 +118,8 @@ bazo(Name):-
     name(Name, C, 'OH'),
     cation(C, C1, _, _),
     kl(C1), !.
-bazo(Name):-
-    dif(Name, 'HOH'),
-    name(Name, C, 'OH'),
-    \+ dif(C, 'NH4').
+bazo('NH4OH').
+ 
 muoi(Name):-
     name(Name, C, A),
     \+ isnumber(A),
@@ -222,7 +220,6 @@ pu(X, Y, [Z, 'H2O']):-
 pu(X, Y, [Z, 'H2O']):-
     axit(X),
     bazo(Y),
-%    \+ khongtontai(X, _),
     name(X, _, A),
     name(Y, C, _),
     name(Z, C, A), !.
@@ -561,7 +558,15 @@ chuoi(X, Y, R):-
     \+ khongtan(R, _),
     pu(X, R, L),
     member(Y, L), !.
+chuoi(X, Y, R):-
+    muoi(X),
+    muoi(Y),
+    name(Y, _, A),
+    name(R, 'H', A),
+    pu(R, X, L),
+    member(Y, L), !.
 
+chuoi('FeCl3', 'FeCl2', 'Fe').
 dieuche([_], []).
 dieuche([H1, H2 | T1], [H | T]):-
     chuoi(H1, H2, H), dieuche([H2 | T1], T), !.

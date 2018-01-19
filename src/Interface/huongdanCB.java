@@ -16,6 +16,7 @@ public class huongdanCB extends javax.swing.JFrame {
      */
     public huongdanCB() {
         initComponents();
+        setTitle("Hướng dẫn");
         initText();
     }
 

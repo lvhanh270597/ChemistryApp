@@ -6,6 +6,7 @@
 package Interface;
 
 import ChemistryApp.functions;
+import static ChemistryApp.functions.a;
 import com.sun.glass.events.KeyEvent;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -39,7 +40,13 @@ public class chatBotInterface extends javax.swing.JFrame {
      */
     public chatBotInterface() {
         initComponents();
-       
+        setTitle("Chat bot");
+        initText("Xin chào!!!",70,35);
+        initText("Để nhận biết một chất chưa rõ ",180,35);
+        initText("Bạn hãy trả lời những câu hỏi của tôi",220,35);
+        initText("Bạn có quỳ tím không? Có hay không?",200,35);
+        initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
+        initScroll();
     }
     public void initText(String s, int x, int y){
         

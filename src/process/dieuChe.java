@@ -8,6 +8,7 @@ package process;
 import knowledge.phanUng;
 import math.edge;
 import java.util.*;
+import math.PwL;
 import org.jpl7.Query;
 import org.jpl7.Term;
 /**
@@ -17,26 +18,16 @@ import org.jpl7.Term;
 public class dieuChe {
     private List <String> chats;
     private edge[] trace;
-    public dieuChe(String X){
+    public dieuChe(List<String> X){
         trace = new edge[1000];
-        this.chats = new Vector<String>();
-        String []v = X.split("\\s");
-        for (String st : v){            
-            this.chats.add(st);
-        }
+        this.chats = PwL.copy(X);
     }
     
     private boolean checkIn(List <String> v, String X){
         for (String st : v) 
             if (st.equals(X)) return true;
         return false;
-    }
-    
-    private List<String> getCopyOf(List <String> v){
-        List <String> res = new Vector<String>();
-        for (String st : v) res.add(st);
-        return res;
-    }
+    }        
     
     private String make(List <String> L1, List <String> L2){
         String res = "";
@@ -47,12 +38,14 @@ public class dieuChe {
         return res;
     }
     
+    
+    // trả về id rồi lấy id đó bỏ vào show path
     public int find(String X){
-        List <String> s = new Vector<String>();
-        for (String st : this.chats) s.add(st);
+        List <String> s = PwL.copy(chats);
+        
         List < List <String> > queue = new Vector<List<String>>();        
         queue.add(s);
-        int L = 0, R = 0;
+        int L = 0, R = 0;        
         while (L <= R){     
             
             for (int k=L; k<=R; k++){
@@ -63,7 +56,7 @@ public class dieuChe {
                     List <String> pu = phanUng.phanUng(c);
                     
                     if (pu != null){
-                        List <String> v = getCopyOf(pu);
+                        List <String> v = PwL.copy(pu);
                         for (String c2 : u){
                             v.add(c2);
                         }
@@ -82,7 +75,7 @@ public class dieuChe {
                     for (int j=i+1; j<u.size(); j++){                        
                         List <String> pu2 = phanUng.phanUng(c + " " + u.get(j));                       
                         if (pu2 != null){
-                            List <String> v = getCopyOf(pu2);
+                            List <String> v = PwL.copy(pu2);
                             for (String c2 : u){
                                 v.add(c2);
                             }
@@ -104,6 +97,9 @@ public class dieuChe {
             
             L = R + 1;
             R = queue.size() - 1;              
+            
+            if (queue.size() > 1000) return queue.size() - 1;
+            
         }
         return 0;
     }
@@ -115,8 +111,16 @@ public class dieuChe {
         
         while (k > 0){
             res.add(trace[k].getPt());
-            k = trace[k].getId();
+            k = trace[k].getId();            
         }
+        
+        int n = res.size();
+        for (int i=0; i<n / 2; i++){
+            String st = res.get(i);
+            res.set(i, res.get(n - i - 1));
+            res.set(n - i - 1, st);
+        }            
+        
         return res;
     }
 }

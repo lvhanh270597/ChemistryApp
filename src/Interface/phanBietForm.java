@@ -29,7 +29,7 @@ public class phanBietForm extends javax.swing.JFrame {
    
     public phanBietForm() {
         initComponents();
-        
+        setTitle("Phân biệt");
         initVars();
     }
 
