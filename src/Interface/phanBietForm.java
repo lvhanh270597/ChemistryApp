@@ -29,7 +29,7 @@ public class phanBietForm extends javax.swing.JFrame {
    
     public phanBietForm() {
         initComponents();
-        
+        setTitle("Phân biệt");
         initVars();
     }
 
@@ -90,7 +90,7 @@ public class phanBietForm extends javax.swing.JFrame {
             }
         });
 
-        quy.setText("Dùng quỳ?");
+        quy.setText("Dùng quỳ tím?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

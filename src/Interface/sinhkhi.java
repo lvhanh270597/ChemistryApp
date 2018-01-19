@@ -34,7 +34,7 @@ public class sinhkhi extends JPanel implements ActionListener{
         
         setLocation(this.x, this.y);
         setSize(this.WIDTH, this.HEIGHT);
-        createKhi(10);
+        createKhi(525);
         setVisible(true);
         timer = new Timer(50, (ActionListener) this);    
         timer.start();
@@ -81,7 +81,7 @@ public class sinhkhi extends JPanel implements ActionListener{
         for (int i=0; i<sl; i++){            
             int xx = rd.nextInt(WIDTH);
             int yy = this.HEIGHT;
-            luongkhi.add(new Khi(xx, yy, 20, 20));
+            luongkhi.add(new Khi(xx, yy, 2, 2));
         }        
     }
 }

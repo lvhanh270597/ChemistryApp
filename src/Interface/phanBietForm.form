@@ -100,7 +100,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="quy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="D&#xf9;ng qu&#x1ef3;?"/>
+        <Property name="text" type="java.lang.String" value="D&#xf9;ng qu&#x1ef3; t&#xed;m?"/>
       </Properties>
     </Component>
   </SubComponents>

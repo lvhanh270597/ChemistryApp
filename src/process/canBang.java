@@ -123,7 +123,7 @@ public class canBang {
     }
     public String canbang(String s){
         int sobien, sochat = 0;
-        huongdan +="\t\t" + s + "\nTa thấy: \n";
+        huongdan +="\t" + s + "\nTa thấy: \n";
         List <String> TT1 = new LinkedList<String>();
         List <Integer> TT2 = new LinkedList<Integer>();
         List <String> SP1 = new LinkedList<String>();
@@ -135,7 +135,7 @@ public class canBang {
         ///Tách các chất tham gia, sản phẩm
         List <String> temp1;
         List <Integer> temp2;
-        huongdan += "\n\t+ Bên các chất tham gia có: \n";
+        huongdan += "\n+ Bên các chất tham gia có: \n";
         for(int i=0; i<tt.size(); i++){
             temp1 = getSet(ptk.split(tt.get(i)));
             temp2 = getValue(ptk.split(tt.get(i)));
@@ -145,17 +145,17 @@ public class canBang {
                 TT2.add(temp2.get(j));  
             }
         }
-        huongdan += "\n\t+ Bên các chất sản phẩm có: \n";
+        huongdan += "\n+ Bên các chất sản phẩm có: \n";
         for(int i=0; i<sp.size(); i++){
             temp1 = getSet(ptk.split(sp.get(i)));
             temp2 = getValue(ptk.split(sp.get(i)));
             for(int j=0; j<temp1.size(); j++){
-                huongdan+="\t\t" + temp1.get(j) + " có số lượng là: " + temp2.get(j) + "\n";
+                huongdan+="\t" + temp1.get(j) + " có số lượng là: " + temp2.get(j) + "\n";
                 SP1.add(temp1.get(j));
                 SP2.add(temp2.get(j));
             }
         }
-        huongdan += "\n\t+ Từ đó ta có hệ phương trình: \n";
+        huongdan += "\n+ Từ đó ta có hệ phương trình: \n";
         ///Thành lập ma trận
         sobien = tt.size() + sp.size();
         for(int i=0; i<TT1.size(); i++){
@@ -237,11 +237,11 @@ public class canBang {
             tq++;
         }
         for(int i = 0; i<hd.length; i++)
-            huongdan +="\t\t" + hd[i] + " = 0 \n";
-        huongdan += "\n\t+ Giải hệ phương trình ta có nghiệm: \n";
+            huongdan +="\t" + hd[i] + " = 0 \n";
+        huongdan += "\n+ Giải hệ phương trình ta có nghiệm: \n";
         List<Integer> e = giaimatran(matrix,sochat,sobien);
         for(int i = 0; i < sobien; i++)
-            huongdan +="\t\t" + cc[i] + " = " + e.get(i) + "\n";
+            huongdan +="\t" + cc[i] + " = " + e.get(i) + "\n";
         String []words = s.split("\\s");
         String str_ = printReaction(words, e);
          huongdan += "\nHệ số của phương trình: "+ str_;
@@ -330,27 +330,27 @@ public class canBang {
         List<String> temp1 = new LinkedList<String>();
         List<Integer> temp2 = new LinkedList<Integer>();
         List<Integer> temp3 = new LinkedList<Integer>();
-        huongdan +="\t\t"+ s + "\nTa cần xác định số oxi hóa của các chất như sau: \n\t+ Bên các chất tham gia ta có:\n";
+        huongdan +="\t"+ s + "\nTa cần xác định số oxi hóa của các chất như sau: \n\t+ Bên các chất tham gia ta có:\n";
         for(int i=0; i<tt.size(); i++){
             temp1 = getSet(getOxh(tt.get(i)));
             temp2 = getValue(getOxh(tt.get(i)));
             temp3 = getValue(ptk.split(tt.get(i)));
-            huongdan +="\n\tTrong chất: " + tt.get(i) + "số oxh của từng chất là: \n";
+            huongdan +="\nTrong chất: " + tt.get(i) + "số oxh của từng chất là: \n";
             for(int j=0; j<temp1.size(); j++){
-                huongdan +="\t\t"+ temp1.get(j) + " có số oxh là: " + temp2.get(j) + "\n";
+                huongdan +="\t"+ temp1.get(j) + " có số oxh là: " + temp2.get(j) + "\n";
                 TT1.add(temp1.get(j));
                 TT2.add(temp2.get(j));
                 TT3.add(temp3.get(j));
             }
         }
-        huongdan +="\n\t+ Bên các chất sản phẩm ta có: \n";
+        huongdan +="\n+ Bên các chất sản phẩm ta có: \n";
         for(int i=0; i<sp.size(); i++){
             temp1 = getSet(getOxh(sp.get(i)));
             temp2 = getValue(getOxh(sp.get(i)));
             temp3 = getValue(ptk.split(sp.get(i)));
-            huongdan +="\n\tTrong chất: " + sp.get(i) + "số oxh của từng chất là: \n";
+            huongdan +="\nTrong chất: " + sp.get(i) + "số oxh của từng chất là: \n";
             for(int j=0; j<temp1.size(); j++){
-                huongdan +="\t\t"+ temp1.get(j) + " có số oxh là: " + temp2.get(j) + "\n";
+                huongdan +="\t"+ temp1.get(j) + " có số oxh là: " + temp2.get(j) + "\n";
                 SP1.add(temp1.get(j));
                 SP2.add(temp2.get(j));
                 SP3.add(temp3.get(j));
@@ -360,7 +360,7 @@ public class canBang {
         temp2.clear();
         temp3.clear();
         /*Xác định quá trình khử - quá trình oxh*/
-        huongdan += "\n\t+ Xác định quá trình khử và quá trình oxh: \n";
+        huongdan += "\n+ Xác định quá trình khử và quá trình oxh: \n";
         for(int i = 0; i < TT1.size(); i++){
             for(int j = 0; j < SP1.size(); j++){
                 if(TT1.get(i).equals(SP1.get(j)) && TT2.get(i) != SP2.get(j)){
@@ -384,9 +384,9 @@ public class canBang {
         for(int i = 0; i < temp1.size(); i+=2){
             a[k] = temp2.get(i + 1) - temp2.get(i);
             if(temp2.get(i) < temp2.get(i + 1))
-                   huongdan+="\t\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k]+"\n";
+                   huongdan+="\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k]+"\n";
             else
-                   huongdan+="\t\tQuá trình khử: " + temp3.get(i)+""+temp1.get(i) +" + " + -a[k] + " -> " + temp3.get(i + 1)+""+temp1.get(i + 1)+"\n";
+                   huongdan+="\tQuá trình khử: " + temp3.get(i)+""+temp1.get(i) +" + " + -a[k] + " -> " + temp3.get(i + 1)+""+temp1.get(i + 1)+"\n";
             if(temp3.get(i) != temp3.get(i+1)){
                 Integer t = temp3.get(i) * temp3.get(i + 1);
                 temp3.set(i, t);
@@ -395,13 +395,13 @@ public class canBang {
             }
             k++;
         }
-        huongdan+="\n\t+ Cân bằng hệ số các nguyên tố trong 2 quá trình oxh - khử:\n";
+        huongdan+="\n+ Cân bằng hệ số các nguyên tố trong 2 quá trình oxh - khử:\n";
         k = 0;
         for(int i = 0; i < temp1.size(); i+=2){
             if(temp2.get(i) < temp2.get(i + 1))
-                 huongdan+="\t\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k]+"\n";
+                 huongdan+="\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k]+"\n";
             else
-                 huongdan+="\t\tQuá trình khử: " + temp3.get(i)+""+temp1.get(i) +" + " + -a[k] + " -> " + temp3.get(i + 1)+""+temp1.get(i + 1)+"\n";
+                 huongdan+="\tQuá trình khử: " + temp3.get(i)+""+temp1.get(i) +" + " + -a[k] + " -> " + temp3.get(i + 1)+""+temp1.get(i + 1)+"\n";
             k++;
         }
         k = 0;
@@ -417,17 +417,17 @@ public class canBang {
         d /= uc;    am /= uc;
         /*Nhân hệ số*/
         k = 0;
-        huongdan+="\n\t+ Cân bằng electron và nhân hệ số sao cho: \n\t\t\tTổng e cho = Tổng e nhân: \n";
+        huongdan+="\n+ Cân bằng electron và nhân hệ số sao cho: \n\t\t\tTổng e cho = Tổng e nhân: \n";
         for(int i = 0; i < temp1.size(); i+=2){
             if(a[k] > 0){
                 temp3.set(i, temp3.get(i) * (-am));
                 temp3.set(i + 1, temp3.get(i+ 1) * (-am));
-                huongdan+="\t\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k] * (-am)+"\n";     
+                huongdan+="\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k] * (-am)+"\n";     
             }
             else{
                 temp3.set(i, temp3.get(i) * d);
                 temp3.set(i + 1, temp3.get(i+1) * d);
-                huongdan+="\t\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k] * (-am)+"\n";
+                huongdan+="\tQuá trình oxh: " +temp3.get(i)+""+ temp1.get(i) + " -> " +temp3.get(i + 1)+""+ temp1.get(i + 1) + " + " + a[k] * (-am)+"\n";
             }
             k++;
         }
@@ -484,7 +484,7 @@ public class canBang {
              }
              k++;
         }
-        huongdan += "\n\t+ Cân bằng các nguyên tố không thay đổi eclectron như là: ";
+        huongdan += "\n+ Cân bằng các nguyên tố không thay đổi eclectron như là: ";
         for(int i = 0; i < VT.size(); i++){
             int t = 0;
             for(int j = 0; j< temp1.size(); j+=2){

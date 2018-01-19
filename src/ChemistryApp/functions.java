@@ -16,12 +16,7 @@ public class functions {
     public static boolean buttonClicked;
     public static chatBotInterface a;
     public static void func1(){
-        a = new chatBotInterface();
-        a.initText("Xin chào!!!",70,35);
-        a.initText("Để nhận biết một chất chưa rõ ",180,35);
-        a.initText("Bạn hãy trả lời những câu hỏi của tôi",220,35);
-        a.initText("Bạn có quỳ tím không? Có hay không?",200,35);
-        a.initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
+        a = new chatBotInterface();        
         a.show();
         
     }    

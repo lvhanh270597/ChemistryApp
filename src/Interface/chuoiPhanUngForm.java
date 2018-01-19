@@ -5,12 +5,17 @@
  */
 package Interface;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import math.sh;
 
 /**
  *
@@ -26,14 +31,23 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
     private int Y_BOARD;
     private int X_INIT;
     private int Y_INIT;        
+    private int weight_ = 0;
+    private int height_ = 0;
+    private int x_size = 200;
+    private int y_size = 50;
     
+   
+  //  private String getText;
+   // private boolean initGame;
+    private int xScroll = 100;
     /**
      * Creates new form chuoiPhanUng
      */
     public chuoiPhanUngForm() {
         initComponents();
-        
+        setTitle("Chuỗi phản ứng");
         initVar();
+        initScroll();
     }
 
     private void initVar(){
@@ -50,6 +64,29 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
         X_INIT = (int)plus.getLocation().getX();
         Y_INIT = (int)plus.getLocation().getY();
     }
+    public void initText(String s, int x, int y){
+        
+        x = sh.max(100, s.length()*7);
+        
+        javax.swing.JLabel area = new JLabel();
+        area.setOpaque(true);
+        area.setText(s);
+        area.setFont(new Font("Helvetica", Font.PLAIN, 12));
+        area.setLocation(weight_, height_);
+        area.setSize(x,y);
+        //area.setBackground(Color.yellow);
+        area.setVisible(true);
+        height_ += y;
+        jPanel1.add(area);
+        repaint();
+    }
+    public void initScroll(){
+        jScrollPane1 =  new JScrollPane(jPanel1);  
+        getContentPane().setLayout(null);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(110, 300, 466, 100);
+        jPanel1.setPreferredSize(new Dimension(100,jPanel1.getHeight()+ xScroll));
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,22 +99,15 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
 
         Title = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        ok = new javax.swing.JButton();
         contain = new javax.swing.JPanel();
         plus = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        giaithich = new javax.swing.JTextArea();
+        ok = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nhập chuỗi phản ứng");
-
-        ok.setText("Ok");
-        ok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okActionPerformed(evt);
-            }
-        });
 
         plus.setText("+");
         plus.addActionListener(new java.awt.event.ActionListener() {
@@ -100,13 +130,28 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
             .addGroup(containLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(plus)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
-        giaithich.setEditable(false);
-        giaithich.setColumns(20);
-        giaithich.setRows(5);
-        jScrollPane1.setViewportView(giaithich);
+        ok.setText("Ok");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Kết quả:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 466, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,15 +164,18 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
                         .addGap(233, 233, 233)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(contain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(276, 276, 276))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +185,16 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(contain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(ok)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -157,10 +210,8 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
         List<String> show = process.chuoiPhanUng.showAll(T);
         T = "";
         for (String st : show){
-            T += st + "\n";
+            initText(st, 200,35);
         }
-        
-        giaithich.setText(T);
         
     }//GEN-LAST:event_okActionPerformed
 
@@ -220,13 +271,13 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
             }
         });
     }
-
+    private javax.swing.JScrollPane jScrollPane1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
     private javax.swing.JPanel contain;
-    private javax.swing.JTextArea giaithich;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton ok;
     private javax.swing.JButton plus;
     // End of variables declaration//GEN-END:variables

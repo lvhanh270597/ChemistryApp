@@ -8,17 +8,15 @@ package Interface;
 import ChemistryApp.functions;
 import com.sun.glass.events.KeyEvent;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Arrays;
-import java.util.Vector;
-import javax.imageio.ImageIO;
+import java.util.*;
 import javax.swing.*;
-import knowledge.knowledge;
+import knowledge.*;
 import math.PwL;
 import math.sh;
-import process.*;
-import static process.timChat.talk;
+import java.util.List;
+import knowledge.phanUng;
+import math.LCS;
+import math.hopchat;
 
 /**
  *
@@ -37,9 +35,16 @@ public class chatBotInterface extends javax.swing.JFrame {
     /**
      * Creates new form chatBotInterface
      */
+   
     public chatBotInterface() {
         initComponents();
-       
+        setTitle("Chat bot");
+        initText("Xin chào!!!",70,35);
+        initText("Để nhận biết một chất chưa rõ ",180,35);
+        initText("Bạn hãy trả lời những câu hỏi của tôi",220,35);
+        initText("Bạn có quỳ tím không? Có hay không?",220,35);
+        initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
+        initScroll();
     }
     public void initText(String s, int x, int y){
         
@@ -53,12 +58,8 @@ public class chatBotInterface extends javax.swing.JFrame {
         area.setSize(x,y);
         area.setVisible(true);
         initAva(height_);
-       // area.setSelectionColor(Color.yellow);
         height_ += y + 10;
         jPanel3.add(area);
-        
-      //  area.disable();
-        repaint();
     }
     public void initAva(int x){
         javax.swing.JLabel ava = new JLabel();
@@ -72,19 +73,11 @@ public class chatBotInterface extends javax.swing.JFrame {
         repaint();
     }
     public void initScroll(){
-        jScrollPane1 =  new JScrollPane(jPanel3);
-          //jScrollPane2 = new JScrollPane(jPanel3);         
-          getContentPane().setLayout(null);
-        //jScrollPane1.setViewportView(jPanel3);
-
-       getContentPane().add(jScrollPane1);
+        jScrollPane1 =  new JScrollPane(jPanel3);  
+        getContentPane().setLayout(null);
+        getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 50, 530, 503);
         jPanel3.setPreferredSize(new Dimension(100,jPanel3.getHeight()+ xScroll));
-       // final JScrollPane jScrollPane1 = new JScrollPane(this.jPanel3, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        //jPanel3.setLayout();
-        //add(jScrollPane1);
-        //jPanel3.autocroll(true);
-       // pack();
     }
     
     public void waitBot(){
@@ -94,10 +87,11 @@ public class chatBotInterface extends javax.swing.JFrame {
         }                
         repaint();
     }
+    
     public void Bot(){
         java.util.List <String> dsc = new Vector<String>();
         java.util.List <String> temp = new Vector<String>();
-        initScroll();
+      
         waitBot();
         String ans;
         ans = text.getText();
@@ -106,7 +100,8 @@ public class chatBotInterface extends javax.swing.JFrame {
            waitBot();
            ans = text.getText();
         }
-        
+        List<String> u = Arrays.asList("AgNO3","BaCl2","Ba(OH)2","HCl","H2SO4","Pb(NO3)2","CaCl2","Ca(OH)2");
+        List<String> v = new Vector<String>();
         if(ans.equals("co")){
             initText("Bạn thấy quỳ tím màu gì?",160,35);
             initText("1: Màu đỏ 2: Màu xanh 3: Không màu",220,35);
@@ -131,43 +126,58 @@ public class chatBotInterface extends javax.swing.JFrame {
                 }
             }                                                                        
                         
-            if(a==1) temp = knowledge.getAllAxit(); 
-            else if (a ==2) temp = knowledge.getAllBazo();
-            else if (a==3){                
+            if(a==1){
+                temp = knowledge.getAllAxit();
+                for(int j = 0; j <u.size(); j++){
+                    if(!knowledge.axit("'"+u.get(j)+"'"))
+                        v.add(u.get(j));
+                }
+            } 
+            else if (a ==2){
+                temp = knowledge.getAllBazo();
+                for(int j = 0; j <u.size(); j++){
+                    hopchat x = knowledge.getCA(u.get(j));
+                    if(!knowledge.bazo("'"+u.get(j)+"'") && !(x.getAnion().equals("'Cl'")))
+                        v.add(u.get(j));
+                }
+            }
+            else if (a==3){
                 temp = knowledge.getAllMuoi();
+                v = u;
             }
         }
         else {
             temp = knowledge.getAllHC();
+            v = u;
         }
-        
+        u = v;
         
         dsc = PwL.copy(temp);                
         
         temp.clear();                        
         
-        java.util.List<String> u = Arrays.asList("AgNO3","BaCl2","Ba(OH)2","HCl","H2SO4","Pb(NO3)2","CaCl2","Ca(OH)2");
+        
         
         ///Nhận dạng bằng cách chạy qua các chất trên
         for(int i =0; i< u.size(); i++){                                              
-            initText("Tôi đã khoanh vùng được khoảng " + dsc.size() + " chất", 200, 35);
+            initText("Tôi đã khoanh vùng được khoảng " + dsc.size() + " chất", 240, 35);
             initText("Các chất điển hình là: ", 200, 35);
-            for (int k=0; k<sh.min(3, dsc.size()); k++) initText(dsc.get(k), 200, 35);
+            for (int k=0; k<sh.min(3, dsc.size()); k++) initText(dsc.get(k), 50, 35);
             if(dsc.size() == 1){
                 initText("Tôi nghĩ chất đó có thể là:.........",200,35);
                 initText(dsc.get(0),200,35);
                 return;
             }
             if ( dsc.size() == 0){
-                initText("Bạn đùa tôi rồi. Chẳng có chất nào như vậy cả.", 100, 35);                
+                initText("Bạn đùa tôi rồi. Chẳng có chất nào như vậy cả.", 270, 35);                
                 return;
             }
             
-            initText("Bạn có "+ u.get(i) + " không? Có hay không?",200,35);
+            initText("Bạn có "+ u.get(i) + " không? Có hay không?",220,35);
             initText("Xin trả lời không dấu VD: có trả lời co, không trả lời khong",330,35);
             waitBot();
             ans = text.getText();
-            if(!ans.equals("co") && !ans.equals("khong")){
+            while(!ans.equals("co") && !ans.equals("khong")){
                 initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
                 waitBot();
                 ans = text.getText();
@@ -199,16 +209,63 @@ public class chatBotInterface extends javax.swing.JFrame {
                 if( t == 1){
                     /* Lấy các chất vừa có kết tủa vừa có khí*/
                     initText("Bạn cho tôi biết kết tủa màu gì?",200,35);
-                    initText("Hãy nhập tên màu.....",150,35);
+                    initText("Hãy nhập tên màu bằng tiếng anh.....",210,35);
                     waitBot();
                     ans = text.getText();
-                    
+                    int[] lcs = new int[dsc.size()];
+                    List<String> colr = new Vector<String>();
                     for(int j = 0; j < dsc.size(); j++){
                         String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
                         String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
-                        if(b != null && c != null) // có kết tủa và có khí
-                            if(knowledge.color(b).equals(ans)) // màu giống màu kết tủa
-                                temp.add(dsc.get(j));
+                        if(b != null && c != null){// có kết tủa và có khí
+                            lcs[j] = (new LCS(ans, knowledge.color(b))).lcs();
+                            colr.add(knowledge.color(b));
+                        }
+                        else{
+                            colr.add(null);
+                        }
+                    }
+                    List <Integer> items = sh.argMax(lcs, 3);
+                    List<String> col = new Vector<String>();
+                    for (int j=0; j<items.size(); j++){          
+                        int index = items.get(j);
+                        int w = 0;
+                        for(int k = 0; k < col.size(); k++){
+                            if(col.get(k).equals(colr.get(index))){
+                                w = 1;
+                                break;
+                            }
+                        }
+                        if(w == 0)
+                            col.add(colr.get(index));
+                    }
+                    initText("Có phải ý bạn là:.........",150,35);
+                    for(int j = 0; j< col.size(); j++)
+                        initText(j + ": " + col.get(j),150,35);
+                    initText("Hãy chọn một số.....",150,35);
+                    ok = knowledge.isNumeric(text.getText());
+                    int k = 0;
+                    if (ok){
+                        k = Integer.parseInt(text.getText());
+                        if (k != 1 && k != 2 && k != 3 && k != 4) ok = false;
+                    }
+                    while (!ok){
+                        initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                        waitBot();
+                        ok = knowledge.isNumeric(text.getText());                                
+                        if (ok){
+                            k = Integer.parseInt(text.getText());
+                            if (k != 1 && k != 2 && k != 3 && k != 4) ok = false;
+                        }
+                    }   
+                
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
+                        if(b != null && c != null){// có kết tủa và có khí
+                            if(knowledge.color(b).equals(col.get(k)))
+                               temp.add(dsc.get(j));
+                        }
                     }
                 }
                 if(t == 2){
@@ -223,21 +280,65 @@ public class chatBotInterface extends javax.swing.JFrame {
                 if(t == 3){
                     /*Lấy các chất có kết tủa*/
                     initText("Bạn cho tôi biết kết tủa màu gì?",200,35);
-                    initText("Hãy nhập tên màu.....",150,35);
+                    initText("Hãy nhập tên màu bằng tiếng anh.....",210,35);
                     waitBot();
                     ans = text.getText();
-                    
+                    int[] lcs = new int[dsc.size()];
+                    List<String> colr = new Vector<String>();
                     for(int j = 0; j < dsc.size(); j++){
                         String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
                         String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
-                        if(b != null && c == null) // có kết tủa
-                           // System.out.println(knowledge.color(b) + " " + in);
-                            if(knowledge.color(b).equals(ans)){ // màu giống màu kết tủa
-                                temp.add(dsc.get(j));
-                              //  System.out.println("a");
-                            }
+                        if(b != null && c == null){// có kết tủa
+                            lcs[j] = (new LCS(ans, knowledge.color(b))).lcs();
+                            colr.add(knowledge.color(b));
+                        }
+                        else{
+                            colr.add(null);
+                        }
                     }
-                   // System.out.println(temp);
+                    for(int j = 0; j< lcs.length; j++)
+                         System.out.print(lcs[j] + " ");
+                    List <Integer> items = sh.argMax(lcs, 3);
+                    List<String> col = new Vector<String>();
+                    for (int j=0; j<items.size(); j++){          
+                        int index = items.get(j);
+                        int w = 0;
+                        for(int k = 0; k < col.size(); k++){
+                            if(col.get(k).equals(colr.get(index))){
+                                w = 1;
+                                break;
+                            }
+                        }
+                        if(w == 0)
+                            col.add(colr.get(index));
+                    }
+                    initText("Có phải ý bạn là:.........",150,35);
+                    for(int j = 0; j< col.size(); j++)
+                        initText(j + ": " + col.get(j),150,35);
+                    initText("Hãy chọn một số.....",150,35);
+                    ok = knowledge.isNumeric(text.getText());
+                    int k = 0;
+                    if (ok){
+                        k = Integer.parseInt(text.getText());
+                        if (k != 1 && k != 2 && k != 3 && k != 4) ok = false;
+                    }
+                    while (!ok){
+                        initText("Bạn vui lòng nhập đúng câu trả lời",200,35); 
+                        waitBot();
+                        ok = knowledge.isNumeric(text.getText());                                
+                        if (ok){
+                            k = Integer.parseInt(text.getText());
+                            if (k != 1 && k != 2 && k != 3 && k != 4) ok = false;
+                        }
+                    }  
+                    for(int j = 0; j < dsc.size(); j++){
+                        String b = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKT(); 
+                        String c = knowledge.getKetTua_Khi(dsc.get(j) + " " + u.get(i)).getKhi();
+                        if(b != null && c == null){// có kết tủa
+                            if(knowledge.color(b).equals(col.get(k)))
+                               temp.add(dsc.get(j));
+                        }
+                    }
                 }
                 if(t == 4){
                     /*Lấy các chất không có hiện tượng*/
@@ -255,7 +356,8 @@ public class chatBotInterface extends javax.swing.JFrame {
             }
         }
         initText("Tôi nghĩ chất đó có thể là:.........",200,20);
-        initText(dsc.get(0),200,100);
+        for(int i = 0; i< dsc.size(); i++)
+            initText(dsc.get(i),50,35);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -331,7 +433,7 @@ public class chatBotInterface extends javax.swing.JFrame {
                 .addComponent(text, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,11 +451,11 @@ public class chatBotInterface extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -369,8 +471,8 @@ public class chatBotInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -383,12 +485,13 @@ public class chatBotInterface extends javax.swing.JFrame {
         area.setOpaque(true);
         area.setText(text.getText());
         area.setLocation(450, height_);
-        area.setSize(30, 20);
+        area.setSize(50, 20);
         area.setVisible(true);
         //area.disable();
         height_ += 30;
         jPanel3.add(area);
         functions.buttonClicked = true;
+      //  repaint();
         
     }//GEN-LAST:event_jButton1MouseClicked
 

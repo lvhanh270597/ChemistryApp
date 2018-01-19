@@ -1,6 +1,6 @@
 
 readKnowledge:-
-    open('/home/hanh/Desktop/ChemistryApp/knowledge/data.txt', read, Str),
+    open('C:/Users/Thien Trang/Desktop/ChemistryApp/knowledge/data.txt', read, Str),
     read_data(Str, TL),
     write(TL),
     close(Str).
@@ -561,7 +561,7 @@ chuoi(X, Y, R):-
     \+ khongtan(R, _),
     pu(X, R, L),
     member(Y, L), !.
-
+chuoi('FeCl3', 'FeCl2', 'Fe').
 dieuche([_], []).
 dieuche([H1, H2 | T1], [H | T]):-
     chuoi(H1, H2, H), dieuche([H2 | T1], T), !.

@@ -35,6 +35,8 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
         
         initSet();
         
+        setTitle("Phân tử khối");
+        
         initEvent();
     }
     
@@ -74,7 +76,8 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
         int[] lcs = new int[names.size()];
         for (int i=0; i<names.size(); i++){
             String Y = names.get(i);            
-            lcs[i] = (new LCS(X, Y)).lcs();                        
+            lcs[i] = (new LCS(X, Y)).lcs();    
+            
         }               
         
         combo.removeAllItems();                
