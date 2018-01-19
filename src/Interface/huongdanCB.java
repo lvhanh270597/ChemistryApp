@@ -33,9 +33,14 @@ public class huongdanCB extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextArea1.setEditable(false);
+=======
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -48,7 +53,11 @@ public class huongdanCB extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+=======
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -59,7 +68,11 @@ public class huongdanCB extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         );
 
         pack();
@@ -95,8 +108,11 @@ public class huongdanCB extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+<<<<<<< HEAD
         //</editor-fold>
         //</editor-fold>
+=======
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
