@@ -47,7 +47,11 @@ public class mainInterface extends javax.swing.JFrame {
     private JLabel[] L_text;
     
     
+<<<<<<< HEAD
     private final String[] paths = {"ptk.jpg", "canbang.png", "dieuche.png", "gd1.jpg", "dc.png", "cb.png", "tracuu.png"};
+=======
+    private final String[] paths = {"ptk.png", "canbang.png", "dieuche.png", "gd1.jpg", "dc.png", "cb.png", "tracuu.png"};
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
     private final String[] st = {"Phân tử khối", "Cân bằng", "Điều chế", "Chuỗi phản ứng", "Hiện tượng", "Phân biệt", "Tìm chất"};
     /**
      * Creates new form mainInterface
@@ -102,8 +106,11 @@ public class mainInterface extends javax.swing.JFrame {
             ImageIcon ii = new ImageIcon("hoahoc/" + paths[i]);
             Image image = ii.getImage().getScaledInstance(L_image[i].getWidth(), L_image[i].getHeight(), Image.SCALE_SMOOTH);
             L_image[i].setIcon(new ImageIcon(image));
+<<<<<<< HEAD
             javax.swing.border.Border border = BorderFactory.createBevelBorder(1, Color.lightGray, Color.black);            
             L_image[1].setBorder(border);
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             
             L_text[i].setText(st[i]); 
             L_text[i].setSize(X_LABEL_SIZE, Y_LABEL_SIZE);
@@ -130,8 +137,12 @@ public class mainInterface extends javax.swing.JFrame {
             ImageIcon ii = new ImageIcon("hoahoc/" + paths[i]);
             Image image = ii.getImage().getScaledInstance(L_image[i].getWidth(), L_image[i].getHeight(), Image.SCALE_SMOOTH);
             L_image[i].setIcon(new ImageIcon(image));
+<<<<<<< HEAD
             javax.swing.border.Border border = BorderFactory.createBevelBorder(1, Color.lightGray, Color.black);            
             L_image[1].setBorder(border);
+=======
+            
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             
             L_text[i].setText(st[i]); 
             L_text[i].setSize(X_LABEL_SIZE, Y_LABEL_SIZE);
@@ -159,11 +170,14 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {  
                 new ptkForm().show();
+<<<<<<< HEAD
                 String[] T = {"Bạn nhập vào công thức hóa học của chất","Chương trình có gợi ý công thức hóa học", "Click OK chương trình sẽ giúp bạn thực hiện tính PTK của nó",
                                 "Chương trình có giải thích cách tính của nó."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         
@@ -172,6 +186,7 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {                  
                 new canBangF().show();
+<<<<<<< HEAD
                 String[] T = {"Bạn nhập vào phương trình hóa học chưa cân bằng", "Chương trình sẽ giúp bạn cân bằng nó",
                                 "Bạn click vào hướng dẫn để xem cách làm."};
                 hdCanBang u = new hdCanBang();
@@ -193,6 +208,9 @@ public class mainInterface extends javax.swing.JFrame {
             {                  
                 javax.swing.border.Border border = BorderFactory.createMatteBorder(1, 5, 1, 1, Color.red);
                 L_image[1].setBorder(border);                
+=======
+                new hdCanBang().show();
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         //-----------------        
@@ -202,11 +220,14 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {  
                 new dieuChe().show();
+<<<<<<< HEAD
                 String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Nhập chất cần đề chế ở ô 'Chất điều chế'", "Click '...' chương trình sẽ giúp bạn điều chế ra chất đó",
                                 "Ô 'Kết quả' sẽ là các phương trình hóa học trong quá trình điều chế."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         L_image[3].addMouseListener(new MouseAdapter()  
@@ -214,11 +235,14 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {  
                 new chuoiPhanUngForm().show();
+<<<<<<< HEAD
                 String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Click 'OK' chương trình sẽ giúp bạn thực thi",
                                 "Ô 'Kết quả' sẽ là các phương trình hóa học của chuỗi phản ứng."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         L_image[4].addMouseListener(new MouseAdapter()  
@@ -226,11 +250,14 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {  
                 new hienTuongForm().show();
+<<<<<<< HEAD
                 String[] T = {"Nhập CTHH của chất cần bỏ vào bình","Chương trình gợi ý CTHH","Click 'Add' để thêm chất đó vào bình",
                                 "Bình bên sẽ mô tả màu và hiện tượng","Phía dưới sẽ cho bạn biết hiện trong bình có chất nào."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         L_image[5].addMouseListener(new MouseAdapter()  
@@ -238,11 +265,14 @@ public class mainInterface extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e)  
             {  
                 new phanBietForm().show();
+<<<<<<< HEAD
                 String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Click vào 'dùng quỳ tím' nếu bạn muốn dùng quỳ tím để phân biệt ","Click '...' để thực hiện nhận biết",
                                 "Xuất hiện các bình, với mỗi bình sẽ chứa một chất mà bạn nhập vào","Click 'Next' chương trình sẽ thực hiện."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
         L_image[6].addMouseListener(new MouseAdapter()  
@@ -253,10 +283,13 @@ public class mainInterface extends javax.swing.JFrame {
                 multiThread t2 = new multiThread("Chat bot", 2);        
                 t1.start();
                 t2.start();
+<<<<<<< HEAD
                 String[] T = {"Hãy trả lời câu hỏi của Bot", "Bot sẽ giúp bạn tìm ra chất đó."};
                 hdCanBang u = new hdCanBang();
                 u.initVars(T);
                 u.show();
+=======
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
             }  
         });
                 

@@ -14,10 +14,12 @@ import java.util.Vector;
 import static knowledge.phanUng.phanUng;
 import math.*;
 import org.jpl7.*;
+import java.lang.Integer;
 
 
 public class knowledge {
     
+<<<<<<< HEAD
     public static List <String> allOfHC;
     public static List <String> allOfAx;
     public static List <String> allOfBz;
@@ -31,6 +33,10 @@ public class knowledge {
     
     public static void prepare() throws IOException{                        
         
+=======
+
+    public static void prepare(){
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         Query q1 = new Query("consult('knowledge/app.pl')");        
         q1.hasSolution();
         q1 = new Query("readKnowledge");
@@ -50,15 +56,27 @@ public class knowledge {
         Term a = q.oneSolution().get("X");
         return a.floatValue();
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
     public static int getOxh(String T){        
         Query qr = new Query("name('" + T + "', X, Y)");
         String X = qr.oneSolution().get("X").toString();
         qr = new Query("cation(" + X + ", _ , X, Y)");
         X = qr.oneSolution().get("X").toString();
+<<<<<<< HEAD
         int result = java.lang.Integer.parseInt(X);
         return result;
     }  
     public static boolean axit(String X){        
+=======
+        int result = Integer.parseInt(X);
+        return result;
+    }    
+    
+    public static boolean axit(String X){
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         Query qr = new Query("axit(" + X + ")");
         return qr.hasSolution();
     }
@@ -70,7 +88,15 @@ public class knowledge {
         Query qr = new Query("bazo(" + X + ")");
         return qr.hasSolution();
     }
+<<<<<<< HEAD
     public static boolean muoi(String X){        
+=======
+    public static boolean oxit(String X){
+        Query qr = new Query("oxit('" + X + "')");
+        return qr.hasSolution();
+    }
+    public static boolean muoi(String X){
+>>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
         Query qr = new Query("muoi(" + X + ")");
         return qr.hasSolution();
     }

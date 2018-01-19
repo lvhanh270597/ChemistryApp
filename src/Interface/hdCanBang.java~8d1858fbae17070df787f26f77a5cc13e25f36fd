@@ -16,15 +16,12 @@ public class hdCanBang extends javax.swing.JFrame {
      */
     public hdCanBang() {
         initComponents();
-<<<<<<< HEAD:src/Interface/hdCanBang.java
-=======
-        setTitle("Hướng dẫn");
-        initText();
->>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd:src/Interface/huongdanCB.java
+        initVars();
     }
 
-    public void initVars(String []T){
-        
+    private void initVars(){
+        String[] T = {"Bạn nhập vào phương trình hóa học chưa cân bằng", "Chương trình sẽ giúp bạn cân bằng nó",
+        "Bạn click vào hướng dẫn để xem cách làm."};
         String Temp = "";
         for (String st : T){
             Temp += st + "\n";
@@ -32,10 +29,7 @@ public class hdCanBang extends javax.swing.JFrame {
         text.setText(Temp);
         setLocationRelativeTo(null);
     }
-    public void initText(String t){
-        text.setText(t);
-        //jTextArea1.disable();
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,10 +43,8 @@ public class hdCanBang extends javax.swing.JFrame {
         text = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-<<<<<<< HEAD:src/Interface/hdCanBang.java
         text.setEditable(false);
         text.setColumns(20);
         text.setRows(5);
@@ -64,31 +56,6 @@ public class hdCanBang extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-=======
-        jTextArea1.setEditable(false);
-=======
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
->>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-=======
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
->>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
-        );
->>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd:src/Interface/huongdanCB.java
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,20 +70,12 @@ public class hdCanBang extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD:src/Interface/hdCanBang.java
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
-=======
-<<<<<<< HEAD
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-=======
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
->>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
->>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd:src/Interface/huongdanCB.java
         );
 
         pack();
@@ -152,15 +111,6 @@ public class hdCanBang extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(hdCanBang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-<<<<<<< HEAD:src/Interface/hdCanBang.java
-=======
-        //</editor-fold>
-<<<<<<< HEAD
-        //</editor-fold>
-        //</editor-fold>
-=======
->>>>>>> b6a3b76a7aaf77cd47fa1869cff39ae95a82b6b6
->>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd:src/Interface/huongdanCB.java
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

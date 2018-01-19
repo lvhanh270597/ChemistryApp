@@ -58,10 +58,20 @@ public class dieuChe extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         output = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+<<<<<<< HEAD
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+=======
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        contain.setBackground(new java.awt.Color(204, 204, 255));
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
 
         plus.setText("+");
         plus.addActionListener(new java.awt.event.ActionListener() {
@@ -77,36 +87,63 @@ public class dieuChe extends javax.swing.JFrame {
             .addGroup(containLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addContainerGap(294, Short.MAX_VALUE))
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
         );
         containLayout.setVerticalGroup(
             containLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(plus)
+<<<<<<< HEAD
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+=======
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(contain, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 120, 350, 130));
+
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
         ok2.setText("Ok");
         ok2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ok2MouseClicked(evt);
             }
         });
+<<<<<<< HEAD
+=======
+        getContentPane().add(ok2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 265, 44, -1));
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
 
         chatdc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chatdcActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
 
         jLabel1.setText("Chất điều chế:");
 
         output.setEditable(false);
+=======
+        getContentPane().add(chatdc, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 266, 87, -1));
+
+        jLabel1.setText("Chất điều chế:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 265, 106, 23));
+
+        output.setEditable(false);
+        output.setBackground(new java.awt.Color(255, 204, 204));
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
         output.setColumns(20);
         output.setRows(5);
         jScrollPane1.setViewportView(output);
 
+<<<<<<< HEAD
         jLabel2.setText("Nhập các chất ban đầu");
 
         jLabel3.setText("Kết quả");
@@ -170,6 +207,20 @@ public class dieuChe extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(25, Short.MAX_VALUE))))
         );
+=======
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 300, 350, 128));
+
+        jLabel2.setText("Nhập các chất ban đầu");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 296, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\OS\\Desktop\\ChemistryApp\\hoahoc\\Dieuche.jpg")); // NOI18N
+        jLabel6.setText("jLabel6");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 380, 390));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/dieuche2.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 90));
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,7 +307,11 @@ public class dieuChe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel4;
+=======
+    private javax.swing.JLabel jLabel6;
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton ok2;
     private javax.swing.JTextArea output;

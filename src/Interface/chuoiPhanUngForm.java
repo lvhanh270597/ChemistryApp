@@ -97,6 +97,7 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         Title = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         contain = new javax.swing.JPanel();
@@ -104,10 +105,29 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
         ok = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+=======
+        contain = new javax.swing.JPanel();
+        plus = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        giaithich = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        ok = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+<<<<<<< HEAD
         jLabel1.setText("Nhập chuỗi phản ứng");
+=======
+        contain.setBackground(new java.awt.Color(255, 255, 204));
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
 
         plus.setText("+");
         plus.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +136,8 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Nhập chuỗi phản ứng");
+
         javax.swing.GroupLayout containLayout = new javax.swing.GroupLayout(contain);
         contain.setLayout(containLayout);
         containLayout.setHorizontalGroup(
@@ -123,11 +145,14 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
             .addGroup(containLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addGap(132, 132, 132)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         containLayout.setVerticalGroup(
             containLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap()
                 .addComponent(plus)
                 .addContainerGap(77, Short.MAX_VALUE))
@@ -195,7 +220,65 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
+=======
+                .addGroup(containLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(containLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(plus)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
+
+        getContentPane().add(contain, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 520, 130));
+
+        giaithich.setEditable(false);
+        giaithich.setBackground(new java.awt.Color(204, 255, 204));
+        giaithich.setColumns(20);
+        giaithich.setRows(5);
+        jScrollPane1.setViewportView(giaithich);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 520, 110));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\OS\\Desktop\\ChemistryApp\\hoahoc\\Chuoi.png")); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 130));
+
+        ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/chuoi1.png"))); // NOI18N
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 80, 80));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 520, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 530, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, 20));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 570, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 570, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -273,11 +356,19 @@ public class chuoiPhanUngForm extends javax.swing.JFrame {
     }
     private javax.swing.JScrollPane jScrollPane1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Title;
     private javax.swing.JPanel contain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+<<<<<<< HEAD
     private javax.swing.JPanel jPanel1;
+=======
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+>>>>>>> 8d1858fbae17070df787f26f77a5cc13e25f36fd
     private javax.swing.JButton ok;
     private javax.swing.JButton plus;
     // End of variables declaration//GEN-END:variables

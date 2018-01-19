@@ -123,11 +123,11 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
             }
         });
         combo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                comboKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 comboKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                comboKeyTyped(evt);
             }
         });
 
@@ -171,8 +171,8 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -190,30 +190,30 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyTyped
+
+    }//GEN-LAST:event_comboKeyTyped
+
+    private void comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyPressed
+
+    }//GEN-LAST:event_comboKeyPressed
+
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
-        
+
     }//GEN-LAST:event_comboActionPerformed
 
     private void comboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemStateChanged
-        
+
     }//GEN-LAST:event_comboItemStateChanged
 
-    private void comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyPressed
-        
-    }//GEN-LAST:event_comboKeyPressed
-
-    private void comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyTyped
-        
-    }//GEN-LAST:event_comboKeyTyped
+    private void editorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String X = combo.getSelectedItem().toString();
         giaithich.setText(process.ptk.getDescription(X));
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void editorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editorActionPerformed
 
     /**
      * @param args the command line arguments
