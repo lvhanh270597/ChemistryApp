@@ -6,13 +6,22 @@
 package Interface;
 
 import ChemistryApp.multiThread;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.Vector;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRootPane;
+import javax.swing.border.EtchedBorder;
 
 /**
  *
@@ -22,11 +31,24 @@ public class mainInterface extends javax.swing.JFrame {
 
     private Image image_title;
     
-    private final int X_Icon = 80;
-    private final int Y_Icon = 80;
+    private final int X_BOARD = 800;
+    private final int Y_BOARD = 600;
+    private final int X_TITLE = 800;
+    private final int Y_TITLE = 150;
+    private final int X_SIZE_ICON = 120;
+    private final int Y_SIZE_ICON = 120;
+    private final int TOP_MARGIN = 250;    
+    private final int X_SPACE = 50;    
+    private final int X_LABEL_SIZE = 120;
+    private final int Y_LABEL_SIZE = 20;
+    private final int Y_SPACE = 50;    
+    private int Dx;
+    private JLabel[] L_image;
+    private JLabel[] L_text;
     
-    private final String[] paths = {"ptk.jpg", "canbang.png", "dieuche.png", "gd1.jpg", "tracuu.png", "dc.png", "cb.png"};
     
+    private final String[] paths = {"ptk.png", "canbang.png", "dieuche.png", "gd1.jpg", "dc.png", "cb.png", "tracuu.png"};
+    private final String[] st = {"Phân tử khối", "Cân bằng", "Điều chế", "Chuỗi phản ứng", "Hiện tượng", "Phân biệt", "Tìm chất"};
     /**
      * Creates new form mainInterface
      */
@@ -40,25 +62,185 @@ public class mainInterface extends javax.swing.JFrame {
 
     private void preProcessing(){       
         
+        setSize(X_BOARD, Y_BOARD);
+        setResizable(false);
         setTitle("Chemistry");        
         
-        ImageIcon ii = new ImageIcon("hoahoc/ptk.jpg");
-        image_title = ii.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon ii = new ImageIcon("hoahoc/chemistry.png");
+        image_title = ii.getImage().getScaledInstance(X_TITLE, Y_TITLE, Image.SCALE_SMOOTH);
         TitleBar.setIcon(new ImageIcon(image_title));        
+        
+        L_image = new JLabel[7];
+        L_text = new JLabel[7];
+        
+        for (int i=0; i<7; i++){
+            L_image[i] = new JLabel();
+            L_text[i] = new JLabel();
+        }
+        
+        
     }
     
-    private void setImageForAll(){
-        JLabel[] l = {l1, l2, l3, l4, l5, l6, l7};
-        JLabel[] L = {l21, l22, l23, l24, l25, l26, l27};
-        String[] st = {"Phân tử khối", "Cân bằng", "Điều chế", "Chuỗi phản ứng", "Tìm chất", "Hiện tượng", "Phân biệt"};
+    private void getDx(int n){
+        Dx = (X_BOARD - (n - 1) * X_SPACE - n * X_SIZE_ICON) / 2;        
+    }    
+    
+    
+    
+    private void setImageForAll(){        
         
-        for (int i=0; i<l.length; i++){
-            l[i].setSize(X_Icon, Y_Icon);            
-            L[i].setText(st[i]);            
+        getDx(4);
+        
+        int x = Dx;
+        int y = TOP_MARGIN;        
+                
+        for (int i=0; i<4; i++){
+            L_image[i].setSize(X_SIZE_ICON, Y_SIZE_ICON); 
+            System.out.println(x + " " + y); 
+            L_image[i].setLocation(x, y);
+            
             ImageIcon ii = new ImageIcon("hoahoc/" + paths[i]);
-            Image image = ii.getImage().getScaledInstance(X_Icon, Y_Icon, Image.SCALE_SMOOTH);
-            l[i].setIcon(new ImageIcon(image));
+            Image image = ii.getImage().getScaledInstance(L_image[i].getWidth(), L_image[i].getHeight(), Image.SCALE_SMOOTH);
+            L_image[i].setIcon(new ImageIcon(image));
+            
+            L_text[i].setText(st[i]); 
+            L_text[i].setSize(X_LABEL_SIZE, Y_LABEL_SIZE);
+            L_text[i].setLocation(x, y - Y_LABEL_SIZE - 10);
+            
+            x += X_SIZE_ICON + X_SPACE;           
+            
+            L_text[i].setVisible(true);
+            L_image[i].setVisible(true);
+            add(L_text[i]);
+            add(L_image[i]);
         }
+        
+        getDx(3);
+        
+        x = Dx;
+        y += Y_SIZE_ICON + Y_SPACE;
+        
+        for (int i=4; i<7; i++){
+            L_image[i].setSize(X_SIZE_ICON, Y_SIZE_ICON); 
+            System.out.println(x + " " + y); 
+            L_image[i].setLocation(x, y);
+            
+            ImageIcon ii = new ImageIcon("hoahoc/" + paths[i]);
+            Image image = ii.getImage().getScaledInstance(L_image[i].getWidth(), L_image[i].getHeight(), Image.SCALE_SMOOTH);
+            L_image[i].setIcon(new ImageIcon(image));
+            
+            
+            L_text[i].setText(st[i]); 
+            L_text[i].setSize(X_LABEL_SIZE, Y_LABEL_SIZE);
+            L_text[i].setLocation(x, y - Y_LABEL_SIZE - 10);
+            
+            x += X_SIZE_ICON + X_SPACE;           
+            
+            L_text[i].setVisible(true);
+            L_image[i].setVisible(true);
+            add(L_text[i]);
+            add(L_image[i]);
+        }
+
+        
+        ptkForm a = new ptkForm();
+        canBangF b = new canBangF();
+        dieuChe c = new dieuChe();        
+        chuoiPhanUngForm d = new chuoiPhanUngForm();
+        hienTuongForm e = new hienTuongForm();
+        phanBietForm f = new phanBietForm();
+      
+        
+        L_image[0].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                new ptkForm().show();
+                String[] T = {"Bạn nhập vào công thức hóa học của chất","Chương trình có gợi ý công thức hóa học", "Click OK chương trình sẽ giúp bạn thực hiện tính PTK của nó",
+                                "Chương trình có giải thích cách tính của nó."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        
+        L_image[1].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {                  
+                new canBangF().show();
+                String[] T = {"Bạn nhập vào phương trình hóa học chưa cân bằng", "Chương trình sẽ giúp bạn cân bằng nó",
+                                "Bạn click vào hướng dẫn để xem cách làm."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        //-----------------        
+        //-----------------
+        L_image[2].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                new dieuChe().show();
+                 String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Nhập chất cần đề chế ở ô 'Chất điều chế'", "Click '...' chương trình sẽ giúp bạn điều chế ra chất đó",
+                                "Ô 'Kết quả' sẽ là các phương trình hóa học trong quá trình điều chế."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        L_image[3].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                new chuoiPhanUngForm().show();
+                String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Click 'OK' chương trình sẽ giúp bạn thực thi",
+                                "Ô 'Kết quả' sẽ là các phương trình hóa học của chuỗi phản ứng."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        L_image[4].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                new hienTuongForm().show();
+                String[] T = {"Nhập CTHH của chất cần bỏ vào bình","Chương trình gợi ý CTHH","Click 'Add' để thêm chất đó vào bình",
+                                "Bình bên sẽ mô tả màu và hiện tượng","Phía dưới sẽ cho bạn biết hiện trong bình có chất nào."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        L_image[5].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                new phanBietForm().show();
+                String[] T = {"Click vào dấu '+' sẽ xuất hiện vùng nhập một công thức của một chất","Click vào 'dùng quỳ tím' nếu bạn muốn dùng quỳ tím để phân biệt ","Click '...' để thực hiện nhận biết",
+                                "Xuất hiện các bình, với mỗi bình sẽ chứa một chất mà bạn nhập vào","Click 'Next' chương trình sẽ thực hiện."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+        L_image[6].addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                multiThread t1 = new multiThread("Create a winndow", 1);
+                multiThread t2 = new multiThread("Chat bot", 2);        
+                t1.start();
+                t2.start();
+                String[] T = {"Hãy trả lời câu hỏi của Bot", "Bot sẽ giúp bạn tìm ra chất đó."};
+                hdCanBang u = new hdCanBang();
+                u.initVars(T);
+                u.show();
+            }  
+        });
+                
     }
     
     /**
@@ -73,23 +255,6 @@ public class mainInterface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         TitleBar = new javax.swing.JLabel();
-        l2 = new javax.swing.JLabel();
-        l1 = new javax.swing.JLabel();
-        l4 = new javax.swing.JLabel();
-        l3 = new javax.swing.JLabel();
-        l5 = new javax.swing.JLabel();
-        l6 = new javax.swing.JLabel();
-        l7 = new javax.swing.JLabel();
-        l21 = new javax.swing.JLabel();
-        l22 = new javax.swing.JLabel();
-        l23 = new javax.swing.JLabel();
-        l25 = new javax.swing.JLabel();
-        l24 = new javax.swing.JLabel();
-        l27 = new javax.swing.JLabel();
-        l26 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -98,176 +263,31 @@ public class mainInterface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TitleBar.setFont(new java.awt.Font("Ubuntu Condensed", 1, 24)); // NOI18N
-
-        l2.addMouseListener(new java.awt.event.MouseAdapter() {
+        TitleBar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l2MouseClicked(evt);
+                TitleBarMouseClicked(evt);
             }
         });
-
-        l1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l1MouseClicked(evt);
-            }
-        });
-
-        l4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l4MouseClicked(evt);
-            }
-        });
-
-        l5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l5MouseClicked(evt);
-            }
-        });
-
-        l6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l6MouseClicked(evt);
-            }
-        });
-
-        l7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l7MouseClicked(evt);
-            }
-        });
-
-        l21.setText("jLabel1");
-
-        l22.setText("jLabel1");
-
-        l23.setText("jLabel1");
-
-        l25.setText("jLabel1");
-
-        l24.setText("jLabel1");
-
-        l27.setText("jLabel1");
-
-        l26.setText("jLabel1");
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TitleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(l21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l22))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l23)
-                            .addComponent(l3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(l4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(l24)
-                                .addGap(156, 156, 156))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(l5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(l25))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)))
-                        .addGap(77, 77, 77)
-                        .addComponent(l6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l27)
-                            .addComponent(l7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(357, 357, 357)
-                    .addComponent(l26)
-                    .addContainerGap(430, Short.MAX_VALUE)))
+            .addComponent(TitleBar, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(TitleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l21)
-                    .addComponent(l22)
-                    .addComponent(l23)
-                    .addComponent(l24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(l4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(l3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l25)
-                    .addComponent(l27))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(351, Short.MAX_VALUE)
-                    .addComponent(l26)
-                    .addGap(119, 119, 119)))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void l1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l1MouseClicked
-        new ptkForm().show();        
-    }//GEN-LAST:event_l1MouseClicked
-
-    private void l4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l4MouseClicked
-        new chuoiPhanUngForm().show();        
-    }//GEN-LAST:event_l4MouseClicked
-
-    private void l6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l6MouseClicked
-        new hienTuongForm().show();        
-    }//GEN-LAST:event_l6MouseClicked
-
-    private void l7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l7MouseClicked
-        new phanBietForm().show();        
-    }//GEN-LAST:event_l7MouseClicked
-
-    private void l2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l2MouseClicked
-        new canBangF().show();
-    }//GEN-LAST:event_l2MouseClicked
-
-    private void l5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l5MouseClicked
-        multiThread t1 = new multiThread("Create a winndow", 1);
-        multiThread t2 = new multiThread("Chat bot", 2);        
-        t1.start();
-        t2.start();
-    }//GEN-LAST:event_l5MouseClicked
+    private void TitleBarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TitleBarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TitleBarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -306,24 +326,7 @@ public class mainInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleBar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JLabel l1;
-    private javax.swing.JLabel l2;
-    private javax.swing.JLabel l21;
-    private javax.swing.JLabel l22;
-    private javax.swing.JLabel l23;
-    private javax.swing.JLabel l24;
-    private javax.swing.JLabel l25;
-    private javax.swing.JLabel l26;
-    private javax.swing.JLabel l27;
-    private javax.swing.JLabel l3;
-    private javax.swing.JLabel l4;
-    private javax.swing.JLabel l5;
-    private javax.swing.JLabel l6;
-    private javax.swing.JLabel l7;
     // End of variables declaration//GEN-END:variables
 }

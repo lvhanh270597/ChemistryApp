@@ -5,9 +5,13 @@
  */
 package Interface;
 
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import process.phanBiet;
 
@@ -29,10 +33,21 @@ public class phanBietForm extends javax.swing.JFrame {
    
     public phanBietForm() {
         initComponents();
-        
+        setTitle("Phân biệt");
         initVars();
+        initImage(jLabel1,"hoahoc/phanbiet.png");
+        initImage(ok, "hoahoc/phanbiet1.jpg");
     }
-
+    private void initImage(JLabel x, String path){
+        ImageIcon ii = new ImageIcon(path);
+        Image image = ii.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_SMOOTH);
+        x.setIcon(new ImageIcon(image));
+    }
+    private void initImage(JButton x, String path){
+        ImageIcon ii = new ImageIcon(path);
+        Image image = ii.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_SMOOTH);
+        x.setIcon(new ImageIcon(image));
+    }
     private void initVars(){
         X_BOARD = contain.getWidth();
         Y_BOARD = contain.getHeight();
@@ -56,8 +71,13 @@ public class phanBietForm extends javax.swing.JFrame {
         plus = new javax.swing.JButton();
         ok = new javax.swing.JButton();
         quy = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        contain.setBackground(new java.awt.Color(204, 255, 204));
 
         plus.setText("+");
         plus.addActionListener(new java.awt.event.ActionListener() {
@@ -83,43 +103,39 @@ public class phanBietForm extends javax.swing.JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
-        ok.setText("Ok");
+        getContentPane().add(contain, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 156, -1, -1));
+
+        ok.setIcon(new javax.swing.ImageIcon("D:\\download\\ChemistryApp\\ChemistryApp\\ChemistryApp\\hoahoc\\phanbiet1.jpg")); // NOI18N
         ok.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 okMouseClicked(evt);
             }
         });
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 100, 85));
 
         quy.setText("Dùng quỳ?");
+        getContentPane().add(quy, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 280, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(contain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(quy)))
-                .addContainerGap(31, Short.MAX_VALUE))
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\download\\ChemistryApp\\ChemistryApp\\ChemistryApp\\hoahoc\\phanbiet.png")); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 150));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(contain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(quy)
-                .addGap(16, 16, 16)
-                .addComponent(ok)
-                .addGap(75, 75, 75))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 680, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,6 +172,10 @@ public class phanBietForm extends javax.swing.JFrame {
         pb.travel();
         showCup sc = new showCup(pb.getTree().getTravel());
     }//GEN-LAST:event_okMouseClicked
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +215,8 @@ public class phanBietForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contain;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton ok;
     private javax.swing.JButton plus;
     private javax.swing.JRadioButton quy;

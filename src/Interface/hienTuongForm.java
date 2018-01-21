@@ -50,8 +50,15 @@ public class hienTuongForm extends javax.swing.JFrame implements KeyListener {
         initVars();
         
         initEvent();        
-    }
 
+        setTitle("Hiện tượng");
+       // initImage(title2, "");
+    }
+    private void initImage(JLabel x, String path){
+        ImageIcon ii = new ImageIcon(path);
+        Image image = ii.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_SMOOTH);
+        x.setIcon(new ImageIcon(image));
+    }
     private void initEvent(){
         editor.addKeyListener((KeyListener)this);
                
@@ -117,6 +124,8 @@ public class hienTuongForm extends javax.swing.JFrame implements KeyListener {
             }
         });
 
+        pthh.setEditable(false);
+        pthh.setBackground(new java.awt.Color(204, 255, 204));
         pthh.setColumns(20);
         pthh.setRows(5);
         jScrollPane1.setViewportView(pthh);

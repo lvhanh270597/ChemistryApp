@@ -60,6 +60,7 @@ public class ptk {
         List <Integer> cnt_ = new Vector<Integer> ();
         int sl = -1;
         int close = 0;
+        System.out.println(X);
         while (i < n){            
             String nt = next(X, i, n);            
                         

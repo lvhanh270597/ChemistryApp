@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 import math.LCS;
@@ -33,18 +34,27 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
     public ptkForm() {
         initComponents();
         
-        initSet();
+        //initSet();
+        
+        setTitle("Phân tử khối");
         
         initEvent();
+        initImage(jLabel3,"hoahoc/ptk1.jpg");
+        
     }
-    
+    private void initImage(JLabel x, String path){
+        ImageIcon ii = new ImageIcon(path);
+        Image image = ii.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_SMOOTH);
+        x.setIcon(new ImageIcon(image));
+    }
+    /*
     private void initSet(){
         ImageIcon ii = new ImageIcon("hoahoc/ptk.jpg");
         Image i = ii.getImage().getScaledInstance(Title.getWidth(), Title.getHeight(), Image.SCALE_SMOOTH);
         Title.setIcon(new ImageIcon(i));                
         
     }
-    
+    */
     private void initEvent(){        
         editor.addKeyListener((KeyListener) this);        
     }
@@ -97,17 +107,16 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         combo = new javax.swing.JComboBox<>();
-        Title = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         giaithich = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         editor = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setText("Nhập tên:");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         combo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -120,15 +129,18 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
             }
         });
         combo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                comboKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 comboKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                comboKeyTyped(evt);
+            }
         });
+        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 128, -1));
 
         jLabel2.setText("Giải thích:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 290, 100, 20));
+        getContentPane().add(giaithich, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 300, 40));
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -136,81 +148,58 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
+        editor.setBackground(new java.awt.Color(204, 255, 204));
         editor.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         editor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editorActionPerformed(evt);
             }
         });
+        getContentPane().add(editor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 60, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 360, 270));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(giaithich, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(combo, 0, 128, Short.MAX_VALUE)
-                            .addComponent(editor))
-                        .addGap(16, 16, 16)
-                        .addComponent(jButton1)))
-                .addContainerGap(107, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(giaithich))
-                .addGap(85, 85, 85))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 660, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyTyped
+
+    }//GEN-LAST:event_comboKeyTyped
+
+    private void comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyPressed
+
+    }//GEN-LAST:event_comboKeyPressed
+
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
-        
+
     }//GEN-LAST:event_comboActionPerformed
 
     private void comboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemStateChanged
-        
+
     }//GEN-LAST:event_comboItemStateChanged
 
-    private void comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyPressed
-        
-    }//GEN-LAST:event_comboKeyPressed
-
-    private void comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboKeyTyped
-        
-    }//GEN-LAST:event_comboKeyTyped
+    private void editorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String X = combo.getSelectedItem().toString();
         giaithich.setText(process.ptk.getDescription(X));
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void editorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,12 +238,12 @@ public class ptkForm extends javax.swing.JFrame implements KeyListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Title;
     private javax.swing.JComboBox<String> combo;
     private javax.swing.JTextField editor;
     private javax.swing.JLabel giaithich;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

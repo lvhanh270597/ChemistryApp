@@ -1,6 +1,6 @@
 
 readKnowledge:-
-    open('/home/hanh/Desktop/ChemistryApp/knowledge/data.txt', read, Str),
+    open('/home/hanh/Desktop/ChemistryApp/ChemistryApp/knowledge/data.txt', read, Str),
     read_data(Str, TL),
     write(TL),
     close(Str).
@@ -186,6 +186,16 @@ pu(X, 'Cl2', [Z]):-
     max('O', C, C1),
     dif(C, C1),
     name(Z, C1, 'Cl'), !.
+%pu voi hno3 dac nong
+pu(X, 'HNO3', [Z, 'NO2', 'H2O']):-
+    kl(X),
+    max('O', X, C),
+    name(Z, C, 'NO3'), !.
+%pu voi H2SO4 dac nong
+pu(X, 'H2SO4', [Z, 'SO2', 'H2O']):-
+    kl(X),
+    max('O', X, C),
+    name(Z, C, 'SO4'), !.
 %pu voi luu huynh
 pu(X, 'S', [Z]):-
     kl(X),
@@ -561,7 +571,7 @@ chuoi(X, Y, R):-
     \+ khongtan(R, _),
     pu(X, R, L),
     member(Y, L), !.
-
+chuoi('FeCl3', 'FeCl2', 'Fe').
 dieuche([_], []).
 dieuche([H1, H2 | T1], [H | T]):-
     chuoi(H1, H2, H), dieuche([H2 | T1], T), !.
